@@ -7,7 +7,7 @@ class Post extends Model {}
 
 Post.init({
     // Model attributes are defined here
-    author: {
+    authorId: {
         type: DataTypes.STRING,
         allowNull: false
     },
