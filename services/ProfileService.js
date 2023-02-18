@@ -1,20 +1,30 @@
-import User from "../models/User.js";
-class ProfileService{
-    async getInfoAuthorizedUser(id){
-                if(!id){
-                    throw new Error('Id не указан')
-                }
-                const user = await User.findByPk(id);
-                const {login, firstName, lastName, email, status} = user
-                return {login, firstName, lastName, email, status};
+import User from '../models/User.js';
+
+class ProfileService {
+  async getInfoAuthorizedUser(id) {
+    if (!id) {
+      throw new Error('Id не указан');
     }
-    async updateStatus(status, id){
-        if(!id){
-            throw new Error('Id не указан')
-        }
-        const oldUser = await User.findByPk(id);
-        const {login, firstName, lastName, email} = oldUser
-        await oldUser.update({login, firstName, lastName, email, status});
+    const user = await User.findByPk(id);
+    const {
+      login, firstName, lastName, email, status,
+    } = user;
+    return {
+      login, firstName, lastName, email, status,
+    };
+  }
+
+  async updateStatus(status, id) {
+    if (!id) {
+      throw new Error('Id не указан');
     }
+    const oldUser = await User.findByPk(id);
+    const {
+      login, firstName, lastName, email,
+    } = oldUser;
+    await oldUser.update({
+      login, firstName, lastName, email, status,
+    });
+  }
 }
-export default new ProfileService()
+export default new ProfileService();

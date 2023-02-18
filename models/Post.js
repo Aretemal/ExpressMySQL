@@ -4,37 +4,27 @@ const sequelize = new Sequelize('database_development_SocialNetwork', 'root', 'r
   host: 'localhost',
   dialect: 'mysql',
 });
-class User extends Model {}
+class Post extends Model {}
 
-User.init({
-  firstName: {
-    type: DataTypes.STRING,
-  },
-  lastName: {
-    type: DataTypes.STRING,
-  },
-  password: {
+Post.init({
+  // Model attributes are defined here
+  authorId: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  email: {
-    type: DataTypes.STRING,
-  },
-  login: {
+  title: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  status: {
+  content: {
     type: DataTypes.STRING,
-    defaultValue: 'Add status',
-  },
-  ava: {
-    type: DataTypes.BLOB,
+    allowNull: false,
   },
 }, {
-  sequelize,
-  modelName: 'User',
+  // Other model options go here
+  sequelize, // We need to pass the connection instance
+  modelName: 'Post', // We need to choose the model name
 });
 (async () => {
 })();
-export default User;
+export default Post;
