@@ -1,11 +1,14 @@
 import express from 'express';
 import cors from 'cors';
+import * as dotenv from 'dotenv';
 import Post from './models/Post.js';
 import User from './models/User.js';
 import router from './router.js';
 
+dotenv.config();
+
 const app = express();
-const PORT = 5000;
+const PORT = process.env.SECRET_PORT || 5000;
 
 app.use(cors()); // Use this after the variable declaration
 app.use(express.json());
