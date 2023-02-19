@@ -2,30 +2,18 @@ import UserService from '../services/UserService.js';
 
 class UserController {
   async create(req, res) {
-    try {
-      const post = await UserService.create(req.body);
-      res.json(post);
-    } catch (e) {
-      res.status(500).json(e);
-    }
+    const post = await UserService.create(req.body);
+    res.json(post);
   }
 
   async getStatus(req, res) {
-    try {
-      const status = UserService.getStatus(req.params.id);
-      res.json(status);
-    } catch (e) {
-      res.status(500).json(e);
-    }
+    const status = UserService.getStatus(req.params.id);
+    res.json(status);
   }
 
   async getOne(req, res) {
-    try {
-      const user = await UserService.getOne(req.params.id);
-      return res.json(user);
-    } catch (e) {
-      res.status(500).json(e);
-    }
+    const user = await UserService.getOne(req.params.id);
+    return res.json(user);
   }
 }
 export default new UserController();

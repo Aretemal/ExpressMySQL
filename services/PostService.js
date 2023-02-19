@@ -1,8 +1,8 @@
 import Post from '../models/Post.js';
 
 class PostService {
-  async create(post) {
-    const createdPost = await Post.create(post);
+  async create({ newMessageText }, id) {
+    const createdPost = await Post.create({ authorId: id, content: newMessageText });
     return createdPost;
   }
 
