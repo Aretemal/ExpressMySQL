@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import config from '../config/config.js';
 
 const { secret } = config;
-export const authMiddleware = (req, res, next) => {
+export const tokenMiddleware = (req, res, next) => {
   if (req.method === 'OPTIONS') {
     next();
   }
