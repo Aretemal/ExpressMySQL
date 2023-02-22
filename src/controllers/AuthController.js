@@ -15,7 +15,7 @@ class AuthController {
     return result;
   }
 
-  async login(req, res) {
+  async login(req, res, next) {
     const token = await AuthService.login(req.body);
     return res.json({ token });
   }

@@ -24,6 +24,7 @@ module.exports = {
     'consistent-return': 0,
     'no-shadow': 0,
     'import/extensions': 0,
+    'import/no-dynamic-require': 0,
     'linebreak-style': [2, 'windows'],
     'import/prefer-default-export': 0,
   },

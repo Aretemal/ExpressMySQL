@@ -1,11 +1,11 @@
 import Router from 'express';
 import { check } from 'express-validator';
-import PostController from './controllers/PostController.js';
-import ProfileController from './controllers/ProfileController.js';
-import UserController from './controllers/UserController.js';
-import AuthController from './controllers/AuthController.js';
-import { tokenMiddleware } from './middlewaree/tokenMiddleware.js';
-import { tryCatch } from './utils/tryCatch.js';
+import PostController from './src/controllers/PostController.js';
+import ProfileController from './src/controllers/ProfileController.js';
+import UserController from './src/controllers/UserController.js';
+import AuthController from './src/controllers/AuthController.js';
+import { tokenMiddleware } from './src/middlewaree/tokenMiddleware.js';
+import { tryCatch } from './src/utils/tryCatch.js';
 
 const router = new Router();
 // User

@@ -7,7 +7,7 @@ class UserController {
   }
 
   async getStatus(req, res) {
-    const status = UserService.getStatus(req.params.id);
+    const status = await UserService.getStatus(req.params.id);
     res.json(status);
   }
 
