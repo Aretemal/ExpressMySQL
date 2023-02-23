@@ -5,6 +5,7 @@ import { errorHandler } from './src/middlewaree/errorHandler.js';
 import Post from './src/models/post.js';
 import router from './router.js';
 import User from './src/models/user.js';
+import Follow from './src/models/follow.js';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ async function startApp() {
   try {
     await User.sync();
     await Post.sync();
+    await Follow.sync();
     // await Dialog.sync();
     // await User.sync({ force: true });
     // await Post.sync({ force: true });
