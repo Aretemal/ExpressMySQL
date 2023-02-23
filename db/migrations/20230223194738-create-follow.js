@@ -9,10 +9,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId1: {
+      followerId: {
         type: Sequelize.STRING
       },
-      userId2: {
+      followingId: {
         type: Sequelize.STRING
       },
       approved: {

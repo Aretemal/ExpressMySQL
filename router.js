@@ -32,7 +32,7 @@ router.put('/profile/status', tokenMiddleware, tryCatch(ProfileController.update
 
 // Follow
 router.post('/follow', tokenMiddleware, tryCatch(FollowedController.follow));
-router.put('/approved', tokenMiddleware, tryCatch(FollowedController.approved));
+router.put('/approve', tokenMiddleware, tryCatch(FollowedController.approved));
 router.put('/unfollow', tokenMiddleware, tryCatch(FollowedController.unfollow));
 
 export default router;

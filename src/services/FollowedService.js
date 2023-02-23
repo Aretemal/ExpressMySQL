@@ -3,7 +3,7 @@ import Follow from '../models/follow.js';
 class FollowedService {
   async follow(firstUserId, secondUserId) {
     await Follow.create({
-      userId1: firstUserId, userId2: secondUserId, approved: 0,
+      followerId: firstUserId, followingId: secondUserId, approved: 0,
     });
     return { resultCode: 0 };
   }
@@ -11,8 +11,8 @@ class FollowedService {
   async approved(firstUserId, secondUserId) {
     const approvedFollow = await Follow.findOne({
       where: {
-        userId1: secondUserId,
-        userId2: firstUserId,
+        followerId: secondUserId,
+        followingId: firstUserId,
       },
     });
     if (!approvedFollow) {
@@ -25,15 +25,15 @@ class FollowedService {
   async unfollow(unSubscriberId, userId) {
     const deletedConnection = await Follow.findOne({
       where: {
-        userId1: userId,
-        userId2: unSubscriberId,
+        followerId: userId,
+        followingId: unSubscriberId,
       },
     });
     if (!deletedConnection) {
       const deletedConnection = await Follow.findOne({
         where: {
-          userId1: unSubscriberId,
-          userId2: userId,
+          followerId: unSubscriberId,
+          followingId: userId,
         },
       });
       console.log(deletedConnection.approved);

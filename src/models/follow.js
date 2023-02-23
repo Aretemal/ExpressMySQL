@@ -15,8 +15,8 @@ class Follow extends Model {
   }
 }
 Follow.init({
-  userId1: DataTypes.STRING,
-  userId2: DataTypes.STRING,
+  followerId: DataTypes.STRING,
+  followingId: DataTypes.STRING,
   approved: DataTypes.STRING,
 }, {
   sequelize,
