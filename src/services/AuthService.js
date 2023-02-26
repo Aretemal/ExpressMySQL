@@ -37,7 +37,7 @@ class AuthService {
     if (!validPassword) {
       throw new Error('Введен неверный пароль');
     }
-    const token = generationAccessToken(user.id);
+    const token = generationAccessToken(user.userId);
     return token;
   }
 }
