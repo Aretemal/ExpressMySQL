@@ -1,25 +1,27 @@
-import { Sequelize, DataTypes, Model } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
+import { db } from '../../db.js';
 
-const sequelize = new Sequelize('database_development_SocialNetwork', 'root', 'root', {
-  host: 'localhost',
-  dialect: 'mysql',
-});
 class Follow extends Model {
-  /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
   static associate(models) {
-    // define association here
+    this.belongsTo(models.User);
   }
 }
 Follow.init({
-  followerId: DataTypes.STRING,
-  followingId: DataTypes.STRING,
-  approved: DataTypes.STRING,
+  followerId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  followingId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+  },
+  approved: {
+    type: DataTypes.DATE,
+    defaultValue: 0,
+  },
 }, {
-  sequelize,
+  sequelize: db,
   modelName: 'Follow',
 });
 export default Follow;

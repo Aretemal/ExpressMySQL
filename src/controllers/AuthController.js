@@ -12,7 +12,7 @@ class AuthController {
       return res.status(400).json({ message: 'Ошибка регистрациии' });
     }
     const result = await AuthService.registration(req.body);
-    return result;
+    return 'result';
   }
 
   async login(req, res, next) {

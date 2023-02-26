@@ -1,25 +1,18 @@
-import { Sequelize, DataTypes, Model } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
+import { db } from '../../db.js';
 
-const sequelize = new Sequelize('database_development_SocialNetwork', 'root', 'root', {
-  host: 'localhost',
-  dialect: 'mysql',
-});
 class Post extends Model {
-  /**
-   * Helper method for defining associations.
-   * This method is not a part of Sequelize lifecycle.
-   * The `models/index` file will call this method automatically.
-   */
   static associate(models) {
-    // define association here
+    this.belongsTo(models.User);
   }
 }
-
 Post.init({
-  authorId: DataTypes.STRING,
+  authorId: {
+    type: DataTypes.INTEGER,
+  },
   content: DataTypes.STRING,
 }, {
-  sequelize,
+  sequelize: db,
   modelName: 'Post',
 });
 export default Post;

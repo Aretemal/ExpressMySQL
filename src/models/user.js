@@ -1,21 +1,32 @@
-import { Sequelize, DataTypes, Model } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
+import { db } from '../../db.js';
 
-const sequelize = new Sequelize('database_development_SocialNetwork', 'root', 'root', {
-  host: 'localhost',
-  dialect: 'mysql',
-});
 class User extends Model {
-  /**
-   * Helper method for defining associations.
-   * This method is not a part of Sequelize lifecycle.
-   * The `models/index` file will call this method automatically.
-   */
   static associate(models) {
-    // define association here
+    this.hasMany(models.Post, {
+      foreignKey: 'authorId',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+    this.hasMany(models.Follow, {
+      foreignKey: 'followerId',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+    this.hasMany(models.Follow, {
+      foreignKey: 'followingId',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
-
-User.init({
+const model = User.init({
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+  },
   firstName: DataTypes.STRING,
   lastName: DataTypes.STRING,
   password: DataTypes.STRING,
@@ -24,7 +35,8 @@ User.init({
   status: DataTypes.STRING,
   ava: DataTypes.BLOB,
 }, {
-  sequelize,
+  sequelize: db,
   modelName: 'User',
 });
-export default User;
+
+export default model;
