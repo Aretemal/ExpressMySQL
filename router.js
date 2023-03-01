@@ -9,17 +9,18 @@ import { tokenMiddleware } from './src/middlewaree/tokenMiddleware.js';
 import { tryCatch } from './src/utils/tryCatch.js';
 
 const router = new Router();
+router.use(tokenMiddleware);
 // User
 router.post('/user', tryCatch(UserController.create));
 router.get('/user/:id', tryCatch(UserController.getOne));
 router.get('profile/status/:id', tryCatch(UserController.getStatus));
 
 // Post
-router.post('/profile/posts', tokenMiddleware, tryCatch(PostController.create));
-router.get('/profile/posts', tokenMiddleware, tryCatch(PostController.getAll));
-router.get('/profile/posts/:id', tokenMiddleware, tryCatch(PostController.getOne));
-router.put('/profile/posts/:id', tokenMiddleware, tryCatch(PostController.update));
-router.delete('/profile/posts/:id', tokenMiddleware, tryCatch(PostController.delete));
+router.post('/profile/posts', tryCatch(PostController.create));
+router.get('/profile/posts', tryCatch(PostController.getAll));
+router.get('/profile/posts/:id', tryCatch(PostController.getOne));
+router.put('/profile/posts/:id', tryCatch(PostController.update));
+router.delete('/profile/posts/:id', tryCatch(PostController.delete));
 
 router.post('/registration', [
   check('userName', 'Имя пользовател не может быть пустым').notEmpty(),
@@ -27,12 +28,12 @@ router.post('/registration', [
 ], tryCatch(AuthController.registration));
 router.post('/login', tryCatch(AuthController.login));
 
-router.get('/profile/user', tokenMiddleware, tryCatch(ProfileController.getInfoAuthorizedUser));
-router.put('/profile/status', tokenMiddleware, tryCatch(ProfileController.updateStatus));
+router.get('/profile/user', tryCatch(ProfileController.getInfoAuthorizedUser));
+router.put('/profile/status', tryCatch(ProfileController.updateStatus));
 
 // Follow
-router.post('/follow', tokenMiddleware, tryCatch(FollowController.follow));
-router.put('/approve', tokenMiddleware, tryCatch(FollowController.approve));
-router.put('/unfollow', tokenMiddleware, tryCatch(FollowController.unfollow));
+router.post('/follow', tryCatch(FollowController.follow));
+router.put('/approve', tryCatch(FollowController.approve));
+router.put('/unfollow', tryCatch(FollowController.unfollow));
 
 export default router;

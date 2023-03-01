@@ -11,8 +11,8 @@ class AuthController {
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: 'Ошибка регистрациии' });
     }
-    const result = await AuthService.registration(req.body);
-    return result;
+    await AuthService.registration(req.body);
+    return { resultCode: 0 };
   }
 
   async login(req, res, next) {
