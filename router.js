@@ -1,5 +1,6 @@
 import Router from 'express';
 import { check } from 'express-validator';
+import FollowController from './src/controllers/FollowController.js';
 import PostController from './src/controllers/PostController.js';
 import ProfileController from './src/controllers/ProfileController.js';
 import UserController from './src/controllers/UserController.js';
@@ -28,5 +29,10 @@ router.post('/login', tryCatch(AuthController.login));
 
 router.get('/profile/user', tokenMiddleware, tryCatch(ProfileController.getInfoAuthorizedUser));
 router.put('/profile/status', tokenMiddleware, tryCatch(ProfileController.updateStatus));
+
+// Follow
+router.post('/follow', tokenMiddleware, tryCatch(FollowController.follow));
+router.put('/approve', tokenMiddleware, tryCatch(FollowController.approve));
+router.put('/unfollow', tokenMiddleware, tryCatch(FollowController.unfollow));
 
 export default router;
