@@ -7,6 +7,7 @@ import router from './router.js';
 import Follow from './src/models/follow.js';
 import Post from './src/models/post.js';
 import User from './src/models/user.js';
+import Follow from './src/models/follow.js';
 
 dotenv.config();
 
@@ -20,10 +21,13 @@ app.use(errorHandler);
 
 async function startApp() {
   try {
-    User.associate({ Post, Follow });
-    Post.associate({ User });
-    Follow.associate({ User });
-    await db.sync({ alter: true });
+    await User.sync();
+    await Post.sync();
+    await Follow.sync();
+    // await Dialog.sync();
+    // await User.sync({ force: true });
+    // await Post.sync({ force: true });
+    // await Dialog.sync({force:true});
     app.listen(PORT, () => console.log(`Server created on port: ${PORT}`));
   } catch (e) {
     console.log(e);
