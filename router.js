@@ -16,9 +16,9 @@ router.get('profile/status/:id', tryCatch(UserController.getStatus));
 // Post
 router.post('/profile/posts', tokenMiddleware, tryCatch(PostController.create));
 router.get('/profile/posts', tokenMiddleware, tryCatch(PostController.getAll));
-router.get('/profile/posts/:id', tryCatch(PostController.getOne));
-router.put('/profile/posts/:id', tryCatch(PostController.update));
-router.delete('/profile/posts/:id', tryCatch(PostController.delete));
+router.get('/profile/posts/:id', tokenMiddleware, tryCatch(PostController.getOne));
+router.put('/profile/posts/:id', tokenMiddleware, tryCatch(PostController.update));
+router.delete('/profile/posts/:id', tokenMiddleware, tryCatch(PostController.delete));
 
 router.post('/registration', [
   check('userName', 'Имя пользовател не может быть пустым').notEmpty(),
