@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import config from '../../config.js';
 import User from '../models/user.js';
+import { ResponseObjectJSON } from '../utils/creatorJSON.js';
 
 const { secret } = config;
 
@@ -23,9 +24,12 @@ class AuthService {
     }
     const hashPassword = bcrypt.hashSync(password, 7);
     await User.create({
-      login, password: hashPassword, firstName, lastName, email,
+      firstName, lastName, password: hashPassword, email, login, status: null, ava: null,
     });
-    return { message: 'Пользователь зарегистрирован' };
+    return ResponseObjectJSON.render({
+      message: `User ${login} was created successfully`,
+      resultCode: 0,
+    });
   }
 
   async login({ login, password }) {
@@ -38,7 +42,10 @@ class AuthService {
       throw new Error('Введен неверный пароль');
     }
     const token = generationAccessToken(user.userId);
-    return token;
+    return ResponseObjectJSON.render({
+      token,
+      resultCode: 0,
+    });
   }
 }
 

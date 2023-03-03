@@ -7,8 +7,8 @@ class ProfileController {
   }
 
   async updateStatus(req, res) {
-    await ProfileService.updateStatus(req.body.status, req.user.id);
-    return res.json({ resultCode: 0 });
+    const response = await ProfileService.updateStatus(req.body.status, req.user.id);
+    return res.json(response);
   }
 }
 export default new ProfileController();

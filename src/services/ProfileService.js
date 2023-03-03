@@ -1,4 +1,5 @@
 import User from '../models/user.js';
+import { ResponseObjectJSON } from '../utils/creatorJSON.js';
 
 class ProfileService {
   async getInfoAuthorizedUser(id) {
@@ -9,9 +10,12 @@ class ProfileService {
     const {
       login, firstName, lastName, email, status,
     } = user;
-    return {
-      login, firstName, lastName, email, status,
-    };
+    return ResponseObjectJSON.render({
+      infoAboutUser: {
+        login, firstName, lastName, email, status,
+      },
+      resultCode: 0,
+    });
   }
 
   async updateStatus(status, id) {
@@ -24,6 +28,9 @@ class ProfileService {
     } = oldUser;
     await oldUser.update({
       login, firstName, lastName, email, status,
+    });
+    return ResponseObjectJSON.render({
+      resultCode: 0,
     });
   }
 }

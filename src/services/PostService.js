@@ -1,14 +1,21 @@
 import Post from '../models/post.js';
+import { ResponseObjectJSON } from '../utils/creatorJSON.js';
 
 class PostService {
   async create({ newMessageText }, id) {
-    const createdPost = await Post.create({ authorId: id, content: newMessageText });
-    return createdPost;
+    await Post.create({ authorId: id, content: newMessageText });
+    return ResponseObjectJSON.render({
+      message: 'Post was created successfully',
+      resultCode: 0,
+    });
   }
 
   async getAll() {
     const posts = await Post.findAll();
-    return posts;
+    return ResponseObjectJSON.render({
+      posts,
+      resultCode: 0,
+    });
   }
 
   async getOne(id) {
@@ -16,7 +23,10 @@ class PostService {
       throw new Error('Id не указан');
     }
     const post = await Post.findByPk(id);
-    return post;
+    return ResponseObjectJSON.render({
+      post,
+      resultCode: 0,
+    });
   }
 
   async update({ author, title, content }, id) {
@@ -24,8 +34,11 @@ class PostService {
       throw new Error('Id не указан');
     }
     const oldPost = await Post.findByPk(id);
-    const updatedPost = await oldPost.update({ author, title, content });
-    return updatedPost;
+    await oldPost.update({ author, title, content });
+    return ResponseObjectJSON.render({
+      message: 'Post was updated successfully',
+      resultCode: 0,
+    });
   }
 
   async delete(id) {
@@ -33,8 +46,11 @@ class PostService {
       throw new Error('Id не указан');
     }
     const oldPost = await Post.findByPk(id);
-    const deletedPost = await oldPost.destroy();
-    return deletedPost;
+    await oldPost.destroy();
+    return ResponseObjectJSON.render({
+      message: 'Post was deleted successfully',
+      resultCode: 0,
+    });
   }
 }
 

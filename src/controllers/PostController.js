@@ -2,8 +2,8 @@ import PostService from '../services/PostService.js';
 
 class PostController {
   async create(req, res) {
-    const post = await PostService.create(req.body, req.user.id);
-    res.json(post);
+    const response = await PostService.create(req.body, req.user.id);
+    res.json(response);
   }
 
   async getAll(req, res) {
@@ -18,13 +18,13 @@ class PostController {
 
   async update(req, res) {
     const { author, title, content } = req.body;
-    const updatedPost = await PostService.update({ author, title, content }, req.params.id);
-    return res.json(updatedPost);
+    const response = await PostService.update({ author, title, content }, req.params.id);
+    return res.json(response);
   }
 
   async delete(req, res) {
-    const oldPost = await PostService.delete(req.params.id);
-    return res.json(oldPost);
+    const response = await PostService.delete(req.params.id);
+    return res.json(response);
   }
 }
 export default new PostController();
