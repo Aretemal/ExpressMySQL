@@ -9,6 +9,11 @@ import { tokenMiddleware } from './src/middlewaree/tokenMiddleware.js';
 import { tryCatch } from './src/utils/tryCatch.js';
 
 const router = new Router();
+router.post('/registration', [
+  check('userName', 'Имя пользовател не может быть пустым').notEmpty(),
+  check('password', 'Password не может быть короче 4 символов').isLength({ min: 4 }),
+], tryCatch(AuthController.registration));
+router.post('/login', tryCatch(AuthController.login));
 router.use(tokenMiddleware);
 // User
 router.post('/user', tryCatch(UserController.create));
@@ -21,12 +26,6 @@ router.get('/profile/posts', tryCatch(PostController.getAll));
 router.get('/profile/posts/:id', tryCatch(PostController.getOne));
 router.put('/profile/posts/:id', tryCatch(PostController.update));
 router.delete('/profile/posts/:id', tryCatch(PostController.delete));
-
-router.post('/registration', [
-  check('userName', 'Имя пользовател не может быть пустым').notEmpty(),
-  check('password', 'Password не может быть короче 4 символов').isLength({ min: 4 }),
-], tryCatch(AuthController.registration));
-router.post('/login', tryCatch(AuthController.login));
 
 router.get('/profile/user', tryCatch(ProfileController.getInfoAuthorizedUser));
 router.put('/profile/status', tryCatch(ProfileController.updateStatus));
