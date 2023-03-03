@@ -9,11 +9,13 @@ import { tokenMiddleware } from './src/middlewaree/tokenMiddleware.js';
 import { tryCatch } from './src/utils/tryCatch.js';
 
 const router = new Router();
+
 router.post('/registration', [
   check('userName', 'Имя пользовател не может быть пустым').notEmpty(),
   check('password', 'Password не может быть короче 4 символов').isLength({ min: 4 }),
 ], tryCatch(AuthController.registration));
 router.post('/login', tryCatch(AuthController.login));
+
 router.use(tokenMiddleware);
 // User
 router.post('/user', tryCatch(UserController.create));

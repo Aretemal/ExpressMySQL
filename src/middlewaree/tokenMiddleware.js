@@ -3,6 +3,7 @@ import config from '../../config.js';
 
 const { secret } = config;
 export const tokenMiddleware = (req, res, next) => {
+
   try {
     if (req.method === 'OPTIONS' || !req.headers.authorization) {
       next();
