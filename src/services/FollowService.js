@@ -38,7 +38,8 @@ class FollowService {
       });
       if (deletedConnection.approvedAt === '0') {
         await deletedConnection.destroy();
-        return deletedConnection;
+        console.log(deletedConnection);
+        return null;
       }
       await deletedConnection.update({ userId1: userId, userId2: unSubscriberId, approvedAt: 0 });
       return deletedConnection;
