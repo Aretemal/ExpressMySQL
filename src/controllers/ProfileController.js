@@ -1,14 +1,23 @@
 import ProfileService from '../services/ProfileService.js';
+import { ResponseObjectJSON } from '../utils/createrObjectResponse.js';
 
 class ProfileController {
   async getInfoAuthorizedUser(req, res) {
-    const user = await ProfileService.getInfoAuthorizedUser(req.user.id);
-    return res.json(user);
+    const data = await ProfileService.getInfoAuthorizedUser(req.user.id);
+    res.json(
+      ResponseObjectJSON.render({
+        type: 'user', id: data.userId, attributes: data, relationships: req.body,
+      }, { links: { self: req.originalUrl } }),
+    );
   }
 
   async updateStatus(req, res) {
-    await ProfileService.updateStatus(req.body.status, req.user.id);
-    return res.json({ resultCode: 0 });
+    const data = await ProfileService.updateStatus(req.body.status, req.user.id);
+    res.json(
+      ResponseObjectJSON.render({
+        type: 'status', attributes: data, relationships: req.body,
+      }, { links: { self: req.originalUrl } }),
+    );
   }
 }
 export default new ProfileController();

@@ -1,11 +1,6 @@
 import User from '../models/user.js';
 
 class UserService {
-  async create(user) {
-    const createdPost = await User.create(user);
-    return createdPost;
-  }
-
   async getOne(id) {
     if (!id) {
       throw new Error('Id не указан');
