@@ -1,23 +1,28 @@
 import { validationResult } from 'express-validator';
-import Joi from 'joi';
 import AuthService from '../services/AuthService.js';
+import { ResponseObjectJSON } from '../utils/createrObjectResponse.js';
 
-const schema = Joi.object({
-  userId: Joi.number().required(),
-});
 class AuthController {
   async registration(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: 'Ошибка регистрациии' });
     }
-    await AuthService.registration(req.body);
-    return { resultCode: 0 };
+    const data = await AuthService.registration(req.body);
+    res.json(
+      ResponseObjectJSON.render({
+        type: 'registration', id: data.id, attributes: data, relationships: req.body,
+      }, { links: { self: req.originalUrl } }),
+    );
   }
 
-  async login(req, res, next) {
-    const token = await AuthService.login(req.body);
-    return res.json({ token });
+  async login(req, res) {
+    const data = await AuthService.login(req.body);
+    res.json(
+      ResponseObjectJSON.render({
+        type: 'login', id: data.user.id, attributes: data, relationships: req.body,
+      }, { links: { self: req.originalUrl } }),
+    );
   }
 }
 

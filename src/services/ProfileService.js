@@ -25,6 +25,7 @@ class ProfileService {
     await oldUser.update({
       login, firstName, lastName, email, status,
     });
+    return { status };
   }
 }
 export default new ProfileService();
