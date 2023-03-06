@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken';
-import config from '../../config.js';
+import * as dotenv from 'dotenv';
 
-const { secret } = config;
+dotenv.config();
 export const tokenMiddleware = (req, res, next) => {
-
   try {
     if (req.method === 'OPTIONS' || !req.headers.authorization) {
       next();
@@ -12,7 +11,7 @@ export const tokenMiddleware = (req, res, next) => {
     if (!token) {
       return res.status(403).json({ message: 'Пользователь не авторизован' });
     }
-    const decodedData = jwt.verify(token, secret);
+    const decodedData = jwt.verify(token, process.env.SECRET_KEY_RANDOM);
     req.user = decodedData;
     next();
   } catch (e) {

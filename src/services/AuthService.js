@@ -1,13 +1,13 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import config from '../../config.js';
+import * as dotenv from 'dotenv';
 import User from '../models/user.js';
 
-const { secret } = config;
+dotenv.config();
 
 const generationAccessToken = (id) => {
   const payload = { id };
-  return jwt.sign(payload, secret, { expiresIn: '24h' });
+  return jwt.sign(payload, process.env.SECRET_KEY_RANDOM, { expiresIn: '24h' });
 };
 class AuthService {
   async registration({
