@@ -11,7 +11,7 @@ import Follow from './src/models/follow.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.SECRET_PORT || 5000;
+const PORT = process.env.DEVELOPMENT_DB_PORT;
 
 app.use(cors()); // Use this after the variable declaration
 app.use(express.json());
