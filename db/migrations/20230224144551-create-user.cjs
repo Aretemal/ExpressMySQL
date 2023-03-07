@@ -1,5 +1,5 @@
 /** @type {import('sequelize-cli').Migration} */
-export const u = {
+module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Users', {
       id: {
