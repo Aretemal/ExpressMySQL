@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import * as dotenv from 'dotenv';
 import { db } from './db.js';
 import { errorHandler } from './src/middlewaree/errorHandler.js';
 import Post from './src/models/post.js';
@@ -8,10 +7,8 @@ import router from './router.js';
 import User from './src/models/user.js';
 import Follow from './src/models/follow.js';
 
-dotenv.config();
-
 const app = express();
-const PORT = process.env.DEVELOPMENT_DB_PORT;
+const PORT = process.env.DB_PORT;
 
 app.use(cors()); // Use this after the variable declaration
 app.use(express.json());
