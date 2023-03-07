@@ -11,6 +11,14 @@ Post.init({
     type: DataTypes.INTEGER,
   },
   content: DataTypes.STRING,
+  createdAt: {
+    type: DataTypes.DATE,
+    defaultValue: new Date(),
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    defaultValue: new Date(),
+  },
 }, {
   sequelize: db,
   modelName: 'Post',
