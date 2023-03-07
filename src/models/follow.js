@@ -20,6 +20,14 @@ Follow.init({
     type: DataTypes.DATE,
     defaultValue: 0,
   },
+  createdAt: {
+    type: DataTypes.DATE,
+    defaultValue: new Date(),
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    defaultValue: new Date(),
+  },
 }, {
   sequelize: db,
   modelName: 'Follow',

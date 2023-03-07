@@ -20,7 +20,7 @@ class User extends Model {
     });
   }
 }
-const model = User.init({
+User.init({
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -32,11 +32,25 @@ const model = User.init({
   password: DataTypes.STRING,
   email: DataTypes.STRING,
   login: DataTypes.STRING,
-  status: DataTypes.STRING,
-  ava: DataTypes.BLOB,
+  status: {
+    type: DataTypes.STRING,
+    defaultValue: 0,
+  },
+  ava: {
+    type: DataTypes.BLOB,
+    defaultValue: 0,
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    defaultValue: new Date(),
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    defaultValue: new Date(),
+  },
 }, {
   sequelize: db,
   modelName: 'User',
 });
 
-export default model;
+export default User;
