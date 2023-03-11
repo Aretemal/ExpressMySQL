@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // NODE_OPTIONS=--experimental-vm-modules npx jest
-import User from '../models/user.js';
-import AuthService from '../services/AuthService.js';
+import User from '../../models/user.js';
+import AuthService from '../../services/AuthService.js';
 
 describe('Auth Service : ', () => {
   test('Creates a new user', async () => {

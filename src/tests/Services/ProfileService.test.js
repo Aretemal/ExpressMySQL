@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 // NODE_OPTIONS=--experimental-vm-modules npx jest
-import ProfileService from '../services/ProfileService.js';
+import ProfileService from '../../services/ProfileService.js';
 
 describe('Profile Service : ', () => {
   test('Returns user information', async () => {
