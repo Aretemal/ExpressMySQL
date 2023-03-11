@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // NODE_OPTIONS=--experimental-vm-modules npx jest
-import PostService from '../services/PostService.js';
-import Post from '../models/post.js';
+import PostService from '../../services/PostService.js';
+import Post from '../../models/post.js';
 
 describe('Post Service : ', () => {
   test('Creates a new post', async () => {
