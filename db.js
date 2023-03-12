@@ -1,7 +1,7 @@
-import * as dotenv from 'dotenv';
-
-dotenv.config();
+import * as dotenvF from 'dotenv-flow';
 import { Sequelize } from 'sequelize';
+
+dotenvF.config();
 
 export const db = new Sequelize(
   process.env.DB_DATABASE,

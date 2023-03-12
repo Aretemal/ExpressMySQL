@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
-// NODE_OPTIONS=--experimental-vm-modules npx jest
-import FollowService from '../../services/FollowService.js';
 import Follow from '../../models/follow.js';
+import FollowService from '../../services/FollowService.js';
 
 describe('Follow Service : ', () => {
   test('Follow', async () => {

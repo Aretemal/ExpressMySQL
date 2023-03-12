@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-// NODE_OPTIONS=--experimental-vm-modules npx jest
 import PostService from '../../services/PostService.js';
 import Post from '../../models/post.js';
 
@@ -9,6 +8,7 @@ describe('Post Service : ', () => {
     expect(data).toBeDefined();
     expect(data.content).toBe('Hello');
     expect(data.authorId).toBe(1);
+    await data.destroy();
   });
   test('Returns all posts', async () => {
     const data = await PostService.getAll();
