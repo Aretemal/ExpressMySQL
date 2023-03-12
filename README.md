@@ -16,11 +16,11 @@ Runs the index.js in the development mode.
 Open http://localhost:5000 to view it in your browser.
 The page will reload when you make changes.\
 
-### `NODE_OPTIONS=--experimental-vm-modules npx jest src/tests/Controllers`
+### `NODE_OPTIONS=--experimental-vm-modules npx jest`
 Run all tests
 
 ### `NODE_OPTIONS=--experimental-vm-modules npx jest src/tests/Controllers`
 Run tests for Controllers
 
 ### `NODE_OPTIONS=--experimental-vm-modules npx jest src/tests/Services`
-Run tests for Controllers
+Run tests for Services
