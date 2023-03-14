@@ -1,28 +1,49 @@
 /* eslint-disable no-undef */
-// NODE_OPTIONS=--experimental-vm-modules npx jest
-import sinon from 'sinon';
+import { jest } from '@jest/globals';
 import AuthController from '../../controllers/AuthController';
 import AuthService from '../../services/AuthService.js';
-import { req, res } from './ReqRes.js';
+
+jest.fn('AuthService');
+const req = {
+  body: {
+    id: 1,
+    login: 'Artem',
+    firstName: 'Artem',
+    lastName: 'Novik',
+    password: 'pass',
+  },
+};
+const res = {
+  dataJS: null,
+  json: (data) => {
+    res.dataJS = data;
+  },
+};
 
 describe('Auth Controller : ', () => {
   test('Creates a new user', async () => {
-    const stub = sinon.stub(AuthService, 'registration');
-    stub.returns({
-      userId: 1, login: 'Artem', firstName: 'Artem', lastName: 'Novik',
+    AuthService.registration = ({
+      id, userName: login, password, firstName, lastName, email,
+    }) => ({
+      userId: id, login, firstName, lastName, email, password,
     });
+
     await AuthController.registration(req, res);
+
     expect(res.dataJS.data.attributes.attributes.userId).toBe(1);
     expect(res.dataJS.data.attributes.attributes.firstName).toBe('Artem');
     expect(res.dataJS.data.attributes.attributes.lastName).toBe('Novik');
   });
   test('Authorization', async () => {
-    const stub = sinon.stub(AuthService, 'login');
-    stub.returns({
-      user: { id: 1 }, token: 'token',
+    AuthService.login = ({ login, password }) => ({
+      user: { id: 1 }, token: 'token', login, password,
     });
+
     await AuthController.login(req, res);
+
     expect(res.dataJS.data.attributes.attributes.token).toBe('token');
     expect(res.dataJS.data.attributes.attributes.user).toBeDefined();
+    expect(res.dataJS.data.attributes.attributes.password).toBeDefined();
+    expect(res.dataJS.data.attributes.attributes.login).toBeDefined();
   });
 });

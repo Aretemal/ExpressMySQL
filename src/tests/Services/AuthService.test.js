@@ -8,14 +8,16 @@ describe('Auth Service : ', () => {
         userName: 'hot', password: '1234', firstName: 'Artem', lastName: 'Novik', email: 'A@gmail.com',
       },
     );
-    console.log(process.env.DB_DATABASE);
+
     expect(data).toBeDefined();
     expect(data.lastName).toBe('Novik');
     expect(data.login).toBe('hot');
+
     await data.destroy();
   });
   test('Authorization', async () => {
     const data = await AuthService.login({ login: 'user1', password: 'user1' });
+
     expect(data).toBeDefined();
     expect(data.token).toBeDefined();
     expect(data.user.login).toBe('user1');
