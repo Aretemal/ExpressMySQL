@@ -2,7 +2,7 @@
 import PostService from '../../services/PostService.js';
 import Post from '../../models/post.js';
 
-describe('Post Service : ', () => {
+describe('Post Service :', () => {
   test('Creates a new post', async () => {
     const data = await PostService.create({ newMessageText: 'Hello' }, 1);
     expect(data).toBeDefined();
@@ -12,12 +12,14 @@ describe('Post Service : ', () => {
 
     await data.destroy();
   });
+
   test('Returns all posts', async () => {
     const data = await PostService.getAll();
 
     expect(data).toBeDefined();
     expect(data).toBeInstanceOf(Array);
   });
+
   test('Returns specific posts', async () => {
     const data = await PostService.getOne(1);
 

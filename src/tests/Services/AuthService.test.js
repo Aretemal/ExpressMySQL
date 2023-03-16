@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import AuthService from '../../services/AuthService.js';
 
-describe('Auth Service : ', () => {
+describe('Auth Service :', () => {
   test('Creates a new user', async () => {
     const data = await AuthService.registration(
       {
@@ -15,6 +15,7 @@ describe('Auth Service : ', () => {
 
     await data.destroy();
   });
+
   test('Authorization', async () => {
     const data = await AuthService.login({ login: 'user1', password: 'user1' });
 

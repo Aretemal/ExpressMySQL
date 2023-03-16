@@ -15,7 +15,7 @@ const res = {
     res.dataJS = data;
   },
 };
-describe('User Controller : ', () => {
+describe('User Controller :', () => {
   test('Get info one user', async () => {
     UserService.getOne = (id) => ({
       userId: id, login: 'Artem', firstName: 'Artem', lastName: 'Novik',
@@ -27,6 +27,7 @@ describe('User Controller : ', () => {
     expect(res.dataJS.data.attributes.attributes.firstName).toBe('Artem');
     expect(res.dataJS.data.attributes.attributes.lastName).toBe('Novik');
   });
+
   test('Get status', async () => {
     UserService.getStatus = (id) => `Status${id}`;
 

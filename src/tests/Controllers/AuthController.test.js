@@ -20,7 +20,7 @@ const res = {
   },
 };
 
-describe('Auth Controller : ', () => {
+describe('Auth Controller :', () => {
   test('Creates a new user', async () => {
     AuthService.registration = ({
       id, userName: login, password, firstName, lastName, email,
@@ -34,6 +34,7 @@ describe('Auth Controller : ', () => {
     expect(res.dataJS.data.attributes.attributes.firstName).toBe('Artem');
     expect(res.dataJS.data.attributes.attributes.lastName).toBe('Novik');
   });
+
   test('Authorization', async () => {
     AuthService.login = ({ login, password }) => ({
       user: { id: 1 }, token: 'token', login, password,
