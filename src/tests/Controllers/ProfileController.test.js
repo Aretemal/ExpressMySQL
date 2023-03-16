@@ -31,6 +31,7 @@ describe('Profile Controller : ', () => {
     expect(res.dataJS.data.attributes.attributes.firstName).toBe('Artem');
     expect(res.dataJS.data.attributes.attributes.lastName).toBe('Novik');
   });
+
   test('Update status', async () => {
     ProfileService.updateStatus = (status, id) => ({
       status: `${status + id}`,

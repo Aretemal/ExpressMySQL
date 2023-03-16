@@ -31,6 +31,7 @@ describe('Follow Controller : ', () => {
     expect(res.dataJS.data.attributes.attributes.followingId).toBe(2);
     expect(res.dataJS.data.attributes.attributes.approvedAt).toBe(0);
   });
+
   test('Approve connection', async () => {
     const timeD = new Date();
     const req1 = {
@@ -51,6 +52,7 @@ describe('Follow Controller : ', () => {
     expect(res.dataJS.data.attributes.attributes.followingId).toBe(2);
     expect(res.dataJS.data.attributes.attributes.approvedAt).toBe(timeD);
   });
+
   test('Unfollow', async () => {
     FollowService.unfollow = (firstUserId, secondUserId) => ({
       followerId: firstUserId, followingId: secondUserId, approvedAt: 0,
