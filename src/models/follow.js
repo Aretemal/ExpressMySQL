@@ -7,13 +7,17 @@ class Follow extends Model {
   }
 }
 Follow.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   followerId: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
   followingId: {
     type: DataTypes.INTEGER,
-    primaryKey: true,
     allowNull: false,
   },
   approvedAt: {
@@ -29,6 +33,13 @@ Follow.init({
     defaultValue: new Date(),
   },
 }, {
+
+  indexes: [
+    {
+      unique: false,
+      fields: ['followerId', 'followingId'],
+    },
+  ],
   sequelize: db,
   modelName: 'Follow',
 });
