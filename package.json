@@ -1,13 +1,13 @@
 {
-  "name": "create-complete-rest-api-using-nodejs-express-mysql-sequelize-in-one-video",
+  "name": "Express_API",
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node app.js",
-    "serve": "nodemon app.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "start": "node server.js",
+    "serve": "nodemon server.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "transform": {},
   "keywords": [],
