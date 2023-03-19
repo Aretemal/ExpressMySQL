@@ -11,6 +11,15 @@ class UserController {
     );
   }
 
+  async getAllUsers(req, res) {
+    const data = await UserService.getAllUsers(req.user.id, req.query);
+    res.json(
+      ResponseObjectJSON.render({
+        type: 'user', attributes: data, relationships: req.body,
+      }, { links: { self: req.originalUrl } }),
+    );
+  }
+
   async getStatus(req, res) {
     const status = await UserService.getStatus(req.params.id);
     res.json(

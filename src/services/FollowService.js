@@ -3,7 +3,7 @@ import Follow from '../models/follow.js';
 class FollowService {
   async follow(firstUserId, secondUserId) {
     const connection = Follow.create({
-      followerId: firstUserId, followingId: secondUserId, approvedAt: 0,
+      followerId: firstUserId, followingId: secondUserId,
     });
     return connection;
   }
