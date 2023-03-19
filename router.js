@@ -17,9 +17,10 @@ router.post('/registration', [
 router.post('/login', tryCatch(AuthController.login));
 
 router.use(tokenMiddleware);
-// User
-router.post('/user', tryCatch(UserController.create));
+
+// Users
 router.get('/user/:id', tryCatch(UserController.getOne));
+router.get('/users/find', tryCatch(UserController.getAllUsers));
 router.get('profile/status/:id', tryCatch(UserController.getStatus));
 
 // Post
