@@ -22,10 +22,12 @@ class AuthService {
       throw new Error('Пользователь уже существует');
     }
     const hashPassword = bcrypt.hashSync(password, 7);
-    const data = await User.create({
+    const user = await User.create({
       login, password: hashPassword, firstName, lastName, email,
     });
-    return data;
+    return {
+      id: user.userId, login, firstName, lastName, email,
+    };
   }
 
   async login({ login, password }) {
@@ -38,7 +40,9 @@ class AuthService {
       throw new Error('Введен неверный пароль');
     }
     const token = generationAccessToken(user.userId);
-    return { token, user };
+    const data = user.dataValues;
+    delete data.password;
+    return { token, user: data };
   }
 }
 
