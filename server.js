@@ -10,7 +10,7 @@ async function startApp() {
     User.associate({ Post, Follow });
     Post.associate({ User });
     Follow.associate({ User });
-    await db.sync({ alter: true });
+    // await db.sync({ alter: true });
     app.listen(PORT, () => console.log(`Server created on port: ${PORT}`));
   } catch (e) {
     console.log(e);
