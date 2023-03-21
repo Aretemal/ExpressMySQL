@@ -19,7 +19,7 @@ const res = {
   },
 };
 
-describe('Profile Controller : ', () => {
+describe('Profile Controller :', () => {
   test('Get info authorized user', async () => {
     ProfileService.getInfoAuthorizedUser = (id) => ({
       userId: id, login: 'Artem', firstName: 'Artem', lastName: 'Novik',

@@ -19,7 +19,8 @@ const res = {
     res.dataJS = data;
   },
 };
-describe('Follow Controller : ', () => {
+
+describe('Follow Controller :', () => {
   test('Creates a new connection', async () => {
     FollowService.follow = (firstUserId, secondUserId) => ({
       followerId: firstUserId, followingId: secondUserId, approvedAt: 0,

@@ -15,6 +15,7 @@ const res = {
     res.dataJS = data;
   },
 };
+
 describe('User Controller :', () => {
   test('Get info one user', async () => {
     UserService.getOne = (id) => ({

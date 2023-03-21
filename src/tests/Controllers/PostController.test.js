@@ -21,6 +21,7 @@ const res = {
     res.dataJS = data;
   },
 };
+
 describe('Post Controller :', () => {
   test('Creates a new post', async () => {
     PostService.create = ({ newMessageText }, id) => ({
@@ -43,6 +44,7 @@ describe('Post Controller :', () => {
     expect(res.dataJS.data.attributes.attributes[0].id).toBe(1);
     expect(res.dataJS.data.attributes.attributes[1].id).toBe(2);
   });
+
   test('Returns one posts', async () => {
     PostService.getOne = (id) => ({
       id, content: 'Hello',
