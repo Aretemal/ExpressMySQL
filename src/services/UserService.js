@@ -19,17 +19,19 @@ class UserService {
     page = +page;
     const beginUsers = (page - 1) * count;
     const endUsers = (page - 1) * count + count;
-    const users = await User.findAll({ include: Follow });
+    const users = await User.findAll({
+      attributes: ['userId', 'firstName', 'lastName', 'login', 'email', 'status', 'ava'],
+      where: {
+        userId: {
+          [Op.between]: [beginUsers + 1, endUsers],
+        },
+      },
+      include: Follow,
+    });
     const countOfUsers = users.length;
-    const data = users
-      .map((user) => {
-        delete user.dataValues.password;
-        return user;
-      });
-    const pageUsers = data.filter((user, index) => (index >= beginUsers) && (index < endUsers));
-    const userAuth = data.filter((user) => user.dataValues.userId === id);
+    const userAuth = users.filter((user) => user.dataValues.userId === id);
     return {
-      pageUsers, countOfUsers, userAuth,
+      users, countOfUsers, userAuth,
     };
   }
 
