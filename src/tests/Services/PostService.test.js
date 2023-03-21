@@ -5,6 +5,7 @@ import Post from '../../models/post.js';
 describe('Post Service :', () => {
   test('Creates a new post', async () => {
     const data = await PostService.create({ newMessageText: 'Hello' }, 1);
+
     expect(data).toBeDefined();
 
     expect(data.content).toBe('Hello');

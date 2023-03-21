@@ -1,7 +1,5 @@
 import jwt from 'jsonwebtoken';
-import * as dotenv from 'dotenv';
 
-dotenv.config();
 export const tokenMiddleware = (req, res, next) => {
   try {
     if (req.method === 'OPTIONS' || !req.headers.authorization) {
