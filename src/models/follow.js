@@ -36,7 +36,7 @@ Follow.init({
 
   indexes: [
     {
-      unique: false,
+      unique: true,
       fields: ['followerId', 'followingId'],
     },
   ],
