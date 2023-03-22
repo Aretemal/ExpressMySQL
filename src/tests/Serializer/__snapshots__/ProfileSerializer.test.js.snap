@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfileSerializer : getInfoAuthorizedUser : should return info about user 1`] = `
+{
+  "data": {
+    "attributes": {
+      "email": "111@11.1",
+      "firstName": "aaaa",
+      "id": 1,
+      "lastName": "bbbb",
+      "login": "Artem",
+    },
+    "id": 1,
+    "type": "ObjectUser",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/profile/user",
+  },
+}
+`;
+
+exports[`ProfileSerializer : updateStatus : should return new status 1`] = `
+{
+  "data": {
+    "attributes": {
+      "status": "Hello world",
+    },
+    "id": 1,
+    "type": "NewStatus",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/profile/status",
+  },
+}
+`;

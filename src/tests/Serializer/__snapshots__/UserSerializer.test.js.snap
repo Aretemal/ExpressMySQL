@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserSerializer : getAllUsers : should return array with info 1`] = `
+{
+  "data": {
+    "attributes": {
+      "countOfUsers": 2,
+      "userAuth": {
+        "id": 1,
+        "login": "Artem",
+      },
+      "users": [
+        {
+          "email": "111@11.1",
+          "firstName": "aaaa",
+          "id": 1,
+          "lastName": "bbbb",
+          "login": "Artem",
+        },
+        {
+          "email": "111@11.1",
+          "firstName": "Artem",
+          "id": 2,
+          "lastName": "Oleg",
+          "login": "hello",
+        },
+      ],
+    },
+    "id": 1,
+    "type": "Array Users",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/users",
+  },
+}
+`;
+
+exports[`UserSerializer : getStatus : should return status 1`] = `
+{
+  "data": {
+    "attributes": {
+      "id": 1,
+      "status": "Hello world",
+    },
+    "id": 1,
+    "type": "Status",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/profile/status/1",
+  },
+}
+`;

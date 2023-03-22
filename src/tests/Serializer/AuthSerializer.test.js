@@ -14,10 +14,7 @@ describe('AuthSerializer :', () => {
 
       const data = AuthSerializer.registration(user, links);
 
-      expect(data.data.id).toBe(1);
-      expect(data.data.type).toBe('ObjectUser');
-      expect(data.data.attributes.firstName).toBe('aaaa');
-      expect(data.links.self).toBe('http://localhost:5000/api/registration');
+      expect(data).toMatchSnapshot();
     });
   });
 
@@ -35,11 +32,7 @@ describe('AuthSerializer :', () => {
 
       const data = AuthSerializer.login({ token, user }, links);
 
-      expect(data.data.id).toBe(1);
-      expect(data.data.type).toBe('Token');
-      expect(data.data.attributes.firstName).toBe('aaaa');
-      expect(data.data.token).toBe('TOKEN');
-      expect(data.links.self).toBe('http://localhost:5000/api/login');
+      expect(data).toMatchSnapshot();
     });
   });
 });

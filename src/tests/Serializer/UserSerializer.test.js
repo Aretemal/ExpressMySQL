@@ -43,11 +43,7 @@ describe('UserSerializer :', () => {
 
       const data = UserSerializer.getAllUsers({ users, countOfUsers, userAuth }, links);
 
-      expect(data.data.attributes.users[1].login).toBe('hello');
-      expect(data.data.attributes.countOfUsers).toBe(2);
-      expect(data.data.id).toBe(1);
-      expect(data.data.type).toBe('Array Users');
-      expect(data.links.self).toBe('http://localhost:5000/api/users');
+      expect(data).toMatchSnapshot();
     });
   });
 
@@ -58,10 +54,7 @@ describe('UserSerializer :', () => {
 
       const data = UserSerializer.getStatus(statusWithId, links);
 
-      expect(data.data.attributes.status).toBe('Hello world');
-      expect(data.data.id).toBe(1);
-      expect(data.data.type).toBe('Status');
-      expect(data.links.self).toBe('http://localhost:5000/api/profile/status/1');
+      expect(data).toMatchSnapshot();
     });
   });
 });

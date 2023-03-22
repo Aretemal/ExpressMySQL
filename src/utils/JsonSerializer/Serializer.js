@@ -1,5 +1,5 @@
 class Serializer {
-  serializer(data, id, type, links) {
+  serialize(data, id, type, links) {
     return {
       data: {
         type,

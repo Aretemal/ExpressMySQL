@@ -11,11 +11,7 @@ describe('PostSerializer :', () => {
 
       const data = PostSerializer.create(post, links, 1);
 
-      expect(data.data.attributes.authorId).toBe(2);
-      expect(data.data.attributes.content).toBe('Hello');
-      expect(data.data.id).toBe(1);
-      expect(data.data.type).toBe('Post');
-      expect(data.links.self).toBe('http://localhost:5000/api/profile/posts');
+      expect(data).toMatchSnapshot();
     });
   });
 
@@ -33,11 +29,7 @@ describe('PostSerializer :', () => {
 
       const data = PostSerializer.getAll(posts, links, 1);
 
-      expect(data.data.attributes[1].authorId).toBe(1);
-      expect(data.data.attributes[1].content).toBe('World');
-      expect(data.data.id).toBe(1);
-      expect(data.data.type).toBe('Array Posts');
-      expect(data.links.self).toBe('http://localhost:5000/api/profile/posts');
+      expect(data).toMatchSnapshot();
     });
   });
 
@@ -51,11 +43,7 @@ describe('PostSerializer :', () => {
 
       const data = PostSerializer.getOne(post, links, 1);
 
-      expect(data.data.attributes.authorId).toBe(2);
-      expect(data.data.attributes.content).toBe('Hello');
-      expect(data.data.id).toBe(1);
-      expect(data.data.type).toBe('Post');
-      expect(data.links.self).toBe('http://localhost:5000/api/profile/posts/2');
+      expect(data).toMatchSnapshot();
     });
   });
 });

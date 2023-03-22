@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostSerializer : create : should return post 1`] = `
+{
+  "data": {
+    "attributes": {
+      "authorId": 2,
+      "content": "Hello",
+    },
+    "id": 1,
+    "type": "Post",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/profile/posts",
+  },
+}
+`;
+
+exports[`PostSerializer : getAll : should return array posts 1`] = `
+{
+  "data": {
+    "attributes": {
+      "0": {
+        "authorId": 2,
+        "content": "Hello",
+      },
+      "1": {
+        "authorId": 1,
+        "content": "World",
+      },
+    },
+    "id": 1,
+    "type": "Array Posts",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/profile/posts",
+  },
+}
+`;
+
+exports[`PostSerializer : getOne : should return post 1`] = `
+{
+  "data": {
+    "attributes": {
+      "authorId": 2,
+      "content": "Hello",
+    },
+    "id": 1,
+    "type": "Post",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/profile/posts/2",
+  },
+}
+`;

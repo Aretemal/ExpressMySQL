@@ -10,12 +10,7 @@ describe('FollowSerializer :', () => {
 
       const data = FollowSerializer.follow(connection, links);
 
-      expect(data.data.attributes.followerId).toBe(1);
-      expect(data.data.id).toBe(21);
-      expect(data.data.attributes.followingId).toBe(2);
-      expect(data.data.attributes.approvedAt).toBe(0);
-      expect(data.data.type).toBe('Follow connection');
-      expect(data.links.self).toBe('http://localhost:5000/api/follow');
+      expect(data).toMatchSnapshot();
     });
   });
 
@@ -28,12 +23,7 @@ describe('FollowSerializer :', () => {
 
       const data = FollowSerializer.approve(connection, links);
 
-      expect(data.data.attributes.followerId).toBe(1);
-      expect(data.data.id).toBe(21);
-      expect(data.data.attributes.followingId).toBe(2);
-      expect(data.data.attributes.approvedAt).toBe(1);
-      expect(data.data.type).toBe('Approve connection');
-      expect(data.links.self).toBe('http://localhost:5000/api/approve');
+      expect(data).toMatchSnapshot();
     });
   });
 
@@ -46,12 +36,7 @@ describe('FollowSerializer :', () => {
 
       const data = FollowSerializer.unfollow(connection, links);
 
-      expect(data.data.attributes.followerId).toBe(1);
-      expect(data.data.id).toBe(21);
-      expect(data.data.attributes.followingId).toBe(2);
-      expect(data.data.attributes.approvedAt).toBe(0);
-      expect(data.data.type).toBe('Unfollow connection');
-      expect(data.links.self).toBe('http://localhost:5000/api/unfollow');
+      expect(data).toMatchSnapshot();
     });
   });
 });
