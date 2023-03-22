@@ -14,10 +14,7 @@ describe('ProfileSerializer :', () => {
 
       const data = ProfileSerializer.getInfoAuthorizedUser(user, links, 1);
 
-      expect(data.data.attributes.firstName).toBe('aaaa');
-      expect(data.data.id).toBe(1);
-      expect(data.data.type).toBe('ObjectUser');
-      expect(data.links.self).toBe('http://localhost:5000/api/profile/user');
+      expect(data).toMatchSnapshot();
     });
   });
 
@@ -28,10 +25,7 @@ describe('ProfileSerializer :', () => {
 
       const data = ProfileSerializer.updateStatus(status, links, 1);
 
-      expect(data.data.attributes.status).toBe('Hello world');
-      expect(data.data.id).toBe(1);
-      expect(data.data.type).toBe('NewStatus');
-      expect(data.links.self).toBe('http://localhost:5000/api/profile/status');
+      expect(data).toMatchSnapshot();
     });
   });
 });
