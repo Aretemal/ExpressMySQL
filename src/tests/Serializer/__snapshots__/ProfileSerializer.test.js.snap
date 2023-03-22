@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProfileSerializer : getInfoAuthorizedUser : should return info about user 1`] = `
+exports[`ProfileSerializers : getInfoAuthorizedUser : should return info about user 1`] = `
 {
   "data": {
     "attributes": {
@@ -19,7 +19,7 @@ exports[`ProfileSerializer : getInfoAuthorizedUser : should return info about us
 }
 `;
 
-exports[`ProfileSerializer : updateStatus : should return new status 1`] = `
+exports[`ProfileSerializers : updateStatus : should return new status 1`] = `
 {
   "data": {
     "attributes": {

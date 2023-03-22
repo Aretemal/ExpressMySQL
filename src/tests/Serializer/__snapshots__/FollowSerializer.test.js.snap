@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FollowSerializer : Approve : should return connection with info 1`] = `
+exports[`FollowSerializers : Approve : should return connection with info 1`] = `
 {
   "data": {
     "attributes": {
@@ -18,7 +18,7 @@ exports[`FollowSerializer : Approve : should return connection with info 1`] = `
 }
 `;
 
-exports[`FollowSerializer : Follow : should return connection with info 1`] = `
+exports[`FollowSerializers : Follow : should return connection with info 1`] = `
 {
   "data": {
     "attributes": {
@@ -36,7 +36,7 @@ exports[`FollowSerializer : Follow : should return connection with info 1`] = `
 }
 `;
 
-exports[`FollowSerializer : Unfollow : should return connection with info 1`] = `
+exports[`FollowSerializers : Unfollow : should return connection with info 1`] = `
 {
   "data": {
     "attributes": {

@@ -1,4 +1,4 @@
-import AuthSerializer from '../../utils/JsonSerializer/AuthSerializer.js';
+import AuthSerializers from '../../utils/JsonSerializer/AuthSerializers.js';
 
 describe('AuthSerializer :', () => {
   describe('Registration', () => {
@@ -12,7 +12,7 @@ describe('AuthSerializer :', () => {
         email: '111@11.1',
       };
 
-      const data = AuthSerializer.registration(user, links);
+      const data = AuthSerializers.registration(user, links);
 
       expect(data).toMatchSnapshot();
     });
@@ -30,7 +30,7 @@ describe('AuthSerializer :', () => {
       };
       const token = 'TOKEN';
 
-      const data = AuthSerializer.login({ token, user }, links);
+      const data = AuthSerializers.login({ token, user }, links);
 
       expect(data).toMatchSnapshot();
     });

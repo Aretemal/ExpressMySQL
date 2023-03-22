@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PostSerializer : create : should return post 1`] = `
+exports[`PostSerializers : create : should return post 1`] = `
 {
   "data": {
     "attributes": {
@@ -16,7 +16,7 @@ exports[`PostSerializer : create : should return post 1`] = `
 }
 `;
 
-exports[`PostSerializer : getAll : should return array posts 1`] = `
+exports[`PostSerializers : getAll : should return array posts 1`] = `
 {
   "data": {
     "attributes": {
@@ -38,7 +38,7 @@ exports[`PostSerializer : getAll : should return array posts 1`] = `
 }
 `;
 
-exports[`PostSerializer : getOne : should return post 1`] = `
+exports[`PostSerializers : getOne : should return post 1`] = `
 {
   "data": {
     "attributes": {
