@@ -18,12 +18,11 @@ class UserService {
     count = +count;
     page = +page;
     const beginUsers = (page - 1) * count;
-    const endUsers = (page - 1) * count + count;
     const users = await User.findAll({
       attributes: ['userId', 'firstName', 'lastName', 'login', 'email', 'status', 'ava'],
       include: Follow,
       offset: beginUsers,
-      limit: endUsers - beginUsers,
+      limit: count,
     });
     const countOfUsers = users.length;
     const userAuth = users.filter((user) => user.dataValues.userId === id);
