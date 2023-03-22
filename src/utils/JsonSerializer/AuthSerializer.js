@@ -1,33 +1,14 @@
-class AuthSerializer {
+import Serializer from './Serializer.js';
+
+class AuthSerializer extends Serializer {
   registration(data, links) {
-    return {
-      data: {
-        type: 'ObjectUser',
-        id: data.id,
-        attributes: {
-          ...data,
-        },
-      },
-      links: {
-        self: links,
-      },
-    };
+    return this.serializer(data, data.id, 'ObjectUser', links);
   }
 
   login(data, links) {
-    return {
-      data: {
-        type: 'Token',
-        token: data.token,
-        id: data.user.id,
-        attributes: {
-          ...data.user,
-        },
-      },
-      links: {
-        self: links,
-      },
-    };
+    const jsonObj = this.serializer(data.user, data.user.id, 'Token', links);
+    jsonObj.data.token = data.token;
+    return jsonObj;
   }
 }
 export default new AuthSerializer();

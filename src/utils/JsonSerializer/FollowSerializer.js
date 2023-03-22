@@ -1,47 +1,16 @@
-class FollowSerializer {
+import Serializer from './Serializer.js';
+
+class FollowSerializer extends Serializer {
   follow(data, links) {
-    return {
-      data: {
-        type: 'Follow connection',
-        id: data.id,
-        attributes: {
-          ...data,
-        },
-      },
-      links: {
-        self: links,
-      },
-    };
+    return this.serializer(data, data.id, 'Follow connection', links);
   }
 
   approve(data, links) {
-    return {
-      data: {
-        type: 'Approve connection',
-        id: data.id,
-        attributes: {
-          ...data,
-        },
-      },
-      links: {
-        self: links,
-      },
-    };
+    return this.serializer(data, data.id, 'Approve connection', links);
   }
 
   unfollow(data, links) {
-    return {
-      data: {
-        type: 'Unfollow connection',
-        id: data.id || 0,
-        attributes: {
-          ...data,
-        },
-      },
-      links: {
-        self: links,
-      },
-    };
+    return this.serializer(data, data.id || 0, 'Unfollow connection', links);
   }
 }
 export default new FollowSerializer();
