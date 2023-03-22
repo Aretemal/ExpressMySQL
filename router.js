@@ -18,7 +18,7 @@ router.use(tokenMiddleware);
 
 // Users
 router.get('/user/:id', UserController.getOne);
-router.get('/users/find', UserController.getAllUsers);
+router.get('/users', UserController.getAllUsers);
 router.get('profile/status/:id', UserController.getStatus);
 
 // Post
