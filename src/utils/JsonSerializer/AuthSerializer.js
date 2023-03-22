@@ -1,4 +1,4 @@
-class AuthJsonCreator {
+class AuthSerializer {
   registration(data, links) {
     return {
       data: {
@@ -30,4 +30,4 @@ class AuthJsonCreator {
     };
   }
 }
-export default new AuthJsonCreator();
+export default new AuthSerializer();

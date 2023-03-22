@@ -40,7 +40,7 @@ class UserService {
       throw new Error('Пользователь не найден');
     }
     const { status } = user;
-    return status;
+    return { status, id };
   }
 }
 export default new UserService();

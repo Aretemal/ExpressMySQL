@@ -1,8 +1,8 @@
-class UserJsonCreator {
-  getOne(data, links) {
+class FollowSerializer {
+  follow(data, links) {
     return {
       data: {
-        type: 'ObjectUser',
+        type: 'Follow connection',
         id: data.id,
         attributes: {
           ...data,
@@ -14,11 +14,11 @@ class UserJsonCreator {
     };
   }
 
-  getAllUsers(data, links) {
+  approve(data, links) {
     return {
       data: {
-        type: 'Array Users',
-        id: -1,
+        type: 'Approve connection',
+        id: data.id,
         attributes: {
           ...data,
         },
@@ -29,11 +29,11 @@ class UserJsonCreator {
     };
   }
 
-  getStatus(data, links) {
+  unfollow(data, links) {
     return {
       data: {
-        type: 'Status',
-        id: -1,
+        type: 'Unfollow connection',
+        id: data.id || 0,
         attributes: {
           ...data,
         },
@@ -44,4 +44,4 @@ class UserJsonCreator {
     };
   }
 }
-export default new UserJsonCreator();
+export default new FollowSerializer();
