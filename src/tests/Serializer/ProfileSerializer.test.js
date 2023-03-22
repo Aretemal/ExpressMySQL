@@ -1,4 +1,4 @@
-import ProfileSerializer from '../../utils/JsonSerializer/ProfileSerializer.js';
+import ProfileSerializers from '../../utils/JsonSerializer/ProfileSerializers.js';
 
 describe('ProfileSerializer :', () => {
   describe('getInfoAuthorizedUser :', () => {
@@ -12,7 +12,7 @@ describe('ProfileSerializer :', () => {
         email: '111@11.1',
       };
 
-      const data = ProfileSerializer.getInfoAuthorizedUser(user, links, 1);
+      const data = ProfileSerializers.profileSerialize(user, links, 'ObjectUser', 1);
 
       expect(data).toMatchSnapshot();
     });
@@ -23,7 +23,7 @@ describe('ProfileSerializer :', () => {
       const links = 'http://localhost:5000/api/profile/status';
       const status = { status: 'Hello world' };
 
-      const data = ProfileSerializer.updateStatus(status, links, 1);
+      const data = ProfileSerializers.profileSerialize(status, links, 'NewStatus', 1);
 
       expect(data).toMatchSnapshot();
     });

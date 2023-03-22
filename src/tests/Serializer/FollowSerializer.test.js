@@ -1,6 +1,6 @@
-import FollowSerializer from '../../utils/JsonSerializer/FollowSerializer.js';
+import FollowSerializers from '../../utils/JsonSerializer/FollowSerializers.js';
 
-describe('FollowSerializer :', () => {
+describe('FollowSerializers :', () => {
   describe('Follow :', () => {
     test('should return connection with info', () => {
       const links = 'http://localhost:5000/api/follow';
@@ -8,7 +8,7 @@ describe('FollowSerializer :', () => {
         id: 21, followerId: 1, followingId: 2, approvedAt: 0,
       };
 
-      const data = FollowSerializer.follow(connection, links);
+      const data = FollowSerializers.followSerialize(connection, links, 'Follow', connection.id);
 
       expect(data).toMatchSnapshot();
     });
@@ -21,7 +21,7 @@ describe('FollowSerializer :', () => {
         id: 21, followerId: 1, followingId: 2, approvedAt: 1,
       };
 
-      const data = FollowSerializer.approve(connection, links);
+      const data = FollowSerializers.followSerialize(connection, links, 'Approve', connection.id);
 
       expect(data).toMatchSnapshot();
     });
@@ -34,7 +34,7 @@ describe('FollowSerializer :', () => {
         id: 21, followerId: 1, followingId: 2, approvedAt: 0,
       };
 
-      const data = FollowSerializer.unfollow(connection, links);
+      const data = FollowSerializers.followSerialize(connection, links, 'Unfollow', connection.id);
 
       expect(data).toMatchSnapshot();
     });

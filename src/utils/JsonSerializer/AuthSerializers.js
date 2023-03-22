@@ -1,6 +1,6 @@
-import Serializer from './Serializer.js';
+import Serializers from './Serializers.js';
 
-class AuthSerializer extends Serializer {
+class AuthSerializers extends Serializers {
   registration(data, links) {
     return this.serialize(data, data.id, 'ObjectUser', links);
   }
@@ -11,4 +11,4 @@ class AuthSerializer extends Serializer {
     return jsonObj;
   }
 }
-export default new AuthSerializer();
+export default new AuthSerializers();

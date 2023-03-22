@@ -1,4 +1,4 @@
-class Serializer {
+class Serializers {
   serialize(data, id, type, links) {
     return {
       data: {
@@ -14,4 +14,4 @@ class Serializer {
     };
   }
 }
-export default Serializer;
+export default Serializers;

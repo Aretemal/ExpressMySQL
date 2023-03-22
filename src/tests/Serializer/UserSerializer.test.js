@@ -1,6 +1,6 @@
-import UserSerializer from '../../utils/JsonSerializer/UserSerializer.js';
+import UserSerializers from '../../utils/JsonSerializer/UserSerializers.js';
 
-describe('UserSerializer :', () => {
+describe('UserSerializers :', () => {
   describe('getOne :', () => {
     test('should return info about user', () => {
       const links = 'http://localhost:5000/api/user/1';
@@ -12,12 +12,9 @@ describe('UserSerializer :', () => {
         email: '111@11.1',
       };
 
-      const data = UserSerializer.getOne(user, links);
+      const data = UserSerializers.userSerialize(user, links, 'ObjectUser', user.id);
 
-      expect(data.data.attributes.firstName).toBe('aaaa');
-      expect(data.data.id).toBe(1);
-      expect(data.data.type).toBe('ObjectUser');
-      expect(data.links.self).toBe('http://localhost:5000/api/user/1');
+      expect(data).toMatchSnapshot();
     });
   });
 
@@ -41,7 +38,7 @@ describe('UserSerializer :', () => {
         email: '111@11.1',
       }];
 
-      const data = UserSerializer.getAllUsers({ users, countOfUsers, userAuth }, links);
+      const data = UserSerializers.userSerialize({ users, countOfUsers, userAuth }, links, 'Array Users', userAuth.id);
 
       expect(data).toMatchSnapshot();
     });
@@ -52,7 +49,7 @@ describe('UserSerializer :', () => {
       const links = 'http://localhost:5000/api/profile/status/1';
       const statusWithId = { id: 1, status: 'Hello world' };
 
-      const data = UserSerializer.getStatus(statusWithId, links);
+      const data = UserSerializers.userSerialize(statusWithId, links, 'Status', statusWithId.id);
 
       expect(data).toMatchSnapshot();
     });

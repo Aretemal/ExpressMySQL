@@ -1,4 +1,4 @@
-import PostSerializer from '../../utils/JsonSerializer/PostSerializer.js';
+import PostSerializers from '../../utils/JsonSerializer/PostSerializers.js';
 
 describe('PostSerializer :', () => {
   describe('create :', () => {
@@ -9,7 +9,7 @@ describe('PostSerializer :', () => {
         content: 'Hello',
       };
 
-      const data = PostSerializer.create(post, links, 1);
+      const data = PostSerializers.postSerialize(post, links, 'Post', 1);
 
       expect(data).toMatchSnapshot();
     });
@@ -27,7 +27,7 @@ describe('PostSerializer :', () => {
         content: 'World',
       }];
 
-      const data = PostSerializer.getAll(posts, links, 1);
+      const data = PostSerializers.postSerialize(posts, links, 'Array Posts', 1);
 
       expect(data).toMatchSnapshot();
     });
@@ -41,7 +41,7 @@ describe('PostSerializer :', () => {
         content: 'Hello',
       };
 
-      const data = PostSerializer.getOne(post, links, 1);
+      const data = PostSerializers.postSerialize(post, links, 'Post', 1);
 
       expect(data).toMatchSnapshot();
     });
