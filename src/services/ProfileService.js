@@ -7,10 +7,10 @@ class ProfileService {
     }
     const user = await User.findByPk(id);
     const {
-      userId, login, firstName, lastName, email, status,
+      userId, login, firstName, lastName, email, status, ava,
     } = user;
     return {
-      userId, login, firstName, lastName, email, status,
+      userId, login, firstName, lastName, email, status, ava,
     };
   }
 
@@ -19,13 +19,13 @@ class ProfileService {
       throw new Error('Id не указан');
     }
     const oldUser = await User.findByPk(id);
+    await oldUser.update({ status });
     const {
-      login, firstName, lastName, email,
+      userId, login, firstName, lastName, email, ava,
     } = oldUser;
-    await oldUser.update({
-      login, firstName, lastName, email, status,
-    });
-    return { status };
+    return {
+      userId, login, firstName, lastName, email, status, ava,
+    };
   }
 
   async getStatus(id) {
@@ -36,8 +36,12 @@ class ProfileService {
     if (!user) {
       throw new Error('Пользователь не найден');
     }
-    const { status } = user;
-    return { status, id };
+    const {
+      userId, login, firstName, lastName, email, ava, status,
+    } = user;
+    return {
+      userId, login, firstName, lastName, email, ava, status,
+    };
   }
 }
 export default new ProfileService();

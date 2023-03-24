@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserSerializer : getAllUsers : should return array with info 1`] = `
+{
+  "data": {
+    "attributes": {
+      "countOfUsers": {
+        "data": {
+          "attributes": {
+            "primitive": 2,
+          },
+          "id": 0,
+          "type": "Primitive",
+        },
+        "links": {
+          "self": undefined,
+        },
+      },
+      "users": [
+        {
+          "data": {
+            "attributes": {
+              "ava": null,
+              "email": "111@11.1",
+              "fullName": undefined,
+              "lastName": "bbbb",
+              "login": "Artem",
+              "status": "1",
+            },
+            "id": 1,
+            "type": "User",
+          },
+          "links": {
+            "self": "http://localhost:5000/api/user/1",
+          },
+        },
+        {
+          "data": {
+            "attributes": {
+              "ava": null,
+              "email": "111@11.1",
+              "fullName": undefined,
+              "lastName": "bbbb",
+              "login": "Artem",
+              "status": "1",
+            },
+            "id": 1,
+            "type": "User",
+          },
+          "links": {
+            "self": "http://localhost:5000/api/user/1",
+          },
+        },
+      ],
+    },
+    "id": 0,
+    "type": "Users",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/users",
+  },
+}
+`;
+
+exports[`UserSerializer : getOne : should return info about user 1`] = `
+{
+  "data": {
+    "attributes": {
+      "ava": null,
+      "email": "111@11.1",
+      "fullName": undefined,
+      "lastName": "bbbb",
+      "login": "Artem",
+      "status": "1",
+    },
+    "id": 1,
+    "type": "User",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/user/1",
+  },
+}
+`;

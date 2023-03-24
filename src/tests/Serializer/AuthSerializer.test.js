@@ -1,18 +1,24 @@
-import AuthSerializers from '../../serializers/AuthSerializers.js';
+import AuthSerializers from '../../serializers/AuthSerializer.js';
+import UserSerializer from '../../serializers/UserSerializer.js';
 
 describe('AuthSerializer :', () => {
   describe('Registration', () => {
     test('should return object with data about user', () => {
       const links = 'http://localhost:5000/api/registration';
       const user = {
-        id: 1,
+        userId: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',
         email: '111@11.1',
+        status: '1',
+        ava: null,
       };
 
-      const data = AuthSerializers.registration(user, links);
+      const serializer = new UserSerializer({
+        attributes: user, link: links,
+      });
+      const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
     });
@@ -21,16 +27,10 @@ describe('AuthSerializer :', () => {
   describe('Login', () => {
     test('should return object and token', () => {
       const links = 'http://localhost:5000/api/login';
-      const user = {
-        id: 1,
-        login: 'Artem',
-        firstName: 'aaaa',
-        lastName: 'bbbb',
-        email: '111@11.1',
-      };
       const token = 'TOKEN';
 
-      const data = AuthSerializers.login({ token, user }, links);
+      const serializer = new AuthSerializers({ token, link: links });
+      const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
     });

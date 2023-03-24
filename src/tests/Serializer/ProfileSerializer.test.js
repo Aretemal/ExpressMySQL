@@ -1,18 +1,22 @@
-import ProfileSerializers from '../../serializers/ProfileSerializers.js';
+import UserSerializer from '../../serializers/UserSerializer.js';
 
 describe('ProfileSerializer :', () => {
   describe('getInfoAuthorizedUser :', () => {
     test('should return info about user', () => {
       const links = 'http://localhost:5000/api/profile/user';
       const user = {
-        id: 1,
+        userId: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',
         email: '111@11.1',
+        status: '1',
+        ava: null,
       };
-
-      const data = ProfileSerializers.profileSerialize(user, links, 'ObjectUser', 1);
+      const serializer = new UserSerializer({
+        attributes: user, link: links,
+      });
+      const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
     });
@@ -21,9 +25,20 @@ describe('ProfileSerializer :', () => {
   describe('updateStatus :', () => {
     test('should return new status', () => {
       const links = 'http://localhost:5000/api/profile/status';
-      const status = { status: 'Hello world' };
+      const user = {
+        userId: 1,
+        login: 'Artem',
+        firstName: 'aaaa',
+        lastName: 'bbbb',
+        email: '111@11.1',
+        status: '1',
+        ava: null,
+      };
 
-      const data = ProfileSerializers.profileSerialize(status, links, 'NewStatus', 1);
+      const serializer = new UserSerializer({
+        attributes: user, link: links,
+      });
+      const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
     });
@@ -32,9 +47,20 @@ describe('ProfileSerializer :', () => {
   describe('getStatus :', () => {
     test('should return status', () => {
       const links = 'http://localhost:5000/api/profile/status/1';
-      const statusWithId = { id: 1, status: 'Hello world' };
+      const user = {
+        userId: 1,
+        login: 'Artem',
+        firstName: 'aaaa',
+        lastName: 'bbbb',
+        email: '111@11.1',
+        status: '1',
+        ava: null,
+      };
 
-      const data = ProfileSerializers.userSerialize(statusWithId, links, 'Status', statusWithId.id);
+      const serializer = new UserSerializer({
+        attributes: user, link: links,
+      });
+      const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
     });

@@ -1,12 +1,13 @@
+import PostsSerializer from '../serializers/PostsSerializer.js';
 import PostService from '../services/PostService.js';
 import fullUrlCreator from '../utils/fullUrlCreator.js';
-import PostSerializers from '../serializers/PostSerializers.js';
+import PostSerializer from '../serializers/PostSerializer.js';
 
 class PostController {
   async create(req, res, next) {
     const post = await PostService.create(req.body, req.user.id);
-    const serializer = new PostSerializers({
-      attributes: post, id: req.user.id, type: 'Post', link: fullUrlCreator(req),
+    const serializer = new PostSerializer({
+      attributes: post, link: fullUrlCreator(req),
     });
     req.serializer = serializer;
     next();
@@ -14,17 +15,17 @@ class PostController {
 
   async getAll(req, res, next) {
     const posts = await PostService.getAll();
-    const serializer = new PostSerializers({
-      attributes: posts, id: req.user.id, type: 'Posts', link: fullUrlCreator(req),
-    });
+    const serializer = new PostsSerializer({
+      attributes: posts, link: fullUrlCreator(req),
+    }, PostSerializer);
     req.serializer = serializer;
     next();
   }
 
   async getOne(req, res, next) {
     const post = await PostService.getOne(req.params.id);
-    const serializer = new PostSerializers({
-      attributes: post, id: req.user.id, type: 'Post', link: fullUrlCreator(req),
+    const serializer = new PostSerializer({
+      attributes: post, link: fullUrlCreator(req),
     });
     req.serializer = serializer;
     next();
@@ -33,8 +34,8 @@ class PostController {
   async update(req, res, next) {
     const { author, title, content } = req.body;
     const updatedPost = await PostService.update({ author, title, content }, req.params.id);
-    const serializer = new PostSerializers({
-      attributes: updatedPost, id: req.user.id, type: 'Post', link: fullUrlCreator(req),
+    const serializer = new PostSerializer({
+      attributes: updatedPost, link: fullUrlCreator(req),
     });
     req.serializer = serializer;
     next();
@@ -42,8 +43,8 @@ class PostController {
 
   async delete(req, res, next) {
     const oldPost = await PostService.delete(req.params.id);
-    const serializer = new PostSerializers({
-      attributes: oldPost, id: req.user.id, type: 'Post', link: fullUrlCreator(req),
+    const serializer = new PostSerializer({
+      attributes: oldPost, link: fullUrlCreator(req),
     });
     req.serializer = serializer;
     next();

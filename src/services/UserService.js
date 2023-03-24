@@ -1,4 +1,3 @@
-import { Op } from 'sequelize';
 import Follow from '../models/follow.js';
 import User from '../models/user.js';
 
@@ -20,11 +19,13 @@ class UserService {
     const beginUsers = (page - 1) * count;
     const users = await User.findAll({
       attributes: ['userId', 'firstName', 'lastName', 'login', 'email', 'status', 'ava'],
-      include: Follow,
+      include: {
+        model: Follow,
+      },
       offset: beginUsers,
       limit: count,
     });
-    const countOfUsers = users.length;
+    const countOfUsers = await User.count();
     const userAuth = users.filter((user) => user.dataValues.userId === id);
     return {
       users, countOfUsers, userAuth,

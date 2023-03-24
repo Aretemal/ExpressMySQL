@@ -1,7 +1,8 @@
 import { validationResult } from 'express-validator';
+import UserSerializer from '../serializers/UserSerializer.js';
 import AuthService from '../services/AuthService.js';
 import fullUrlCreator from '../utils/fullUrlCreator.js';
-import AuthSerializers from '../serializers/AuthSerializers.js';
+import AuthSerializer from '../serializers/AuthSerializer.js';
 
 class AuthController {
   async registration(req, res, next) {
@@ -9,18 +10,18 @@ class AuthController {
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: 'Ошибка регистрациии' });
     }
-    const data = await AuthService.registration(req.body);
-    const serializer = new AuthSerializers({
-      attributes: data, id: data.id, type: 'User', link: fullUrlCreator(req),
+    const user = await AuthService.registration(req.body);
+    const serializer = new UserSerializer({
+      attributes: user, link: fullUrlCreator(req),
     });
     req.serializer = serializer;
     next();
   }
 
   async login(req, res, next) {
-    const data = await AuthService.login(req.body);
-    const serializer = new AuthSerializers({
-      attributes: data, id: data.id, type: 'Token', link: fullUrlCreator(req),
+    const token = await AuthService.login(req.body);
+    const serializer = new AuthSerializer({
+      token, link: fullUrlCreator(req),
     });
     req.serializer = serializer;
     next();

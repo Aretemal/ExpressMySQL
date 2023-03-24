@@ -1,4 +1,4 @@
-class Serializers {
+class Serializer {
   constructor(resource, options = {}) {
     this.resource = resource;
     this.options = options;
@@ -11,26 +11,28 @@ class Serializers {
         id: this.id(),
         attributes: this.attributes(),
       },
-      links: {
-        self: this.link(),
-      },
+      links: this.link(),
     };
   }
 
   type() {
-    throw new Error('Method is not defined');
+    return this.resource.type;
   }
 
   id() {
-    throw new Error('Method is not defined');
+    return this.resource.id || 0;
   }
 
   attributes() {
-    throw new Error('Method is not defined');
+    return {
+      ...this.resource.attributes,
+    };
   }
 
   link() {
-    throw new Error('Method is not defined');
+    return {
+      self: this.resource.link,
+    };
   }
 }
-export default Serializers;
+export default Serializer;

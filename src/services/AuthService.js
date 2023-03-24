@@ -26,7 +26,13 @@ class AuthService {
       login, password: hashPassword, firstName, lastName, email,
     });
     return {
-      id: user.userId, login, firstName, lastName, email,
+      id: user.userId,
+      login,
+      firstName,
+      lastName,
+      email,
+      ava: user.dataValues.ava,
+      status: user.dataValues.status,
     };
   }
 
@@ -40,9 +46,7 @@ class AuthService {
       throw new Error('Введен неверный пароль');
     }
     const token = generationAccessToken(user.userId);
-    const data = user.dataValues;
-    delete data.password;
-    return { token, user: data };
+    return { token };
   }
 }
 
