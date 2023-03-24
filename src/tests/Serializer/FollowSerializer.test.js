@@ -1,4 +1,4 @@
-import FollowSerializers from '../../utils/JsonSerializer/FollowSerializers.js';
+import FollowSerializers from '../../serializers/FollowSerializers.js';
 
 describe('FollowSerializers :', () => {
   describe('Follow :', () => {

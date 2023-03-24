@@ -1,4 +1,4 @@
-import ProfileSerializers from '../../utils/JsonSerializer/ProfileSerializers.js';
+import ProfileSerializers from '../../serializers/ProfileSerializers.js';
 
 describe('ProfileSerializer :', () => {
   describe('getInfoAuthorizedUser :', () => {
@@ -24,6 +24,17 @@ describe('ProfileSerializer :', () => {
       const status = { status: 'Hello world' };
 
       const data = ProfileSerializers.profileSerialize(status, links, 'NewStatus', 1);
+
+      expect(data).toMatchSnapshot();
+    });
+  });
+
+  describe('getStatus :', () => {
+    test('should return status', () => {
+      const links = 'http://localhost:5000/api/profile/status/1';
+      const statusWithId = { id: 1, status: 'Hello world' };
+
+      const data = ProfileSerializers.userSerialize(statusWithId, links, 'Status', statusWithId.id);
 
       expect(data).toMatchSnapshot();
     });

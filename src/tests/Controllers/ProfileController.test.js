@@ -2,6 +2,7 @@
 import { jest } from '@jest/globals';
 import ProfileController from '../../controllers/ProfileController';
 import ProfileService from '../../services/ProfileService';
+import UserService from '../../services/UserService.js';
 
 jest.fn('ProfileService');
 const req = {
@@ -40,5 +41,13 @@ describe('Profile Controller :', () => {
     await ProfileController.updateStatus(req, res);
 
     expect(res.dataJS.data.attributes.attributes.status).toBe('Status1');
+  });
+
+  test('Get status', async () => {
+    UserService.getStatus = (id) => `Status${id}`;
+
+    await ProfileController.getStatus(req, res);
+
+    expect(res.dataJS.data.attributes.attributes).toBe('Status1');
   });
 });

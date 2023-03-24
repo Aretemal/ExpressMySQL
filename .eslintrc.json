@@ -25,6 +25,7 @@
   ],
   "rules": {
     "no-param-reassign": 0,
+    "no-unused-vars": ["error", { "varsIgnorePattern": "[nextresreq]" }],
     "jest-formatting/padding-around-expect-groups": "error",
     "jest-formatting/padding-around-describe-blocks": "error",
     "jest-formatting/padding-around-test-blocks": "error",

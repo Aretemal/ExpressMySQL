@@ -1,4 +1,4 @@
-import UserSerializers from '../../utils/JsonSerializer/UserSerializers.js';
+import UserSerializers from '../../serializers/UserSerializers.js';
 
 describe('UserSerializers :', () => {
   describe('getOne :', () => {
@@ -39,17 +39,6 @@ describe('UserSerializers :', () => {
       }];
 
       const data = UserSerializers.userSerialize({ users, countOfUsers, userAuth }, links, 'Array Users', userAuth.id);
-
-      expect(data).toMatchSnapshot();
-    });
-  });
-
-  describe('getStatus :', () => {
-    test('should return status', () => {
-      const links = 'http://localhost:5000/api/profile/status/1';
-      const statusWithId = { id: 1, status: 'Hello world' };
-
-      const data = UserSerializers.userSerialize(statusWithId, links, 'Status', statusWithId.id);
 
       expect(data).toMatchSnapshot();
     });

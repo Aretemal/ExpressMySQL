@@ -15,4 +15,10 @@ describe('Profile Service :', () => {
     expect(data).toBeDefined();
     expect(data.status).toBe('User');
   });
+
+  test('Get status', async () => {
+    const data = await ProfileService.getStatus(1);
+
+    expect(data).toBeDefined();
+  });
 });
