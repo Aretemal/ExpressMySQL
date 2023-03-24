@@ -28,12 +28,4 @@ describe('User Controller :', () => {
     expect(res.dataJS.data.attributes.attributes.firstName).toBe('Artem');
     expect(res.dataJS.data.attributes.attributes.lastName).toBe('Novik');
   });
-
-  test('Get status', async () => {
-    UserService.getStatus = (id) => `Status${id}`;
-
-    await UserController.getStatus(req, res);
-
-    expect(res.dataJS.data.attributes.attributes).toBe('Status1');
-  });
 });

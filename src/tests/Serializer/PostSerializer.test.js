@@ -1,4 +1,4 @@
-import PostSerializers from '../../utils/JsonSerializer/PostSerializers.js';
+import PostSerializers from '../../serializers/PostSerializers.js';
 
 describe('PostSerializer :', () => {
   describe('create :', () => {

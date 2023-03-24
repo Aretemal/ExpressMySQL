@@ -5,7 +5,6 @@ import PostController from './src/controllers/PostController.js';
 import ProfileController from './src/controllers/ProfileController.js';
 import UserController from './src/controllers/UserController.js';
 import AuthController from './src/controllers/AuthController.js';
-import { tokenMiddleware } from './src/middlewaree/tokenMiddleware.js';
 
 const router = new Router();
 router.post('/registration', [
@@ -14,12 +13,10 @@ router.post('/registration', [
 ], AuthController.registration);
 router.post('/login', AuthController.login);
 
-router.use(tokenMiddleware);
-
 // Users
 router.get('/user/:id', UserController.getOne);
 router.get('/users', UserController.getAllUsers);
-router.get('profile/status/:id', UserController.getStatus);
+router.get('profile/status/:id', ProfileController.getStatus);
 
 // Post
 router.post('/profile/posts', PostController.create);
@@ -33,7 +30,7 @@ router.put('/profile/status', ProfileController.updateStatus);
 
 // Follow
 router.post('/follow', FollowController.follow);
-router.put('/approve', FollowCosntroller.approve);
+router.put('/approve', FollowController.approve);
 router.put('/unfollow', FollowController.unfollow);
 
 export default router;

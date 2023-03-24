@@ -9,10 +9,4 @@ describe('User Service :', () => {
     expect(data).toBeDefined();
     expect(data).toBeInstanceOf(User);
   });
-
-  test('Get status', async () => {
-    const data = await UserService.getStatus(1);
-
-    expect(data).toBeDefined();
-  });
 });

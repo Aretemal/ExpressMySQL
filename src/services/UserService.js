@@ -30,17 +30,5 @@ class UserService {
       users, countOfUsers, userAuth,
     };
   }
-
-  async getStatus(id) {
-    if (!id) {
-      throw new Error('Id не указан');
-    }
-    const user = await User.findByPk(id);
-    if (!user) {
-      throw new Error('Пользователь не найден');
-    }
-    const { status } = user;
-    return { status, id };
-  }
 }
 export default new UserService();

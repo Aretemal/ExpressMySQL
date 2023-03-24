@@ -1,4 +1,4 @@
-import AuthSerializers from '../../utils/JsonSerializer/AuthSerializers.js';
+import AuthSerializers from '../../serializers/AuthSerializers.js';
 
 describe('AuthSerializer :', () => {
   describe('Registration', () => {

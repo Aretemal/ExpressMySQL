@@ -1,37 +1,52 @@
 import PostService from '../services/PostService.js';
-import { ResponseObjectJSON } from '../utils/createrObjectResponse.js';
 import fullUrlCreator from '../utils/fullUrlCreator.js';
-import PostSerializers from '../utils/JsonSerializer/PostSerializers.js';
+import PostSerializers from '../serializers/PostSerializers.js';
 
 class PostController {
-  async create(req, res) {
+  async create(req, res, next) {
     const post = await PostService.create(req.body, req.user.id);
-    res.json(PostSerializers.postSerialize(post, fullUrlCreator(req), 'Post', req.user.id));
+    const serializer = new PostSerializers({
+      attributes: post, id: req.user.id, type: 'Post', link: fullUrlCreator(req),
+    });
+    req.serializer = serializer;
+    next();
   }
 
-  async getAll(req, res) {
+  async getAll(req, res, next) {
     const posts = await PostService.getAll();
-    res.json(PostSerializers.postSerialize(posts, fullUrlCreator(req), 'Array Posts', req.user.id));
+    const serializer = new PostSerializers({
+      attributes: posts, id: req.user.id, type: 'Posts', link: fullUrlCreator(req),
+    });
+    req.serializer = serializer;
+    next();
   }
 
-  async getOne(req, res) {
+  async getOne(req, res, next) {
     const post = await PostService.getOne(req.params.id);
-    res.json(PostSerializers.postSerialize(post, fullUrlCreator(req), 'Post', req.user.id));
+    const serializer = new PostSerializers({
+      attributes: post, id: req.user.id, type: 'Post', link: fullUrlCreator(req),
+    });
+    req.serializer = serializer;
+    next();
   }
 
-  async update(req, res) {
+  async update(req, res, next) {
     const { author, title, content } = req.body;
     const updatedPost = await PostService.update({ author, title, content }, req.params.id);
-    return res.json(ResponseObjectJSON.render({
-      type: 'post', id: updatedPost.id, attributes: updatedPost, relationships: req.body,
-    }, { links: { self: req.originalUrl } }));
+    const serializer = new PostSerializers({
+      attributes: updatedPost, id: req.user.id, type: 'Post', link: fullUrlCreator(req),
+    });
+    req.serializer = serializer;
+    next();
   }
 
-  async delete(req, res) {
+  async delete(req, res, next) {
     const oldPost = await PostService.delete(req.params.id);
-    return res.json(ResponseObjectJSON.render({
-      type: 'post', id: oldPost.id, attributes: oldPost, relationships: req.body,
-    }, { links: { self: req.originalUrl } }));
+    const serializer = new PostSerializers({
+      attributes: oldPost, id: req.user.id, type: 'Post', link: fullUrlCreator(req),
+    });
+    req.serializer = serializer;
+    next();
   }
 }
 export default new PostController();

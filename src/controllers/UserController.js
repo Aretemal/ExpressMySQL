@@ -1,21 +1,24 @@
 import UserService from '../services/UserService.js';
 import fullUrlCreator from '../utils/fullUrlCreator.js';
-import UserSerializers from '../utils/JsonSerializer/UserSerializers.js';
+import UserSerializers from '../serializers/UserSerializers.js';
 
 class UserController {
-  async getOne(req, res) {
+  async getOne(req, res, next) {
     const user = await UserService.getOne(req.params.id);
-    res.json(UserSerializers.userSerialize(user, fullUrlCreator(req), 'ObjectUser', req.user.id));
+    const serializer = new UserSerializers({
+      attributes: user, id: req.user.id, type: 'User', link: fullUrlCreator(req),
+    });
+    req.serializer = serializer;
+    next();
   }
 
-  async getAllUsers(req, res) {
+  async getAllUsers(req, res, next) {
     const data = await UserService.getAllUsers(req.user.id, req.query);
-    res.json(UserSerializers.userSerialize(data, fullUrlCreator(req), 'Array Users', req.user.id));
-  }
-
-  async getStatus(req, res) {
-    const status = await UserService.getStatus(req.params.id);
-    res.json(UserSerializers.userSerialize(status, fullUrlCreator(req), 'Status', req.user.id));
+    const serializer = new UserSerializers({
+      attributes: data, id: req.user.id, type: 'Users', link: fullUrlCreator(req),
+    });
+    req.serializer = serializer;
+    next();
   }
 }
 export default new UserController();
