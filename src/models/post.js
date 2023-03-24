@@ -3,7 +3,7 @@ import { db } from '../../db.js';
 
 class Post extends Model {
   static associate(models) {
-    this.belongsTo(models.User);
+    this.belongsTo(models.User, { foreignKey: 'authorId' });
   }
 }
 Post.init({

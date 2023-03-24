@@ -1,18 +1,24 @@
-import UserSerializers from '../../serializers/UserSerializers.js';
+import UserSerializer from '../../serializers/UserSerializer.js';
+import UsersSerializer from '../../serializers/UsersSerializer.js';
 
-describe('UserSerializers :', () => {
+describe('UserSerializer :', () => {
   describe('getOne :', () => {
     test('should return info about user', () => {
       const links = 'http://localhost:5000/api/user/1';
       const user = {
-        id: 1,
+        userId: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',
         email: '111@11.1',
+        status: '1',
+        ava: null,
       };
 
-      const data = UserSerializers.userSerialize(user, links, 'ObjectUser', user.id);
+      const serializer = new UserSerializer({
+        attributes: user, link: links,
+      });
+      const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
     });
@@ -22,23 +28,29 @@ describe('UserSerializers :', () => {
     test('should return array with info', () => {
       const links = 'http://localhost:5000/api/users';
       const countOfUsers = 2;
-      const userAuth = { id: 1, login: 'Artem' };
       const users = [{
-        id: 1,
+        userId: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',
         email: '111@11.1',
+        status: '1',
+        ava: null,
       },
       {
-        id: 2,
-        login: 'hello',
-        firstName: 'Artem',
-        lastName: 'Oleg',
+        userId: 1,
+        login: 'Artem',
+        firstName: 'aaaa',
+        lastName: 'bbbb',
         email: '111@11.1',
+        status: '1',
+        ava: null,
       }];
 
-      const data = UserSerializers.userSerialize({ users, countOfUsers, userAuth }, links, 'Array Users', userAuth.id);
+      const serializer = new UsersSerializer({
+        attributes: { users, countOfUsers }, link: links,
+      }, UserSerializer);
+      const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
     });

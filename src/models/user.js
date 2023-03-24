@@ -4,7 +4,6 @@ import { db } from '../../db.js';
 class User extends Model {
   static associate(models) {
     this.hasMany(models.Post, {
-      foreignKey: 'authorId',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });

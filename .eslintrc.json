@@ -24,6 +24,8 @@
     "jest"
   ],
   "rules": {
+    "new-cap": 0,
+    "no-plusplus": 0,
     "no-param-reassign": 0,
     "no-unused-vars": ["error", { "varsIgnorePattern": "[nextresreq]" }],
     "jest-formatting/padding-around-expect-groups": "error",

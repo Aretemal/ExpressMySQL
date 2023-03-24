@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FollowSerializers : Approve : should return connection with info 1`] = `
+{
+  "data": {
+    "attributes": {
+      "approvedAt": 1,
+      "followerId": 1,
+      "followingId": 2,
+    },
+    "id": 21,
+    "type": "Follow",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/approve",
+  },
+}
+`;
+
+exports[`FollowSerializers : Follow : should return connection with info 1`] = `
+{
+  "data": {
+    "attributes": {
+      "approvedAt": 0,
+      "followerId": 1,
+      "followingId": 2,
+    },
+    "id": 21,
+    "type": "Follow",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/follow",
+  },
+}
+`;
+
+exports[`FollowSerializers : Unfollow : should return connection with info 1`] = `
+{
+  "data": {
+    "attributes": {
+      "approvedAt": 0,
+      "followerId": 1,
+      "followingId": 2,
+    },
+    "id": 21,
+    "type": "Follow",
+  },
+  "links": {
+    "self": "http://localhost:5000/api/unfollow",
+  },
+}
+`;

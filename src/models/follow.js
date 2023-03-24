@@ -14,10 +14,12 @@ Follow.init({
   },
   followerId: {
     type: DataTypes.INTEGER,
+    foreignKey: true,
     allowNull: false,
   },
   followingId: {
     type: DataTypes.INTEGER,
+    foreignKey: true,
     allowNull: false,
   },
   approvedAt: {

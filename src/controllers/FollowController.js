@@ -1,13 +1,13 @@
 import FollowService from '../services/FollowService.js';
 import fullUrlCreator from '../utils/fullUrlCreator.js';
-import FollowSerializers from '../serializers/FollowSerializers.js';
+import FollowSerializer from '../serializers/FollowSerializer.js';
 
 class FollowController {
   async follow(req, res, next) {
     const { id } = req.body;
-    const data = await FollowService.follow(req.user.id, id);
-    const serializer = new FollowSerializers({
-      data, id: req.user.id, type: 'Follow', link: fullUrlCreator(req),
+    const follow = await FollowService.follow(req.user.id, id);
+    const serializer = new FollowSerializer({
+      attributes: follow, link: fullUrlCreator(req),
     });
     req.serializer = serializer;
     next();
@@ -15,9 +15,9 @@ class FollowController {
 
   async approve(req, res, next) {
     const { id } = req.body;
-    const data = await FollowService.approve(req.user.id, id);
-    const serializer = new FollowSerializers({
-      attributes: data, id: req.user.id, type: 'Approve', link: fullUrlCreator(req),
+    const follow = await FollowService.approve(req.user.id, id);
+    const serializer = new FollowSerializer({
+      attributes: follow, link: fullUrlCreator(req),
     });
     req.serializer = serializer;
     next();
@@ -25,9 +25,9 @@ class FollowController {
 
   async unfollow(req, res, next) {
     const { id } = req.body;
-    const data = await FollowService.unfollow(req.user.id, id);
-    const serializer = new FollowSerializers({
-      attributes: data, id: req.user.id, type: 'Unfollow', link: fullUrlCreator(req),
+    const follow = await FollowService.unfollow(req.user.id, id);
+    const serializer = new FollowSerializer({
+      attributes: follow, link: fullUrlCreator(req),
     });
     req.serializer = serializer;
     next();
