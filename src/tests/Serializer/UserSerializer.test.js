@@ -4,7 +4,6 @@ import UsersSerializer from '../../serializers/UsersSerializer.js';
 describe('UserSerializer :', () => {
   describe('getOne :', () => {
     test('should return info about user', () => {
-      const links = 'http://localhost:5000/api/user/1';
       const user = {
         userId: 1,
         login: 'Artem',
@@ -15,9 +14,7 @@ describe('UserSerializer :', () => {
         ava: null,
       };
 
-      const serializer = new UserSerializer({
-        attributes: user, link: links,
-      });
+      const serializer = new UserSerializer(user);
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
@@ -26,7 +23,6 @@ describe('UserSerializer :', () => {
 
   describe('getAllUsers :', () => {
     test('should return array with info', () => {
-      const links = 'http://localhost:5000/api/users';
       const countOfUsers = 2;
       const users = [{
         userId: 1,
@@ -47,9 +43,7 @@ describe('UserSerializer :', () => {
         ava: null,
       }];
 
-      const serializer = new UsersSerializer({
-        attributes: { users, countOfUsers }, link: links,
-      }, UserSerializer);
+      const serializer = new UsersSerializer({ users, countOfUsers });
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();

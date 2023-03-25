@@ -1,3 +1,4 @@
+import PostSerializer from './PostSerializer.js';
 import Serializer from './Serializer.js';
 
 class PostsSerializer extends Serializer {
@@ -16,9 +17,9 @@ class PostsSerializer extends Serializer {
   }
 
   posts() {
-    return this.resource.attributes.map((post) => {
-      const serializer = new this.options({ attributes: post, link: `http://localhost:5000/api/post/${post.id}` });
-      return serializer.serialize();
+    return this.resource.map((post) => {
+      const serializer = new PostSerializer(post);
+      return serializer.collectionSerializer();
     });
   }
 }

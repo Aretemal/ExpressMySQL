@@ -7,7 +7,7 @@ class AuthSerializer extends Serializer {
 
   attributes() {
     return {
-      token: this.resource.token,
+      token: this.token,
     };
   }
 }

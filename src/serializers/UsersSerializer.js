@@ -1,5 +1,6 @@
 import PrimitiveSerializer from './PrimitiveSerializer.js';
 import Serializer from './Serializer.js';
+import UserSerializer from './UserSerializer.js';
 
 class UsersSerializer extends Serializer {
   type() {
@@ -14,17 +15,17 @@ class UsersSerializer extends Serializer {
   }
 
   users() {
-    return this.resource.attributes.users.map((user) => {
-      const serializer = new this.options({ attributes: user, link: `http://localhost:5000/api/user/${user.userId}` });
-      return serializer.serialize();
+    return this.resource.users.map((user) => {
+      const serializer = new UserSerializer(user);
+      return serializer.collectionSerializer();
     });
   }
 
   primitive() {
     const serializer = new PrimitiveSerializer({
-      primitive: this.resource.attributes.countOfUsers,
+      primitive: this.resource.countOfUsers,
     });
-    return serializer.serialize();
+    return serializer.collectionSerializer();
   }
 }
 export default UsersSerializer;

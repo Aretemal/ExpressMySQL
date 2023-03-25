@@ -7,14 +7,14 @@ class FollowSerializer extends Serializer {
 
   attributes() {
     return {
-      followerId: this.resource.attributes.followerId,
-      followingId: this.resource.attributes.followingId,
-      approvedAt: this.resource.attributes.approvedAt,
+      followerId: this.resource.followerId,
+      followingId: this.resource.followingId,
+      approvedAt: this.resource.approvedAt,
     };
   }
 
   id() {
-    return this.resource.attributes.id || 0;
+    return this.resource.id || 0;
   }
 }
 export default FollowSerializer;

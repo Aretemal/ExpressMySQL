@@ -6,17 +6,25 @@ class UserSerializer extends Serializer {
   }
 
   id() {
-    return this.resource.attributes.userId;
+    return this.resource.userId;
+  }
+
+  collectionSerializer() {
+    return {
+      type: this.type(),
+      id: this.id(),
+      attributes: this.attributes(),
+    };
   }
 
   attributes() {
     return {
-      fullName: this.resource.attributes.fullName,
-      lastName: this.resource.attributes.lastName,
-      login: this.resource.attributes.login,
-      status: this.resource.attributes.status,
-      email: this.resource.attributes.email,
-      ava: this.resource.attributes.ava,
+      fullName: this.resource.fullName,
+      lastName: this.resource.lastName,
+      login: this.resource.login,
+      status: this.resource.status,
+      email: this.resource.email,
+      ava: this.resource.ava,
     };
   }
 }

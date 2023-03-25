@@ -1,7 +1,9 @@
+import fullUrlCreator from '../utils/fullUrlCreator.js';
+
 class Serializer {
-  constructor(resource, options = {}) {
+  constructor(resource, request = null) {
     this.resource = resource;
-    this.options = options;
+    this.request = request;
   }
 
   serialize() {
@@ -31,7 +33,7 @@ class Serializer {
 
   link() {
     return {
-      self: this.resource.link,
+      self: !this.request ? {} : fullUrlCreator(this.request),
     };
   }
 }

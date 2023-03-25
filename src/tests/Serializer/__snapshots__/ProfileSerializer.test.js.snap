@@ -15,7 +15,7 @@ exports[`ProfileSerializer : getInfoAuthorizedUser : should return info about us
     "type": "User",
   },
   "links": {
-    "self": "http://localhost:5000/api/profile/user",
+    "self": {},
   },
 }
 `;
@@ -35,7 +35,7 @@ exports[`ProfileSerializer : getStatus : should return status 1`] = `
     "type": "User",
   },
   "links": {
-    "self": "http://localhost:5000/api/profile/status/1",
+    "self": {},
   },
 }
 `;
@@ -55,7 +55,7 @@ exports[`ProfileSerializer : updateStatus : should return new status 1`] = `
     "type": "User",
   },
   "links": {
-    "self": "http://localhost:5000/api/profile/status",
+    "self": {},
   },
 }
 `;

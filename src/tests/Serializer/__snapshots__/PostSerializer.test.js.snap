@@ -11,7 +11,7 @@ exports[`PostSerializer : create : should return post 1`] = `
     "type": "Post",
   },
   "links": {
-    "self": "http://localhost:5000/api/profile/posts",
+    "self": {},
   },
 }
 `;
@@ -22,30 +22,20 @@ exports[`PostSerializer : getAll : should return array posts 1`] = `
     "attributes": {
       "posts": [
         {
-          "data": {
-            "attributes": {
-              "authorId": 2,
-              "content": "Hello",
-            },
-            "id": 2,
-            "type": "Post",
+          "attributes": {
+            "authorId": 2,
+            "content": "Hello",
           },
-          "links": {
-            "self": "http://localhost:5000/api/post/2",
-          },
+          "id": 2,
+          "type": "Post",
         },
         {
-          "data": {
-            "attributes": {
-              "authorId": 1,
-              "content": "World",
-            },
-            "id": 2,
-            "type": "Post",
+          "attributes": {
+            "authorId": 1,
+            "content": "World",
           },
-          "links": {
-            "self": "http://localhost:5000/api/post/2",
-          },
+          "id": 2,
+          "type": "Post",
         },
       ],
     },
@@ -53,7 +43,7 @@ exports[`PostSerializer : getAll : should return array posts 1`] = `
     "type": "Posts",
   },
   "links": {
-    "self": "http://localhost:5000/api/profile/posts",
+    "self": {},
   },
 }
 `;
@@ -69,7 +59,7 @@ exports[`PostSerializer : getOne : should return post 1`] = `
     "type": "Post",
   },
   "links": {
-    "self": "http://localhost:5000/api/profile/posts/2",
+    "self": {},
   },
 }
 `;
