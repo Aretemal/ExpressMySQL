@@ -10,5 +10,13 @@ class PrimitiveSerializer extends Serializer {
       primitive: this.resource.primitive,
     };
   }
+
+  collectionSerializer() {
+    return {
+      type: this.type(),
+      id: this.id(),
+      attributes: this.attributes(),
+    };
+  }
 }
 export default PrimitiveSerializer;

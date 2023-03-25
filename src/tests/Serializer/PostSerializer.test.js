@@ -4,16 +4,13 @@ import PostsSerializer from '../../serializers/PostsSerializer.js';
 describe('PostSerializer :', () => {
   describe('create :', () => {
     test('should return post', () => {
-      const links = 'http://localhost:5000/api/profile/posts';
       const post = {
         id: 3,
         authorId: 2,
         content: 'Hello',
       };
 
-      const serializer = new PostSerializer({
-        attributes: post, link: links,
-      });
+      const serializer = new PostSerializer(post);
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
@@ -22,7 +19,6 @@ describe('PostSerializer :', () => {
 
   describe('getAll :', () => {
     test('should return array posts', () => {
-      const links = 'http://localhost:5000/api/profile/posts';
       const posts = [{
         id: 2,
         authorId: 2,
@@ -33,9 +29,7 @@ describe('PostSerializer :', () => {
         authorId: 1,
         content: 'World',
       }];
-      const serializer = new PostsSerializer({
-        attributes: posts, link: links,
-      }, PostSerializer);
+      const serializer = new PostsSerializer(posts);
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
@@ -44,15 +38,12 @@ describe('PostSerializer :', () => {
 
   describe('getOne :', () => {
     test('should return post', () => {
-      const links = 'http://localhost:5000/api/profile/posts/2';
       const post = {
         id: 1,
         authorId: 2,
         content: 'Hello',
       };
-      const serializer = new PostSerializer({
-        attributes: post, link: links,
-      });
+      const serializer = new PostSerializer(post);
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();

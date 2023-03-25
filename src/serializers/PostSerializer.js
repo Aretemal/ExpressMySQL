@@ -6,13 +6,21 @@ class PostSerializer extends Serializer {
   }
 
   id() {
-    return this.resource.attributes.id;
+    return this.resource.id;
+  }
+
+  collectionSerializer() {
+    return {
+      type: this.type(),
+      id: this.id(),
+      attributes: this.attributes(),
+    };
   }
 
   attributes() {
     return {
-      authorId: this.resource.attributes.authorId,
-      content: this.resource.attributes.content,
+      authorId: this.resource.authorId,
+      content: this.resource.content,
     };
   }
 }
