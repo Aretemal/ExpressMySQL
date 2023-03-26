@@ -1,5 +1,11 @@
+import { matchersWithOptions } from 'jest-json-schema';
 import PostSerializer from '../../serializers/PostSerializer.js';
 import PostsSerializer from '../../serializers/PostsSerializer.js';
+import schema from './schema.json';
+
+expect.extend(matchersWithOptions({
+  verbose: true,
+}));
 
 describe('PostSerializer :', () => {
   describe('create :', () => {
@@ -13,6 +19,7 @@ describe('PostSerializer :', () => {
       const serializer = new PostSerializer(post);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });
@@ -32,6 +39,7 @@ describe('PostSerializer :', () => {
       const serializer = new PostsSerializer(posts);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });
@@ -46,6 +54,7 @@ describe('PostSerializer :', () => {
       const serializer = new PostSerializer(post);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });

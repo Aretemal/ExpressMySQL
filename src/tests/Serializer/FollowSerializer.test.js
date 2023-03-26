@@ -1,4 +1,10 @@
+import { matchersWithOptions } from 'jest-json-schema';
 import FollowSerializer from '../../serializers/FollowSerializer.js';
+import schema from './schema.json';
+
+expect.extend(matchersWithOptions({
+  verbose: true,
+}));
 
 describe('FollowSerializers :', () => {
   describe('Follow :', () => {
@@ -10,6 +16,7 @@ describe('FollowSerializers :', () => {
       const serializer = new FollowSerializer(follow);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });
@@ -23,6 +30,7 @@ describe('FollowSerializers :', () => {
       const serializer = new FollowSerializer(follow);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });
@@ -36,6 +44,7 @@ describe('FollowSerializers :', () => {
       const serializer = new FollowSerializer(follow);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });

@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthSerializer : Login should return object and token 1`] = `
+{
+  "data": [
+    {
+      "attributes": {
+        "token": undefined,
+      },
+      "id": "0",
+      "type": "Token",
+    },
+  ],
+  "links": {
+    "self": "1",
+  },
+}
+`;
+
+exports[`AuthSerializer : Registration should return object with data about user 1`] = `
+{
+  "data": [
+    {
+      "attributes": {
+        "ava": null,
+        "email": "111@11.1",
+        "firstName": "aaaa",
+        "lastName": "bbbb",
+        "login": "Artem",
+        "status": "1",
+      },
+      "id": "1",
+      "type": "User",
+    },
+  ],
+  "links": {
+    "self": "1",
+  },
+}
+`;
