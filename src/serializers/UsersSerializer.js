@@ -1,26 +1,17 @@
-import PrimitiveSerializer from './PrimitiveSerializer.js';
 import Serializer from './Serializer.js';
 import UserSerializer from './UserSerializer.js';
 
 class UsersSerializer extends Serializer {
-  type() {
-    return 'Users';
-  }
-
-  attributes() {
+  meta() {
     return {
-      users: this.users(),
-      countOfUsers: this.primitive(),
+      countOfUsers: this.resource.countOfUsers,
     };
   }
 
   serialize() {
     return {
-      data: [{
-        type: this.type(),
-        id: this.id(),
-        attributes: this.attributes(),
-      }],
+      meta: this.meta(),
+      data: this.users(),
       links: this.link(),
     };
   }
@@ -28,15 +19,12 @@ class UsersSerializer extends Serializer {
   users() {
     return this.resource.users.map((user) => {
       const serializer = new UserSerializer(user);
-      return serializer.collectionSerializer();
+      return {
+        type: serializer.type(),
+        id: serializer.id(),
+        attributes: serializer.attributes(),
+      };
     });
-  }
-
-  primitive() {
-    const serializer = new PrimitiveSerializer({
-      primitive: this.resource.countOfUsers,
-    });
-    return serializer.collectionSerializer();
   }
 }
 export default UsersSerializer;

@@ -32,7 +32,7 @@ describe('UserSerializer :', () => {
     test('should return array with info', () => {
       const countOfUsers = 2;
       const users = [{
-        userId: 1,
+        userId: 3,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',

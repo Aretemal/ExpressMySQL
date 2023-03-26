@@ -8,11 +8,11 @@ class Serializer {
 
   serialize() {
     return {
-      data: [{
+      data: {
         type: this.type(),
         id: this.id(),
         attributes: this.attributes(),
-      }],
+      },
       links: this.link(),
     };
   }
