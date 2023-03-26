@@ -5,6 +5,17 @@ class FollowSerializer extends Serializer {
     return 'Follow';
   }
 
+  serialize() {
+    return {
+      data: {
+        type: this.type(),
+        id: this.id(),
+        attributes: this.attributes(),
+      },
+      links: this.link(),
+    };
+  }
+
   attributes() {
     return {
       followerId: this.resource.followerId,
@@ -14,7 +25,7 @@ class FollowSerializer extends Serializer {
   }
 
   id() {
-    return this.resource.id || 0;
+    return `${this.resource.id}` || '0';
   }
 }
 export default FollowSerializer;

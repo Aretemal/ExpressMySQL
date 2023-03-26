@@ -7,12 +7,23 @@ class PostsSerializer extends Serializer {
   }
 
   id() {
-    return 0;
+    return '0';
   }
 
   attributes() {
     return {
       posts: this.posts(),
+    };
+  }
+
+  serialize() {
+    return {
+      data: {
+        type: this.type(),
+        id: this.id(),
+        attributes: this.attributes(),
+      },
+      links: this.link(),
     };
   }
 

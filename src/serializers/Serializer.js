@@ -8,11 +8,11 @@ class Serializer {
 
   serialize() {
     return {
-      data: {
+      data: [{
         type: this.type(),
         id: this.id(),
         attributes: this.attributes(),
-      },
+      }],
       links: this.link(),
     };
   }
@@ -22,7 +22,7 @@ class Serializer {
   }
 
   id() {
-    return this.resource.id || 0;
+    return this.resource.id || '0';
   }
 
   attributes() {
@@ -33,7 +33,7 @@ class Serializer {
 
   link() {
     return {
-      self: !this.request ? {} : fullUrlCreator(this.request),
+      self: !this.request ? '1' : fullUrlCreator(this.request),
     };
   }
 }

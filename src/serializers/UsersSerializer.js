@@ -14,6 +14,17 @@ class UsersSerializer extends Serializer {
     };
   }
 
+  serialize() {
+    return {
+      data: {
+        type: this.type(),
+        id: this.id(),
+        attributes: this.attributes(),
+      },
+      links: this.link(),
+    };
+  }
+
   users() {
     return this.resource.users.map((user) => {
       const serializer = new UserSerializer(user);
