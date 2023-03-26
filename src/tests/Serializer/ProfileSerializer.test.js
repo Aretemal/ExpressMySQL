@@ -1,4 +1,10 @@
+import { matchersWithOptions } from 'jest-json-schema';
 import UserSerializer from '../../serializers/UserSerializer.js';
+import schema from './schema.json';
+
+expect.extend(matchersWithOptions({
+  verbose: true,
+}));
 
 describe('ProfileSerializer :', () => {
   describe('getInfoAuthorizedUser :', () => {
@@ -12,9 +18,11 @@ describe('ProfileSerializer :', () => {
         status: '1',
         ava: null,
       };
+
       const serializer = new UserSerializer(user);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });
@@ -34,6 +42,7 @@ describe('ProfileSerializer :', () => {
       const serializer = new UserSerializer(user);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });
@@ -53,6 +62,7 @@ describe('ProfileSerializer :', () => {
       const serializer = new UserSerializer(user);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });

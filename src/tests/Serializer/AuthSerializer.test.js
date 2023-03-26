@@ -1,5 +1,11 @@
+import { matchersWithOptions } from 'jest-json-schema';
 import AuthSerializers from '../../serializers/AuthSerializer.js';
 import UserSerializer from '../../serializers/UserSerializer.js';
+import schema from './schema.json';
+
+expect.extend(matchersWithOptions({
+  verbose: true,
+}));
 
 describe('AuthSerializer :', () => {
   describe('Registration', () => {
@@ -17,6 +23,7 @@ describe('AuthSerializer :', () => {
       const serializer = new UserSerializer(user);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });
@@ -28,6 +35,7 @@ describe('AuthSerializer :', () => {
       const serializer = new AuthSerializers(token);
       const data = serializer.serialize();
 
+      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
     });
   });
