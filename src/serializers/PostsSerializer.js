@@ -2,27 +2,9 @@ import PostSerializer from './PostSerializer.js';
 import Serializer from './Serializer.js';
 
 class PostsSerializer extends Serializer {
-  type() {
-    return 'Posts';
-  }
-
-  id() {
-    return '0';
-  }
-
-  attributes() {
-    return {
-      posts: this.posts(),
-    };
-  }
-
   serialize() {
     return {
-      data: [{
-        type: this.type(),
-        id: this.id(),
-        attributes: this.attributes(),
-      }],
+      data: this.posts(),
       links: this.link(),
     };
   }
@@ -30,7 +12,11 @@ class PostsSerializer extends Serializer {
   posts() {
     return this.resource.map((post) => {
       const serializer = new PostSerializer(post);
-      return serializer.collectionSerializer();
+      return {
+        type: serializer.type(),
+        id: serializer.id(),
+        attributes: serializer.attributes(),
+      };
     });
   }
 }

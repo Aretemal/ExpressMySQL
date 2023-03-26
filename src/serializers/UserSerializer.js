@@ -9,14 +9,6 @@ class UserSerializer extends Serializer {
     return `${this.resource.userId}`;
   }
 
-  collectionSerializer() {
-    return {
-      type: this.type(),
-      id: this.id(),
-      attributes: this.attributes(),
-    };
-  }
-
   attributes() {
     return {
       firstName: this.resource.firstName,
