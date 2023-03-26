@@ -6,7 +6,7 @@ class UserSerializer extends Serializer {
   }
 
   id() {
-    return this.resource.userId;
+    return `${this.resource.userId}`;
   }
 
   collectionSerializer() {
@@ -19,7 +19,7 @@ class UserSerializer extends Serializer {
 
   attributes() {
     return {
-      fullName: this.resource.fullName,
+      firstName: this.resource.firstName,
       lastName: this.resource.lastName,
       login: this.resource.login,
       status: this.resource.status,

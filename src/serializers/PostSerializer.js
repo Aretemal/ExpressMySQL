@@ -6,7 +6,18 @@ class PostSerializer extends Serializer {
   }
 
   id() {
-    return this.resource.id;
+    return `${this.resource.id}`;
+  }
+
+  serialize() {
+    return {
+      data: {
+        type: this.type(),
+        id: this.id(),
+        attributes: this.attributes(),
+      },
+      links: this.link(),
+    };
   }
 
   collectionSerializer() {
