@@ -22,8 +22,8 @@ describe('ProfileSerializer :', () => {
       const serializer = new UserSerializer(user);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 
@@ -42,8 +42,8 @@ describe('ProfileSerializer :', () => {
       const serializer = new UserSerializer(user);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 
@@ -62,8 +62,8 @@ describe('ProfileSerializer :', () => {
       const serializer = new UserSerializer(user);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 });

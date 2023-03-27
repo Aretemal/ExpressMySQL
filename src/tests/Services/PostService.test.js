@@ -14,7 +14,7 @@ describe('Post Service :', () => {
     await data.destroy();
   });
 
-  test('Returns all posts', async () => {
+  test('Returns all  posts', async () => {
     const data = await PostService.getAll();
 
     expect(data).toBeDefined();

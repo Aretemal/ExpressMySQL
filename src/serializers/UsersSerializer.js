@@ -1,3 +1,4 @@
+import fullUrlCreator from '../utils/fullUrlCreator.js';
 import Serializer from './Serializer.js';
 import UserSerializer from './UserSerializer.js';
 
@@ -12,19 +13,21 @@ class UsersSerializer extends Serializer {
     return {
       meta: this.meta(),
       data: this.users(),
-      links: this.link(),
+      links: this.links(),
     };
   }
 
   users() {
     return this.resource.users.map((user) => {
       const serializer = new UserSerializer(user);
-      return {
-        type: serializer.type(),
-        id: serializer.id(),
-        attributes: serializer.attributes(),
-      };
+      return serializer.serialize().data;
     });
+  }
+
+  links() {
+    return this.request ? {
+      self: fullUrlCreator(this.request),
+    } : { self: `${process.env.API_URL}/users` };
   }
 }
 export default UsersSerializer;

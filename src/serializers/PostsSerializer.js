@@ -5,18 +5,14 @@ class PostsSerializer extends Serializer {
   serialize() {
     return {
       data: this.posts(),
-      links: this.link(),
+      links: this.links(),
     };
   }
 
   posts() {
     return this.resource.map((post) => {
       const serializer = new PostSerializer(post);
-      return {
-        type: serializer.type(),
-        id: serializer.id(),
-        attributes: serializer.attributes(),
-      };
+      return serializer.serialize().data;
     });
   }
 }

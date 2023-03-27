@@ -23,8 +23,8 @@ describe('AuthSerializer :', () => {
       const serializer = new UserSerializer(user);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 
@@ -35,8 +35,8 @@ describe('AuthSerializer :', () => {
       const serializer = new AuthSerializers(token);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 });

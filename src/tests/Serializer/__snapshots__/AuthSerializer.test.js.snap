@@ -6,11 +6,11 @@ exports[`AuthSerializer : Login should return object and token 1`] = `
     "attributes": {
       "token": undefined,
     },
-    "id": "0",
+    "id": "",
+    "links": {
+      "self": "Links",
+    },
     "type": "Token",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;
@@ -27,10 +27,10 @@ exports[`AuthSerializer : Registration should return object with data about user
       "status": "1",
     },
     "id": "1",
+    "links": {
+      "self": "http://localhost:5000/api/user/1",
+    },
     "type": "User",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;
