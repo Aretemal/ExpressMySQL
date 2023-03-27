@@ -12,10 +12,10 @@ exports[`ProfileSerializer : getInfoAuthorizedUser : should return info about us
       "status": "1",
     },
     "id": "1",
+    "links": {
+      "self": "http://localhost:5000/api/user/1",
+    },
     "type": "User",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;
@@ -32,10 +32,10 @@ exports[`ProfileSerializer : getStatus : should return status 1`] = `
       "status": "1",
     },
     "id": "1",
+    "links": {
+      "self": "http://localhost:5000/api/user/1",
+    },
     "type": "User",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;
@@ -52,10 +52,10 @@ exports[`ProfileSerializer : updateStatus : should return new status 1`] = `
       "status": "1",
     },
     "id": "1",
+    "links": {
+      "self": "http://localhost:5000/api/user/1",
+    },
     "type": "User",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;

@@ -12,17 +12,17 @@ class Serializer {
         type: this.type(),
         id: this.id(),
         attributes: this.attributes(),
+        links: this.links(),
       },
-      links: this.link(),
     };
   }
 
   type() {
-    return this.resource.type;
+    throw new Error('Undefined');
   }
 
   id() {
-    return this.resource.id || '0';
+    return `${this.resource.id}` || '';
   }
 
   attributes() {
@@ -31,10 +31,10 @@ class Serializer {
     };
   }
 
-  link() {
-    return {
-      self: !this.request ? '1' : fullUrlCreator(this.request),
-    };
+  links() {
+    return this.request ? {
+      self: fullUrlCreator(this.request),
+    } : { self: process.env.API_URL };
   }
 }
 export default Serializer;

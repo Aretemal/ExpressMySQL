@@ -8,10 +8,10 @@ exports[`PostSerializer : create : should return post 1`] = `
       "content": "Hello",
     },
     "id": "3",
+    "links": {
+      "self": "http://localhost:5000/api/post/3",
+    },
     "type": "Post",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;
@@ -25,6 +25,9 @@ exports[`PostSerializer : getAll : should return array posts 1`] = `
         "content": "Hello",
       },
       "id": "2",
+      "links": {
+        "self": "http://localhost:5000/api/post/2",
+      },
       "type": "Post",
     },
     {
@@ -32,12 +35,15 @@ exports[`PostSerializer : getAll : should return array posts 1`] = `
         "authorId": 1,
         "content": "World",
       },
-      "id": "2",
+      "id": "1",
+      "links": {
+        "self": "http://localhost:5000/api/post/1",
+      },
       "type": "Post",
     },
   ],
   "links": {
-    "self": "1",
+    "self": "Links",
   },
 }
 `;
@@ -50,10 +56,10 @@ exports[`PostSerializer : getOne : should return post 1`] = `
       "content": "Hello",
     },
     "id": "1",
+    "links": {
+      "self": "http://localhost:5000/api/post/1",
+    },
     "type": "Post",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;

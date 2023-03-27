@@ -16,8 +16,8 @@ describe('FollowSerializers :', () => {
       const serializer = new FollowSerializer(follow);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 
@@ -30,8 +30,8 @@ describe('FollowSerializers :', () => {
       const serializer = new FollowSerializer(follow);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 
@@ -44,8 +44,8 @@ describe('FollowSerializers :', () => {
       const serializer = new FollowSerializer(follow);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 });

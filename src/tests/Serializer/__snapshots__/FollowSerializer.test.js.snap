@@ -9,10 +9,10 @@ exports[`FollowSerializers : Approve : should return connection with info 1`] = 
       "followingId": 2,
     },
     "id": "21",
+    "links": {
+      "self": "Links",
+    },
     "type": "Follow",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;
@@ -26,10 +26,10 @@ exports[`FollowSerializers : Follow : should return connection with info 1`] = `
       "followingId": 2,
     },
     "id": "21",
+    "links": {
+      "self": "Links",
+    },
     "type": "Follow",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;
@@ -43,10 +43,10 @@ exports[`FollowSerializers : Unfollow : should return connection with info 1`] =
       "followingId": 2,
     },
     "id": "21",
+    "links": {
+      "self": "Links",
+    },
     "type": "Follow",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;

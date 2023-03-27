@@ -12,9 +12,5 @@ class FollowSerializer extends Serializer {
       approvedAt: this.resource.approvedAt,
     };
   }
-
-  id() {
-    return `${this.resource.id}`;
-  }
 }
 export default FollowSerializer;

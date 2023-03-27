@@ -6,13 +6,16 @@ exports[`UserSerializer : getAllUsers : should return array with info 1`] = `
     {
       "attributes": {
         "ava": null,
-        "email": "111@11.1",
-        "firstName": "aaaa",
-        "lastName": "bbbb",
-        "login": "Artem",
-        "status": "1",
+        "email": "111s@11.1",
+        "firstName": "assaaa",
+        "lastName": "bbsbb",
+        "login": "dsdsd",
+        "status": "1s",
       },
       "id": "3",
+      "links": {
+        "self": "http://localhost:5000/api/user/3",
+      },
       "type": "User",
     },
     {
@@ -25,11 +28,14 @@ exports[`UserSerializer : getAllUsers : should return array with info 1`] = `
         "status": "1",
       },
       "id": "1",
+      "links": {
+        "self": "http://localhost:5000/api/user/1",
+      },
       "type": "User",
     },
   ],
   "links": {
-    "self": "1",
+    "self": "http://localhost:5000/api/users",
   },
   "meta": {
     "countOfUsers": 2,
@@ -49,10 +55,10 @@ exports[`UserSerializer : getOne : should return info about user 1`] = `
       "status": "1",
     },
     "id": "1",
+    "links": {
+      "self": "http://localhost:5000/api/user/1",
+    },
     "type": "User",
-  },
-  "links": {
-    "self": "1",
   },
 }
 `;

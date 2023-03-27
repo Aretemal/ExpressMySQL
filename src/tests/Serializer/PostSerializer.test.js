@@ -19,8 +19,8 @@ describe('PostSerializer :', () => {
       const serializer = new PostSerializer(post);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 
@@ -32,15 +32,15 @@ describe('PostSerializer :', () => {
         content: 'Hello',
       },
       {
-        id: 2,
+        id: 1,
         authorId: 1,
         content: 'World',
       }];
       const serializer = new PostsSerializer(posts);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 
@@ -54,8 +54,8 @@ describe('PostSerializer :', () => {
       const serializer = new PostSerializer(post);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 });

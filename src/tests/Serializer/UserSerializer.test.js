@@ -23,8 +23,8 @@ describe('UserSerializer :', () => {
       const serializer = new UserSerializer(user);
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 
@@ -33,11 +33,11 @@ describe('UserSerializer :', () => {
       const countOfUsers = 2;
       const users = [{
         userId: 3,
-        login: 'Artem',
-        firstName: 'aaaa',
-        lastName: 'bbbb',
-        email: '111@11.1',
-        status: '1',
+        login: 'dsdsd',
+        firstName: 'assaaa',
+        lastName: 'bbsbb',
+        email: '111s@11.1',
+        status: '1s',
         ava: null,
       },
       {
@@ -53,8 +53,8 @@ describe('UserSerializer :', () => {
       const serializer = new UsersSerializer({ users, countOfUsers });
       const data = serializer.serialize();
 
-      expect(data).toMatchSchema(schema);
       expect(data).toMatchSnapshot();
+      expect(data).toMatchSchema(schema);
     });
   });
 });
