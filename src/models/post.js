@@ -3,13 +3,15 @@ import { db } from '../../db.js';
 
 class Post extends Model {
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'authorId' });
+    this.belongsTo(models.User, {
+      foreignKey: 'authorId',
+      as: 'author',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 Post.init({
-  authorId: {
-    type: DataTypes.INTEGER,
-  },
   content: DataTypes.STRING,
   createdAt: {
     type: DataTypes.DATE,

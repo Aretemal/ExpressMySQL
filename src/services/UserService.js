@@ -17,18 +17,39 @@ class UserService {
     count = +count;
     page = +page;
     const beginUsers = (page - 1) * count;
-    const users = await User.findAll({
+    const data = await User.findAll({
       attributes: ['userId', 'firstName', 'lastName', 'login', 'email', 'status', 'ava'],
-      include: {
+      include: [{
         model: Follow,
-      },
+        association: 'following',
+      }, {
+        model: Follow,
+        association: 'follower',
+      }],
       offset: beginUsers,
       limit: count,
     });
+    const users = data.map((user) => {
+      if (user.dataValues.follower.some((follow) => follow.followingId === id
+        && follow.approvedAt.getFullYear() !== 1970)) {
+        user.dataValues.followed = true;
+        delete user.dataValues.follower;
+        delete user.dataValues.following;
+      } else if (user.dataValues.following
+        .some((follow) => follow.followerId === id)) {
+        user.dataValues.followed = true;
+        delete user.dataValues.follower;
+        delete user.dataValues.following;
+      } else {
+        user.dataValues.followed = false;
+        delete user.dataValues.follower;
+        delete user.dataValues.following;
+      }
+      return user.dataValues;
+    });
     const countOfUsers = await User.count();
-    const userAuth = users.filter((user) => user.dataValues.userId === id);
     return {
-      users, countOfUsers, userAuth,
+      users, countOfUsers,
     };
   }
 }

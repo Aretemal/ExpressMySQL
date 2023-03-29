@@ -18,7 +18,7 @@ class FollowService {
     if (!approvedFollow) {
       throw new Error('Такой связи не существует');
     }
-    await approvedFollow.update({ approvedAt: (new Date()).toString() });
+    await approvedFollow.update({ approvedAt: (new Date()) });
     return approvedFollow;
   }
 
@@ -36,14 +36,18 @@ class FollowService {
           followingId: userId,
         },
       });
-      if (deletedConnection.approvedAt === 0) {
+      if (deletedConnection.approvedAt.getFullYear() === 1970) {
         await deletedConnection.destroy();
         return null;
       }
-      await deletedConnection.update({ userId1: userId, userId2: unSubscriberId, approvedAt: 0 });
+      await deletedConnection.update({
+        userId1: userId,
+        userId2: unSubscriberId,
+        approvedAt: new Date(0),
+      });
       return deletedConnection;
     }
-    await deletedConnection.update({ approvedAt: 0 });
+    await deletedConnection.update({ approvedAt: new Date(0) });
     return deletedConnection;
   }
 }

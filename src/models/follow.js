@@ -3,7 +3,18 @@ import { db } from '../../db.js';
 
 class Follow extends Model {
   static associate(models) {
-    this.belongsTo(models.User);
+    this.belongsTo(models.User, {
+      foreignKey: 'followerId',
+      as: 'follower',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+    this.belongsTo(models.User, {
+      foreignKey: 'followingId',
+      as: 'following',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 Follow.init({
@@ -12,19 +23,9 @@ Follow.init({
     primaryKey: true,
     autoIncrement: true,
   },
-  followerId: {
-    type: DataTypes.INTEGER,
-    foreignKey: true,
-    allowNull: false,
-  },
-  followingId: {
-    type: DataTypes.INTEGER,
-    foreignKey: true,
-    allowNull: false,
-  },
   approvedAt: {
     type: DataTypes.DATE,
-    defaultValue: 0,
+    defaultValue: new Date(0),
   },
   createdAt: {
     type: DataTypes.DATE,
