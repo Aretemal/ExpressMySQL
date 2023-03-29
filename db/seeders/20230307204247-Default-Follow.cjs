@@ -10,7 +10,7 @@ module.exports = {
       {
         followerId: 1,
         followingId: 3,
-        approvedAt: 0,
+        approvedAt: new Date(0),
       }, {
         followerId: 4,
         followingId: 1,
@@ -18,7 +18,7 @@ module.exports = {
       }, {
         followerId: 5,
         followingId: 1,
-        approvedAt: 0,
+        approvedAt: new Date(0),
       }, {
         followerId: 3,
         followingId: 6,

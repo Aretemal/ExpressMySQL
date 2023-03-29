@@ -10,6 +10,7 @@ module.exports = {
       },
       followerId: {
         type: Sequelize.STRING,
+
       },
       followingId: {
         type: Sequelize.STRING,

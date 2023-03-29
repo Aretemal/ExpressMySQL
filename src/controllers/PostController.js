@@ -10,7 +10,7 @@ class PostController {
   }
 
   async getAll(req, res, next) {
-    const posts = await PostService.getAll();
+    const posts = await PostService.getAll(req.user.id);
     req.serializer = new PostsSerializer(posts, req);
     next();
   }

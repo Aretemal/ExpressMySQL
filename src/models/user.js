@@ -4,16 +4,20 @@ import { db } from '../../db.js';
 class User extends Model {
   static associate(models) {
     this.hasMany(models.Post, {
+      foreignKey: 'authorId',
+      as: 'author',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
     this.hasMany(models.Follow, {
       foreignKey: 'followerId',
+      as: 'follower',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
     this.hasMany(models.Follow, {
       foreignKey: 'followingId',
+      as: 'following',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });

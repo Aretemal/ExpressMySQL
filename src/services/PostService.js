@@ -6,8 +6,8 @@ class PostService {
     return createdPost;
   }
 
-  async getAll() {
-    const posts = await Post.findAll();
+  async getAll(id) {
+    const posts = await Post.findAll({ where: { authorId: id } });
     return posts;
   }
 

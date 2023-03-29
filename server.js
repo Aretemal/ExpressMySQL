@@ -7,9 +7,9 @@ import app from './app.js';
 const PORT = process.env.DB_PORT;
 async function startApp() {
   try {
-    User.associate({ Post, Follow });
-    Post.associate({ User });
-    Follow.associate({ User });
+    // User.associate({ Post, Follow });
+    // Post.associate({ User });
+    // Follow.associate({ User });
     // await db.sync({ alter: true });
     app.listen(PORT, () => console.log(`Server created on port: ${PORT}`));
   } catch (e) {
