@@ -10,12 +10,6 @@ class UserSerializer extends Serializer {
     return `${this.resource.userId}`;
   }
 
-  attributes() {
-    return {
-      ...this.resource,
-    };
-  }
-
   links() {
     return this.request ? {
       self: fullUrlCreator(this.request),

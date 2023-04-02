@@ -10,8 +10,13 @@ class UserController {
   }
 
   async getAllUsers(req, res, next) {
-    const usersWithData = await UserService.getAllUsers(req.user.id, req.query);
-    req.serializer = new UsersSerializer(usersWithData, req);
+    const collection = await UserService.getAllUsers(req.user.id, req.query);
+    req.serializer = new UsersSerializer(
+      collection.users,
+      UserSerializer,
+      collection.countOfUsers,
+      req,
+    );
     next();
   }
 }

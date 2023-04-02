@@ -1,5 +1,7 @@
+import dotenv from 'dotenv';
 import fullUrlCreator from '../utils/fullUrlCreator.js';
 
+dotenv.config();
 class Serializer {
   constructor(resource, request = null) {
     this.resource = resource;
@@ -27,7 +29,7 @@ class Serializer {
 
   attributes() {
     return {
-      ...this.resource.attributes,
+      ...this.resource,
     };
   }
 

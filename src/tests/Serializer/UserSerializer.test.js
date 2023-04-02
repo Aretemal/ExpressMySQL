@@ -50,7 +50,7 @@ describe('UserSerializer :', () => {
         ava: null,
       }];
 
-      const serializer = new UsersSerializer({ users, countOfUsers });
+      const serializer = new UsersSerializer(users, UserSerializer, countOfUsers);
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
