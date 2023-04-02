@@ -21,6 +21,18 @@ class User extends Model {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
+    this.hasMany(models.Dialog, {
+      foreignKey: 'recipientId',
+      as: 'recipient',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+    this.hasMany(models.Dialog, {
+      foreignKey: 'senderId',
+      as: 'sender',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 User.init({
