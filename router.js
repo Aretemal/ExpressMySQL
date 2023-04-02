@@ -1,5 +1,6 @@
 import Router from 'express';
 import { check } from 'express-validator';
+import DialogController from './src/controllers/DialogController.js';
 import FollowController from './src/controllers/FollowController.js';
 import PostController from './src/controllers/PostController.js';
 import ProfileController from './src/controllers/ProfileController.js';
@@ -32,5 +33,10 @@ router.put('/profile/status', ProfileController.updateStatus);
 router.post('/follow', FollowController.follow);
 router.put('/approve', FollowController.approve);
 router.put('/unfollow', FollowController.unfollow);
+
+// Dialog
+router.post('/dialog/message/:id', DialogController.sendMessage);
+router.get('/dialog/companion/:id', DialogController.getAllMessage);
+router.get('/dialog/companion', DialogController.getAllInterlocutors);
 
 export default router;
