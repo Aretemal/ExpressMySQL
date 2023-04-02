@@ -1,27 +1,22 @@
 import fullUrlCreator from '../utils/fullUrlCreator.js';
-import Serializer from './Serializer.js';
-import UserSerializer from './UserSerializer.js';
+import CollectionSerializer from './CollectionSerializer.js';
 
-class UsersSerializer extends Serializer {
+class UsersSerializer extends CollectionSerializer {
+  constructor(resource, serializerType, metaData, request = null) {
+    super(resource, serializerType, request);
+    this.metaData = metaData;
+  }
+
   meta() {
     return {
-      countOfUsers: this.resource.countOfUsers,
+      countOfUsers: this.metaData,
     };
   }
 
   serialize() {
-    return {
-      meta: this.meta(),
-      data: this.users(),
-      links: this.links(),
-    };
-  }
-
-  users() {
-    return this.resource.users.map((user) => {
-      const serializer = new UserSerializer(user);
-      return serializer.serialize().data;
-    });
+    const data = super.serialize();
+    data.meta = this.meta();
+    return data;
   }
 
   links() {

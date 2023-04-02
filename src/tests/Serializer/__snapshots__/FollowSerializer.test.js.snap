@@ -10,7 +10,7 @@ exports[`FollowSerializers : Approve : should return connection with info 1`] = 
     },
     "id": "21",
     "links": {
-      "self": "Links",
+      "self": "http://localhost:5000/api",
     },
     "type": "Follow",
   },
@@ -27,7 +27,7 @@ exports[`FollowSerializers : Follow : should return connection with info 1`] = `
     },
     "id": "21",
     "links": {
-      "self": "Links",
+      "self": "http://localhost:5000/api",
     },
     "type": "Follow",
   },
@@ -44,7 +44,7 @@ exports[`FollowSerializers : Unfollow : should return connection with info 1`] =
     },
     "id": "21",
     "links": {
-      "self": "Links",
+      "self": "http://localhost:5000/api",
     },
     "type": "Follow",
   },

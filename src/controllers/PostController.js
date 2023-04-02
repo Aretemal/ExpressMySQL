@@ -1,4 +1,4 @@
-import PostsSerializer from '../serializers/PostsSerializer.js';
+import CollectionSerializer from '../serializers/CollectionSerializer.js';
 import PostService from '../services/PostService.js';
 import PostSerializer from '../serializers/PostSerializer.js';
 
@@ -11,7 +11,7 @@ class PostController {
 
   async getAll(req, res, next) {
     const posts = await PostService.getAll(req.user.id);
-    req.serializer = new PostsSerializer(posts, req);
+    req.serializer = new CollectionSerializer(posts, PostSerializer, req);
     next();
   }
 
