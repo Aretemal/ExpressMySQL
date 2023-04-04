@@ -1,8 +1,7 @@
 import { matchersWithOptions } from 'jest-json-schema';
 import CollectionSerializer from '../../serializers/CollectionSerializer.js';
-import MessageSerializer from '../../serializers/MessageSerializer.js';
+import DialogSerializer from '../../serializers/DialogSerializer.js';
 import UserSerializer from '../../serializers/UserSerializer.js';
-import UsersSerializer from '../../serializers/UsersSerializer.js';
 import schema from './schema.json';
 
 expect.extend(matchersWithOptions({
@@ -18,7 +17,7 @@ describe('DialogSerializer :', () => {
         message: 'Hello',
       };
 
-      const serializer = new MessageSerializer(message);
+      const serializer = new DialogSerializer(message);
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
@@ -39,7 +38,7 @@ describe('DialogSerializer :', () => {
         message: 'Hel1lo',
       }];
 
-      const serializer = new CollectionSerializer(messages, MessageSerializer);
+      const serializer = new CollectionSerializer(messages, DialogSerializer, { originalUrl: 'example' });
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
@@ -50,7 +49,7 @@ describe('DialogSerializer :', () => {
   describe('getAllInterlocutors :', () => {
     test('should return array of users', () => {
       const users = [{
-        userId: 3,
+        id: 3,
         login: 'dsdsd',
         firstName: 'assaaa',
         lastName: 'bbsbb',
@@ -59,7 +58,7 @@ describe('DialogSerializer :', () => {
         ava: null,
       },
       {
-        userId: 1,
+        id: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',
@@ -68,7 +67,7 @@ describe('DialogSerializer :', () => {
         ava: null,
       }];
 
-      const serializer = new CollectionSerializer(users, UserSerializer);
+      const serializer = new CollectionSerializer(users, UserSerializer, { originalUrl: 'example' });
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();

@@ -25,7 +25,6 @@ exports[`AuthSerializer : Registration should return object with data about user
       "lastName": "bbbb",
       "login": "Artem",
       "status": "1",
-      "userId": 1,
     },
     "id": "1",
     "links": {

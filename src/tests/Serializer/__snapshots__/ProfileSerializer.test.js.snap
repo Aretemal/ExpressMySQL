@@ -10,7 +10,6 @@ exports[`ProfileSerializer : getInfoAuthorizedUser : should return info about us
       "lastName": "bbbb",
       "login": "Artem",
       "status": "1",
-      "userId": 1,
     },
     "id": "1",
     "links": {
@@ -31,7 +30,6 @@ exports[`ProfileSerializer : getStatus : should return status 1`] = `
       "lastName": "bbbb",
       "login": "Artem",
       "status": "1",
-      "userId": 1,
     },
     "id": "1",
     "links": {
@@ -52,7 +50,6 @@ exports[`ProfileSerializer : updateStatus : should return new status 1`] = `
       "lastName": "bbbb",
       "login": "Artem",
       "status": "1",
-      "userId": 1,
     },
     "id": "1",
     "links": {

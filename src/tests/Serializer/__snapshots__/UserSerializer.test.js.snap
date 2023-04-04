@@ -11,7 +11,6 @@ exports[`UserSerializer : getAllUsers : should return array with info 1`] = `
         "lastName": "bbsbb",
         "login": "dsdsd",
         "status": "1s",
-        "userId": 3,
       },
       "id": "3",
       "links": {
@@ -27,7 +26,6 @@ exports[`UserSerializer : getAllUsers : should return array with info 1`] = `
         "lastName": "bbbb",
         "login": "Artem",
         "status": "1",
-        "userId": 1,
       },
       "id": "1",
       "links": {
@@ -37,7 +35,7 @@ exports[`UserSerializer : getAllUsers : should return array with info 1`] = `
     },
   ],
   "links": {
-    "self": "http://localhost:5000/api/users",
+    "self": "http://localhost:5000/api/example",
   },
   "meta": {
     "countOfUsers": 2,
@@ -55,7 +53,6 @@ exports[`UserSerializer : getOne : should return info about user 1`] = `
       "lastName": "bbbb",
       "login": "Artem",
       "status": "1",
-      "userId": 1,
     },
     "id": "1",
     "links": {

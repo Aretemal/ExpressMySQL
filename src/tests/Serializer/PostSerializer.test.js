@@ -36,7 +36,7 @@ describe('PostSerializer :', () => {
         authorId: 1,
         content: 'World',
       }];
-      const serializer = new CollectionSerializer(posts, PostSerializer);
+      const serializer = new CollectionSerializer(posts, PostSerializer, { originalUrl: 'example' });
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
