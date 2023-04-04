@@ -1,4 +1,4 @@
-import UsersSerializer from '../serializers/UsersSerializer.js';
+import CollectionSerializer from '../serializers/CollectionSerializer.js';
 import UserService from '../services/UserService.js';
 import UserSerializer from '../serializers/UserSerializer.js';
 
@@ -10,8 +10,13 @@ class UserController {
   }
 
   async getAllUsers(req, res, next) {
-    const usersWithData = await UserService.getAllUsers(req.user.id, req.query);
-    req.serializer = new UsersSerializer(usersWithData, req);
+    const collection = await UserService.getAllUsers(req.user.id, req.query);
+    req.serializer = new CollectionSerializer(
+      collection.users,
+      UserSerializer,
+      req,
+      { countOfUsers: collection.countOfUsers },
+    );
     next();
   }
 }
