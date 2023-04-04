@@ -10,7 +10,7 @@ describe('ProfileSerializer :', () => {
   describe('getInfoAuthorizedUser :', () => {
     test('should return info about user', () => {
       const user = {
-        userId: 1,
+        id: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',
@@ -30,7 +30,7 @@ describe('ProfileSerializer :', () => {
   describe('updateStatus :', () => {
     test('should return new status', () => {
       const user = {
-        userId: 1,
+        id: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',
@@ -50,7 +50,7 @@ describe('ProfileSerializer :', () => {
   describe('getStatus :', () => {
     test('should return status', () => {
       const user = {
-        userId: 1,
+        id: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',

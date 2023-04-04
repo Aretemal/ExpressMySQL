@@ -32,9 +32,7 @@ class Serializer {
   }
 
   links() {
-    return this.request ? {
-      self: fullUrlCreator(this.request),
-    } : { self: process.env.API_URL };
+    return { self: process.env.API_URL };
   }
 }
 export default Serializer;

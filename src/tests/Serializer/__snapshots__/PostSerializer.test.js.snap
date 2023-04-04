@@ -43,7 +43,7 @@ exports[`PostSerializer : getAll : should return array posts 1`] = `
     },
   ],
   "links": {
-    "self": "Links",
+    "self": "http://localhost:5000/api/example",
   },
 }
 `;

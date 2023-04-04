@@ -1,6 +1,6 @@
 import { matchersWithOptions } from 'jest-json-schema';
+import CollectionSerializer from '../../serializers/CollectionSerializer.js';
 import PostSerializer from '../../serializers/PostSerializer.js';
-import PostsSerializer from '../../serializers/PostsSerializer.js';
 import schema from './schema.json';
 
 expect.extend(matchersWithOptions({
@@ -36,7 +36,7 @@ describe('PostSerializer :', () => {
         authorId: 1,
         content: 'World',
       }];
-      const serializer = new PostsSerializer(posts);
+      const serializer = new CollectionSerializer(posts, PostSerializer, { originalUrl: 'example' });
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();

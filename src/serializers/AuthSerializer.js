@@ -10,5 +10,9 @@ class AuthSerializer extends Serializer {
       token: this.resource.token,
     };
   }
+
+  links() {
+    return { self: `${process.env.API_URL}/login` };
+  }
 }
 export default AuthSerializer;

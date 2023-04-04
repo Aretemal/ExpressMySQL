@@ -1,6 +1,6 @@
 import { matchersWithOptions } from 'jest-json-schema';
+import CollectionSerializer from '../../serializers/CollectionSerializer.js';
 import UserSerializer from '../../serializers/UserSerializer.js';
-import UsersSerializer from '../../serializers/UsersSerializer.js';
 import schema from './schema.json';
 
 expect.extend(matchersWithOptions({
@@ -11,7 +11,7 @@ describe('UserSerializer :', () => {
   describe('getOne :', () => {
     test('should return info about user', () => {
       const user = {
-        userId: 1,
+        id: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',
@@ -32,7 +32,7 @@ describe('UserSerializer :', () => {
     test('should return array with info', () => {
       const countOfUsers = 2;
       const users = [{
-        userId: 3,
+        id: 3,
         login: 'dsdsd',
         firstName: 'assaaa',
         lastName: 'bbsbb',
@@ -41,7 +41,7 @@ describe('UserSerializer :', () => {
         ava: null,
       },
       {
-        userId: 1,
+        id: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',
@@ -50,7 +50,7 @@ describe('UserSerializer :', () => {
         ava: null,
       }];
 
-      const serializer = new UsersSerializer({ users, countOfUsers });
+      const serializer = new CollectionSerializer(users, UserSerializer, { originalUrl: 'example' }, { countOfUsers });
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();

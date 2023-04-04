@@ -14,9 +14,7 @@ class PostSerializer extends Serializer {
   }
 
   links() {
-    return this.request ? {
-      self: fullUrlCreator(this.request),
-    } : { self: `${process.env.API_URL}/post/${this.resource.id}` };
+    return { self: `${process.env.API_URL}/post/${this.resource.id}` };
   }
 }
 export default PostSerializer;

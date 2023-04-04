@@ -6,8 +6,15 @@ class UserSerializer extends Serializer {
     return 'User';
   }
 
-  id() {
-    return `${this.resource.userId}`;
+  attributes() {
+    return {
+      ava: this.resource.ava,
+      email: this.resource.email,
+      firstName: this.resource.firstName,
+      lastName: this.resource.lastName,
+      login: this.resource.login,
+      status: this.resource.status,
+    };
   }
 
   attributes() {
@@ -17,9 +24,7 @@ class UserSerializer extends Serializer {
   }
 
   links() {
-    return this.request ? {
-      self: fullUrlCreator(this.request),
-    } : { self: `${process.env.API_URL}/user/${this.resource.userId}` };
+    return { self: `${process.env.API_URL}/user/${this.resource.id}` };
   }
 }
 export default UserSerializer;

@@ -11,7 +11,7 @@ describe('AuthSerializer :', () => {
   describe('Registration', () => {
     test('should return object with data about user', () => {
       const user = {
-        userId: 1,
+        id: 1,
         login: 'Artem',
         firstName: 'aaaa',
         lastName: 'bbbb',
