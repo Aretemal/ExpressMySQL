@@ -1,26 +1,43 @@
 import { Op } from 'sequelize';
 import Dialog from '../models/dialog.js';
+import Message from '../models/message.js';
 import User from '../models/user.js';
 
 class DialogService {
   async sendMessage({ message }, recipientId, senderId) {
-    const content = await Dialog.create({ message, senderId, recipientId });
+    console.log({ message, recipientId, senderId });
+    let dialog = await Dialog.findOne({
+      where: { senderId, recipientId },
+    });
+    if (!dialog) {
+      dialog = await Dialog.create({ senderId, recipientId });
+    }
+    const content = await Message.create({ message, dialogId: dialog.id });
     return content;
   }
 
   async getAllMessage(authId, otherId) {
-    const messages = await Dialog.findAll({
-      where: {
-        [Op.or]: [
-          { senderId: authId, recipientId: otherId },
-          { senderId: otherId, recipientId: authId },
-        ],
+    const data = await Message.findAll({
+      include: {
+        model: Dialog,
+        as: 'messenger',
+        where: {
+          [Op.or]: [
+            { senderId: authId, recipientId: otherId },
+            { senderId: otherId, recipientId: authId },
+          ],
+        },
       },
+    });
+    const messages = data.map((item) => {
+      item.senderId = item.messenger.senderId;
+      item.recipientId = item.messenger.recipientId;
+      return item;
     });
     return messages;
   }
 
-  async getAllInterlocutors(id) {
+  async getAllCompanions(id) {
     const dialogsId = await Dialog.findAll({
       attributes: ['senderId', 'recipientId'],
       where: {
@@ -39,9 +56,9 @@ class DialogService {
     });
     const uniqueId = [...new Set(usersId)];
     const data = await User.findAll({
-      attributes: ['userId', 'firstName', 'lastName', 'login', 'email', 'status', 'ava'],
+      attributes: ['id', 'firstName', 'lastName', 'login', 'email', 'status', 'ava'],
       where: {
-        userId: {
+        id: {
           [Op.in]: uniqueId,
         },
       },
