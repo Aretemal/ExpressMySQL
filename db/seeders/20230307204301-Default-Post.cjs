@@ -5,6 +5,8 @@ module.exports = {
       {
         authorId: 1,
         content: 'Hello',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ]);
   },
