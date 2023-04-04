@@ -25,15 +25,7 @@ Follow.init({
   },
   approvedAt: {
     type: DataTypes.DATE,
-    defaultValue: new Date(0),
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    defaultValue: new Date(),
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    defaultValue: new Date(),
+    defaultValue: null,
   },
 }, {
 
