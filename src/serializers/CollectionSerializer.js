@@ -2,16 +2,25 @@ import fullUrlCreator from '../utils/fullUrlCreator.js';
 import Serializer from './Serializer.js';
 
 class CollectionSerializer extends Serializer {
-  constructor(resource, serializerType, request = null) {
+  constructor(resource, serializerType, request = null, metaData = null) {
     super(resource, request);
     this.serializerType = serializerType;
+    this.metaData = metaData;
+  }
+
+  meta() {
+    return this.metaData;
   }
 
   serialize() {
-    return {
+    const data = {
       data: this.collect(),
       links: this.links(),
     };
+    if (this.metaData) {
+      data.meta = this.meta();
+    }
+    return data;
   }
 
   collect() {
@@ -22,9 +31,7 @@ class CollectionSerializer extends Serializer {
   }
 
   links() {
-    return this.request ? {
-      self: fullUrlCreator(this.request),
-    } : { self: `${process.env.API_URL}` };
+    return { self: `${process.env.API_URL}/${this.request.originalUrl}` };
   }
 }
 export default CollectionSerializer;
