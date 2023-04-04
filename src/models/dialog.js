@@ -15,6 +15,12 @@ class Dialog extends Model {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
+    this.hasMany(models.Message, {
+      foreignKey: 'dialogId',
+      as: 'messenger',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 Dialog.init({
@@ -23,18 +29,6 @@ Dialog.init({
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-  },
-  message: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    defaultValue: new Date(),
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    defaultValue: new Date(),
   },
 }, {
   sequelize: db,
