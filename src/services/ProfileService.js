@@ -1,46 +1,46 @@
 import User from '../models/user.js';
 
 class ProfileService {
-  async getInfoAuthorizedUser(id) {
-    if (!id) {
+  async getInfoAuthorizedUser(userId) {
+    if (!userId) {
       throw new Error('Id не указан');
     }
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(userId);
     const {
-      userId, login, firstName, lastName, email, status, ava,
+      id, login, firstName, lastName, email, status, ava,
     } = user;
     return {
-      userId, login, firstName, lastName, email, status, ava,
+      id, login, firstName, lastName, email, status, ava,
     };
   }
 
-  async updateStatus(status, id) {
-    if (!id) {
+  async updateStatus(status, userId) {
+    if (!userId) {
       throw new Error('Id не указан');
     }
-    const oldUser = await User.findByPk(id);
+    const oldUser = await User.findByPk(userId);
     await oldUser.update({ status });
     const {
-      userId, login, firstName, lastName, email, ava,
+      id, login, firstName, lastName, email, ava,
     } = oldUser;
     return {
-      userId, login, firstName, lastName, email, status, ava,
+      id, login, firstName, lastName, email, status, ava,
     };
   }
 
-  async getStatus(id) {
-    if (!id) {
+  async getStatus(userId) {
+    if (!userId) {
       throw new Error('Id не указан');
     }
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(userId);
     if (!user) {
       throw new Error('Пользователь не найден');
     }
     const {
-      userId, login, firstName, lastName, email, ava, status,
+      id, login, firstName, lastName, email, ava, status,
     } = user;
     return {
-      userId, login, firstName, lastName, email, ava, status,
+      id, login, firstName, lastName, email, ava, status,
     };
   }
 }
