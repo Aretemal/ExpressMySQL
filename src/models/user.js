@@ -36,7 +36,7 @@ class User extends Model {
   }
 }
 User.init({
-  userId: {
+  id: {
     type: DataTypes.INTEGER,
     allowNull: false,
     autoIncrement: true,
@@ -54,14 +54,6 @@ User.init({
   ava: {
     type: DataTypes.BLOB,
     defaultValue: 0,
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    defaultValue: new Date(),
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    defaultValue: new Date(),
   },
 }, {
   sequelize: db,

@@ -36,18 +36,18 @@ class FollowService {
           followingId: userId,
         },
       });
-      if (deletedConnection.approvedAt.getFullYear() === 1970) {
+      if (deletedConnection.approvedAt === null) {
         await deletedConnection.destroy();
         return null;
       }
       await deletedConnection.update({
-        userId1: userId,
-        userId2: unSubscriberId,
-        approvedAt: new Date(0),
+        followerId: userId,
+        followingId: unSubscriberId,
+        approvedAt: null,
       });
       return deletedConnection;
     }
-    await deletedConnection.update({ approvedAt: new Date(0) });
+    await deletedConnection.update({ approvedAt: null });
     return deletedConnection;
   }
 }
