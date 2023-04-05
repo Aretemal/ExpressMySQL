@@ -2,19 +2,17 @@ import Serializer from './Serializer.js';
 
 class DialogSerializer extends Serializer {
   type() {
-    return 'Message';
+    return 'Dialog';
   }
 
   attributes() {
     return {
-      senderId: this.resource.senderId,
-      recipientId: this.resource.recipientId,
-      message: this.resource.message,
+      name: this.resource.name,
     };
   }
 
   links() {
-    return { self: `${process.env.API_URL}/dialog/message/${this.resource.id}` };
+    return { self: `${process.env.API_URL}/dialog/${this.resource.id}` };
   }
 }
 export default DialogSerializer;

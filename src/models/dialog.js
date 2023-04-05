@@ -3,18 +3,6 @@ import { db } from '../../db.js';
 
 class Dialog extends Model {
   static associate(models) {
-    this.belongsTo(models.User, {
-      foreignKey: 'firstId',
-      as: 'first',
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-    });
-    this.belongsTo(models.User, {
-      foreignKey: 'secondId',
-      as: 'second',
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-    });
     this.hasMany(models.Message, {
       foreignKey: 'dialogId',
       as: 'messages',
@@ -29,6 +17,10 @@ Dialog.init({
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
+  },
+  name: {
+    type: DataTypes.STRING,
+    defaultValue: 'Default name',
   },
 }, {
   sequelize: db,

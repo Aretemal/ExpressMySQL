@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DialogSerializer : getAllInterlocutors : should return array of users 1`] = `
+exports[`MessageSerializer : getAllInterlocutors : should return array of users 1`] = `
 {
   "data": [
     {
@@ -40,7 +40,7 @@ exports[`DialogSerializer : getAllInterlocutors : should return array of users 1
 }
 `;
 
-exports[`DialogSerializer : getAllMessage : should return array with messages 1`] = `
+exports[`MessageSerializer : getAllMessage : should return array with messages 1`] = `
 {
   "data": [
     {
@@ -74,7 +74,7 @@ exports[`DialogSerializer : getAllMessage : should return array with messages 1`
 }
 `;
 
-exports[`DialogSerializer : sendMessage : should return created message 1`] = `
+exports[`MessageSerializer : sendMessage : should return created message 1`] = `
 {
   "data": {
     "attributes": {
