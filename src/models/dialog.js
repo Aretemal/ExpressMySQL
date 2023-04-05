@@ -4,20 +4,20 @@ import { db } from '../../db.js';
 class Dialog extends Model {
   static associate(models) {
     this.belongsTo(models.User, {
-      foreignKey: 'senderId',
-      as: 'sender',
+      foreignKey: 'firstId',
+      as: 'first',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
     this.belongsTo(models.User, {
-      foreignKey: 'recipientId',
-      as: 'recipient',
+      foreignKey: 'secondId',
+      as: 'second',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
     this.hasMany(models.Message, {
       foreignKey: 'dialogId',
-      as: 'messenger',
+      as: 'messages',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });

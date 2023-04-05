@@ -5,54 +5,46 @@ import User from '../models/user.js';
 
 class DialogService {
   async sendMessage({ message }, recipientId, senderId) {
-    console.log({ message, recipientId, senderId });
     let dialog = await Dialog.findOne({
-      where: { senderId, recipientId },
+      where: {
+        [Op.or]: [
+          { firstId: senderId, secondId: recipientId },
+          { secondId: senderId, firstId: recipientId },
+        ],
+      },
     });
     if (!dialog) {
-      dialog = await Dialog.create({ senderId, recipientId });
+      dialog = await Dialog.create({ firstId: senderId, secondId: recipientId });
     }
-    const content = await Message.create({ message, dialogId: dialog.id });
+    const content = await Message.create({ message, dialogId: dialog.id, senderId });
     return content;
   }
 
-  async getAllMessage(authId, otherId) {
-    const data = await Message.findAll({
-      include: {
-        model: Dialog,
-        as: 'messenger',
-        where: {
-          [Op.or]: [
-            { senderId: authId, recipientId: otherId },
-            { senderId: otherId, recipientId: authId },
-          ],
-        },
+  async getAllMessage(id) {
+    const messages = await Message.findAll({
+      where: {
+        dialogId: id,
       },
-    });
-    const messages = data.map((item) => {
-      item.senderId = item.messenger.senderId;
-      item.recipientId = item.messenger.recipientId;
-      return item;
     });
     return messages;
   }
 
-  async getAllCompanions(id) {
+  async getAllDialogs(id) {
     const dialogsId = await Dialog.findAll({
-      attributes: ['senderId', 'recipientId'],
+      attributes: ['id', 'firstId', 'secondId'],
       where: {
         [Op.or]: [
-          { senderId: id },
-          { recipientId: id },
+          { firstId: id },
+          { secondId: id },
         ],
       },
-      group: ['senderId', 'recipientId'],
+      group: ['firstId', 'secondId'],
     });
     const usersId = dialogsId.map((dialog) => {
-      if (dialog.senderId === id) {
-        return dialog.recipientId;
+      if (dialog.firstId === id) {
+        return dialog.secondId;
       }
-      return dialog.senderId;
+      return dialog.firstId;
     });
     const uniqueId = [...new Set(usersId)];
     const data = await User.findAll({
@@ -64,6 +56,9 @@ class DialogService {
       },
     });
     const users = data.map((user) => user.dataValues);
+    for (let i = 0; i < users.length; i++) {
+      users[i].dialogId = dialogsId[i].id;
+    }
     return users;
   }
 }

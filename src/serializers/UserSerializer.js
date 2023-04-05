@@ -6,14 +6,15 @@ class UserSerializer extends Serializer {
     return 'User';
   }
 
+  id() {
+    const data = this.resource.id;
+    delete this.resource.id;
+    return `${data}`;
+  }
+
   attributes() {
     return {
-      ava: this.resource.ava,
-      email: this.resource.email,
-      firstName: this.resource.firstName,
-      lastName: this.resource.lastName,
-      login: this.resource.login,
-      status: this.resource.status,
+      ...this.resource,
     };
   }
 

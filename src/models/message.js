@@ -5,7 +5,7 @@ class Message extends Model {
   static associate(models) {
     this.belongsTo(models.Dialog, {
       foreignKey: 'dialogId',
-      as: 'messenger',
+      as: 'messages',
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
@@ -17,6 +17,10 @@ Message.init({
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
+  },
+  senderId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
   message: {
     type: DataTypes.STRING,

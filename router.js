@@ -36,7 +36,7 @@ router.put('/unfollow', FollowController.unfollow);
 
 // Dialog
 router.post('/dialog/message/:id', DialogController.sendMessage);
-router.get('/dialog/companion/:id', DialogController.getAllMessage);
-router.get('/dialog/companion', DialogController.getAllCompanions);
+router.get('/dialog/messages/:id', DialogController.getAllMessage);
+router.get('/dialog/companion', DialogController.getAllDialogs);
 
 export default router;
