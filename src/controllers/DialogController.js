@@ -11,13 +11,13 @@ class DialogController {
   }
 
   async getAllMessage(req, res, next) {
-    const messages = await DialogService.getAllMessage(req.user.id, req.params.id);
+    const messages = await DialogService.getAllMessage(req.params.id);
     req.serializer = new CollectionSerializer(messages, DialogSerializer, req);
     next();
   }
 
-  async getAllCompanions(req, res, next) {
-    const users = await DialogService.getAllCompanions(req.user.id);
+  async getAllDialogs(req, res, next) {
+    const users = await DialogService.getAllDialogs(req.user.id);
     req.serializer = new CollectionSerializer(users, UserSerializer, req);
     next();
   }
