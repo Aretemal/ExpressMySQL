@@ -2,22 +2,32 @@ import { Op } from 'sequelize';
 import Dialog from '../models/dialog.js';
 import Message from '../models/message.js';
 import User from '../models/user.js';
+import UserDialog from '../models/User_Dialog.js';
 
 class DialogService {
-  async sendMessage({ message }, recipientId, senderId) {
-    let dialog = await Dialog.findOne({
+  async sendMessage({ message, recipientId }, senderId, dialogId) {
+    let dialog = await UserDialog.findOne({
       where: {
-        [Op.or]: [
-          { firstId: senderId, secondId: recipientId },
-          { secondId: senderId, firstId: recipientId },
-        ],
+        UserId: senderId, DialogId: dialogId,
       },
     });
     if (!dialog) {
-      dialog = await Dialog.create({ firstId: senderId, secondId: recipientId });
+      dialog = await Dialog.create();
+      await UserDialog.create({ UserId: senderId, DialogId: dialog.id });
+      await UserDialog.create({ UserId: recipientId, DialogId: dialog.id });
     }
     const content = await Message.create({ message, dialogId: dialog.id, senderId });
     return content;
+  }
+
+  async getAllDialogs(id) {
+    const user = await User.findOne({ where: { id } });
+    const data = await user.getDialogs();
+    const dialogs = data.map((item) => {
+      delete item.dataValues.UserDialog;
+      return item.dataValues;
+    });
+    return dialogs;
   }
 
   async getAllMessage(id) {
@@ -27,39 +37,6 @@ class DialogService {
       },
     });
     return messages;
-  }
-
-  async getAllDialogs(id) {
-    const dialogsId = await Dialog.findAll({
-      attributes: ['id', 'firstId', 'secondId'],
-      where: {
-        [Op.or]: [
-          { firstId: id },
-          { secondId: id },
-        ],
-      },
-      group: ['firstId', 'secondId'],
-    });
-    const usersId = dialogsId.map((dialog) => {
-      if (dialog.firstId === id) {
-        return dialog.secondId;
-      }
-      return dialog.firstId;
-    });
-    const uniqueId = [...new Set(usersId)];
-    const data = await User.findAll({
-      attributes: ['id', 'firstName', 'lastName', 'login', 'email', 'status', 'ava'],
-      where: {
-        id: {
-          [Op.in]: uniqueId,
-        },
-      },
-    });
-    const users = data.map((user) => user.dataValues);
-    for (let i = 0; i < users.length; i++) {
-      users[i].dialogId = dialogsId[i].id;
-    }
-    return users;
   }
 }
 

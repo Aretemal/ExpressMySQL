@@ -1,6 +1,6 @@
 import { matchersWithOptions } from 'jest-json-schema';
 import CollectionSerializer from '../../serializers/CollectionSerializer.js';
-import DialogSerializer from '../../serializers/DialogSerializer.js';
+import MessageSerializer from '../../serializers/MessageSerializer.js';
 import UserSerializer from '../../serializers/UserSerializer.js';
 import schema from './schema.json';
 
@@ -8,7 +8,7 @@ expect.extend(matchersWithOptions({
   verbose: true,
 }));
 
-describe('DialogSerializer :', () => {
+describe('MessageSerializer :', () => {
   describe('sendMessage :', () => {
     test('should return created message', () => {
       const message = {
@@ -17,7 +17,7 @@ describe('DialogSerializer :', () => {
         message: 'Hello',
       };
 
-      const serializer = new DialogSerializer(message);
+      const serializer = new MessageSerializer(message);
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
@@ -38,7 +38,7 @@ describe('DialogSerializer :', () => {
         message: 'Hel1lo',
       }];
 
-      const serializer = new CollectionSerializer(messages, DialogSerializer, { originalUrl: 'example' });
+      const serializer = new CollectionSerializer(messages, MessageSerializer, { originalUrl: 'example' });
       const data = serializer.serialize();
 
       expect(data).toMatchSnapshot();
