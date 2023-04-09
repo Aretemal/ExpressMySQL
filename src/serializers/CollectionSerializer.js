@@ -1,22 +1,14 @@
-import fullUrlCreator from '../utils/fullUrlCreator.js';
 import Serializer from './Serializer.js';
 
 class CollectionSerializer extends Serializer {
-  constructor(resource, serializerType, request = null, metaData = null) {
-    super(resource, request);
-    this.serializerType = serializerType;
-    this.metaData = metaData;
-  }
-
-  meta() {
-    return this.metaData;
-  }
-
-  serialize() {
+  serialize(req) {
     const data = {
       data: this.collect(),
-      links: this.links(),
+      links: this.links(req),
     };
+    if (this.include) {
+      data.included = this.included();
+    }
     if (this.metaData) {
       data.meta = this.meta();
     }
@@ -25,13 +17,40 @@ class CollectionSerializer extends Serializer {
 
   collect() {
     return this.resource.map((item) => {
-      const serializer = new this.serializerType(item);
+      const serializer = new this.serializerType(item, {
+        include: this.include,
+        getter: this.getter,
+      });
       return serializer.serialize().data;
     });
   }
 
-  links() {
-    return { self: `${process.env.API_URL}/${this.request.originalUrl}` };
+  included() {
+    const includeArray = [];
+    const idArray = new Set();
+    let k = 0;
+    this.include.forEach((includedName) => {
+      const IncludedClass = this.getter(includedName);
+
+      this.resource.forEach((serializable) => {
+        const serializer = new IncludedClass(serializable[includedName], { include: this.include });
+        const { data } = serializer.serialize();
+        idArray.add(data.id);
+        if (k !== idArray.size) {
+          includeArray.push(data);
+          k++;
+        }
+      });
+    });
+    return includeArray;
+  }
+
+  meta() {
+    return this.metaData;
+  }
+
+  links(req) {
+    return { self: `${process.env.API_URL}/${req.originalUrl}` };
   }
 }
 export default CollectionSerializer;

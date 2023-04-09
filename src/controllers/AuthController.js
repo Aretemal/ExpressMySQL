@@ -10,7 +10,7 @@ class AuthController {
       return res.status(400).json({ errors: errors.array() });
     }
     const user = await AuthService.registration(req.body);
-    req.serializer = new UserSerializer(user, req);
+    req.serializer = new UserSerializer(user);
     next();
   }
 
@@ -20,7 +20,7 @@ class AuthController {
       return res.status(400).json({ errors: errors.array() });
     }
     const token = await AuthService.login(req.body);
-    req.serializer = new AuthSerializer(token, req);
+    req.serializer = new AuthSerializer(token);
     next();
   }
 }

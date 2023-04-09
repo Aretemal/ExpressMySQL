@@ -50,8 +50,14 @@ describe('UserSerializer :', () => {
         ava: null,
       }];
 
-      const serializer = new CollectionSerializer(users, UserSerializer, { originalUrl: 'example' }, { countOfUsers });
-      const data = serializer.serialize();
+      const serializer = new CollectionSerializer(
+        users,
+        {
+          serializerType: UserSerializer,
+          metaData: { countOfUsers },
+        },
+      );
+      const data = serializer.serialize({ originalUrl: 'example' });
 
       expect(data).toMatchSnapshot();
       expect(data).toMatchSchema(schema);

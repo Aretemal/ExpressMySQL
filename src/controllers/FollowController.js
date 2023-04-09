@@ -12,7 +12,7 @@ class FollowController {
     }
     const { id } = req.body;
     const follow = await FollowService.follow(req.user.id, id);
-    req.serializer = new FollowSerializer(follow, req);
+    req.serializer = new FollowSerializer(follow);
     next();
   }
 
@@ -23,7 +23,7 @@ class FollowController {
     }
     const { id } = req.body;
     const follow = await FollowService.approve(req.user.id, id);
-    req.serializer = new FollowSerializer(follow, req);
+    req.serializer = new FollowSerializer(follow);
     next();
   }
 
@@ -34,7 +34,7 @@ class FollowController {
     }
     const { id } = req.body;
     const follow = await FollowService.unfollow(req.user.id, id);
-    req.serializer = new FollowSerializer(follow, req);
+    req.serializer = new FollowSerializer(follow);
     next();
   }
 

@@ -1,11 +1,13 @@
 import dotenv from 'dotenv';
-import fullUrlCreator from '../utils/fullUrlCreator.js';
 
 dotenv.config();
 class Serializer {
-  constructor(resource, request = null) {
+  constructor(resource, options = {}) {
     this.resource = resource;
-    this.request = request;
+    const keysArray = Object.keys(options);
+    keysArray.forEach((key) => {
+      this[key] = options[key];
+    });
   }
 
   serialize() {
@@ -19,12 +21,22 @@ class Serializer {
     };
   }
 
+  createRelationUnit() {
+    return {
+      data: {
+        type: this.type(),
+        id: this.id(),
+      },
+      links: this.links(),
+    };
+  }
+
   type() {
-    throw new Error('Undefined');
+    return '';
   }
 
   id() {
-    return `${this.resource.id}` || '';
+    return `${this.resource.id}`;
   }
 
   attributes() {

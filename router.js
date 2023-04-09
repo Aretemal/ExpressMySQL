@@ -59,7 +59,6 @@ router.delete('/dialog/message/:id', [
 ], DialogController.deleteMessage);
 router.get('/dialog/messages/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
-  body('message', 'Message cannot be empty').notEmpty(),
 ], DialogController.getAllMessage);
 
 export default router;

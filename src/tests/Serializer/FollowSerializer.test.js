@@ -1,10 +1,13 @@
 import { matchersWithOptions } from 'jest-json-schema';
 import FollowSerializer from '../../serializers/FollowSerializer.js';
+import { getClass } from '../../utils/getClass.js';
 import schema from './schema.json';
 
 expect.extend(matchersWithOptions({
   verbose: true,
 }));
+
+global[getClass] = getClass;
 
 describe('FollowSerializers :', () => {
   describe('Follow :', () => {

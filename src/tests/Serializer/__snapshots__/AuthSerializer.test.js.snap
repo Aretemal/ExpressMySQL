@@ -8,7 +8,7 @@ exports[`AuthSerializer : Login should return object and token 1`] = `
     },
     "id": "undefined",
     "links": {
-      "self": "http://localhost:5000/api",
+      "self": "http://localhost:5000/api/login",
     },
     "type": "Token",
   },
