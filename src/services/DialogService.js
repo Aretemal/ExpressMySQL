@@ -5,7 +5,7 @@ import User from '../models/user.js';
 import UserDialog from '../models/User_Dialog.js';
 
 class DialogService {
-  async sendMessage({ message, recipientId }, senderId, dialogId) {
+  async sendMessage({ message, recipientId }, dialogId, senderId) {
     let dialog = await UserDialog.findOne({
       where: {
         UserId: senderId, DialogId: dialogId,
@@ -36,7 +36,9 @@ class DialogService {
         dialogId: id,
       },
     });
-    return messages;
+    const dialog = await Dialog.findOne({ where: { id } });
+    const users = await dialog.getUsers();
+    return { messages, users };
   }
 }
 

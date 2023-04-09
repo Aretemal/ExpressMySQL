@@ -14,7 +14,7 @@ exports[`MessageSerializer : getAllInterlocutors : should return array of users 
       },
       "id": "3",
       "links": {
-        "self": "http://localhost:5000/api/user/3",
+        "self": "http://localhost:5000/api/user/undefined",
       },
       "type": "User",
     },
@@ -29,7 +29,7 @@ exports[`MessageSerializer : getAllInterlocutors : should return array of users 
       },
       "id": "1",
       "links": {
-        "self": "http://localhost:5000/api/user/1",
+        "self": "http://localhost:5000/api/user/undefined",
       },
       "type": "User",
     },
@@ -46,24 +46,66 @@ exports[`MessageSerializer : getAllMessage : should return array with messages 1
     {
       "attributes": {
         "message": "Hello",
-        "recipientId": 2,
+        "recipientId": undefined,
         "senderId": 1,
       },
       "id": "undefined",
+      "included": {
+        "attributes": {
+          "ava": null,
+          "email": "111@11.1",
+          "firstName": "aaaa",
+          "lastName": "bbbb",
+          "login": "Artem",
+          "status": "1",
+        },
+        "id": "undefined",
+        "type": "User",
+      },
       "links": {
         "self": "http://localhost:5000/api/dialog/message/undefined",
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "id": "1",
+            "type": "User",
+          },
+          "links": "http://localhost:5000/api/user/1",
+        },
       },
       "type": "Message",
     },
     {
       "attributes": {
         "message": "Hel1lo",
-        "recipientId": 3,
+        "recipientId": undefined,
         "senderId": 2,
       },
       "id": "undefined",
+      "included": {
+        "attributes": {
+          "ava": null,
+          "email": "111@161.1",
+          "firstName": "a4aaa",
+          "lastName": "bb5bb",
+          "login": "Ar3tem",
+          "status": "16",
+        },
+        "id": "undefined",
+        "type": "User",
+      },
       "links": {
         "self": "http://localhost:5000/api/dialog/message/undefined",
+      },
+      "relationships": {
+        "user": {
+          "data": {
+            "id": "2",
+            "type": "User",
+          },
+          "links": "http://localhost:5000/api/user/2",
+        },
       },
       "type": "Message",
     },

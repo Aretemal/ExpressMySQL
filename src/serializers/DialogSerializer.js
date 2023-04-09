@@ -1,4 +1,5 @@
 import Serializer from './Serializer.js';
+import UserSerializer from './UserSerializer.js';
 
 class DialogSerializer extends Serializer {
   type() {

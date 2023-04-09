@@ -26,8 +26,8 @@ class DialogController {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const messages = await DialogService.getAllMessage(req.params.id);
-    req.serializer = new CollectionSerializer(messages, MessageSerializer, req);
+    const { messages, users } = await DialogService.getAllMessage(req.params.id);
+    req.serializer = new CollectionSerializer(messages, MessageSerializer, req, null, users);
     next();
   }
 }

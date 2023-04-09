@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import fullUrlCreator from '../utils/fullUrlCreator.js';
 
 dotenv.config();
 class Serializer {

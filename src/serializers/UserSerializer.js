@@ -1,4 +1,3 @@
-import fullUrlCreator from '../utils/fullUrlCreator.js';
 import Serializer from './Serializer.js';
 
 class UserSerializer extends Serializer {
