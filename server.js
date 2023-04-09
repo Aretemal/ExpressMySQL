@@ -6,6 +6,7 @@ import Post from './src/models/post.js';
 import User from './src/models/user.js';
 import app from './app.js';
 import UserDialog from './src/models/User_Dialog.js';
+import { getClass } from './src/utils/getClass.js';
 
 const PORT = process.env.DB_PORT;
 async function startApp() {
@@ -17,6 +18,7 @@ async function startApp() {
     Follow.associate({ User });
     User.belongsToMany(Dialog, { through: UserDialog });
     Dialog.belongsToMany(User, { through: UserDialog });
+    global[getClass] = getClass;
     // await db.sync({ alter: true });
     app.listen(PORT, () => console.log(`Server created on port: ${PORT}`));
   } catch (e) {

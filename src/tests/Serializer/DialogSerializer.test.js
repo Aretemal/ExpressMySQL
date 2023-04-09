@@ -1,51 +1,16 @@
 import { matchersWithOptions } from 'jest-json-schema';
 import CollectionSerializer from '../../serializers/CollectionSerializer.js';
-import MessageSerializer from '../../serializers/MessageSerializer.js';
 import UserSerializer from '../../serializers/UserSerializer.js';
+import { getClass } from '../../utils/getClass.js';
 import schema from './schema.json';
 
 expect.extend(matchersWithOptions({
   verbose: true,
 }));
 
-describe('MessageSerializer :', () => {
-  describe('sendMessage :', () => {
-    test('should return created message', () => {
-      const message = {
-        senderId: 1,
-        recipientId: 2,
-        message: 'Hello',
-      };
+global[getClass] = getClass;
 
-      const serializer = new MessageSerializer(message);
-      const data = serializer.serialize();
-
-      expect(data).toMatchSnapshot();
-      expect(data).toMatchSchema(schema);
-    });
-  });
-
-  describe('getAllMessage :', () => {
-    test('should return array with messages', () => {
-      const messages = [{
-        senderId: 1,
-        recipientId: 2,
-        message: 'Hello',
-      },
-      {
-        senderId: 2,
-        recipientId: 3,
-        message: 'Hel1lo',
-      }];
-
-      const serializer = new CollectionSerializer(messages, MessageSerializer, { originalUrl: 'example' });
-      const data = serializer.serialize();
-
-      expect(data).toMatchSnapshot();
-      expect(data).toMatchSchema(schema);
-    });
-  });
-
+describe('DialogSerializer :', () => {
   describe('getAllInterlocutors :', () => {
     test('should return array of users', () => {
       const users = [{
@@ -67,8 +32,8 @@ describe('MessageSerializer :', () => {
         ava: null,
       }];
 
-      const serializer = new CollectionSerializer(users, UserSerializer, { originalUrl: 'example' });
-      const data = serializer.serialize();
+      const serializer = new CollectionSerializer(users, { serializerType: UserSerializer });
+      const data = serializer.serialize({ originalUrl: 'example' });
 
       expect(data).toMatchSnapshot();
       expect(data).toMatchSchema(schema);

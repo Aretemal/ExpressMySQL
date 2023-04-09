@@ -5,7 +5,7 @@ import User from '../models/user.js';
 import UserDialog from '../models/User_Dialog.js';
 
 class DialogService {
-  async sendMessage({ message, recipientId }, senderId, dialogId) {
+  async sendMessage({ message, recipientId }, dialogId, senderId) {
     let dialog = await UserDialog.findOne({
       where: {
         UserId: senderId, DialogId: dialogId,
@@ -31,10 +31,18 @@ class DialogService {
   }
 
   async getAllMessage(id) {
-    const messages = await Message.findAll({
+    const data = await Message.findAll({
       where: {
         dialogId: id,
       },
+    });
+    const dialog = await Dialog.findOne({ where: { id } });
+    const users = await dialog.getUsers();
+    const messages = data.map((item) => {
+      const person = users.find((user) => user.dataValues.id === item.dataValues.senderId);
+      item.dataValues.user = person.dataValues;
+      delete item.dataValues.UserDialog;
+      return item.dataValues;
     });
     return messages;
   }

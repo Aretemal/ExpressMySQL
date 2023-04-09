@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageSerializer : getAllMessage : should return array with messages 1`] = `
+{
+  "data": [
+    {
+      "attributes": {
+        "dialogId": 1,
+        "message": "Hello",
+        "senderId": 2,
+      },
+      "id": "1",
+      "links": {
+        "self": "http://localhost:5000/api/dialog/message/1",
+      },
+      "relationships": {
+        "user": {
+          "data": [
+            {
+              "id": "2",
+              "type": "User",
+            },
+          ],
+          "links": {
+            "self": "http://localhost:5000/api/user/2",
+          },
+        },
+      },
+      "type": "Message",
+    },
+    {
+      "attributes": {
+        "dialogId": 1,
+        "message": "Hel1lo",
+        "senderId": 1,
+      },
+      "id": "2",
+      "links": {
+        "self": "http://localhost:5000/api/dialog/message/2",
+      },
+      "relationships": {
+        "user": {
+          "data": [
+            {
+              "id": "1",
+              "type": "User",
+            },
+          ],
+          "links": {
+            "self": "http://localhost:5000/api/user/1",
+          },
+        },
+      },
+      "type": "Message",
+    },
+  ],
+  "included": [
+    {
+      "attributes": {
+        "ava": null,
+        "email": "111@161.1",
+        "firstName": "a4aaa",
+        "lastName": "bb5bb",
+        "login": "Ar3tem",
+        "status": "16",
+      },
+      "id": "2",
+      "links": {
+        "self": "http://localhost:5000/api/user/2",
+      },
+      "type": "User",
+    },
+    {
+      "attributes": {
+        "ava": null,
+        "email": "111@11.1",
+        "firstName": "aaaa",
+        "lastName": "bbbb",
+        "login": "Artem",
+        "status": "1",
+      },
+      "id": "1",
+      "links": {
+        "self": "http://localhost:5000/api/user/1",
+      },
+      "type": "User",
+    },
+  ],
+  "links": {
+    "self": "http://localhost:5000/api/example",
+  },
+}
+`;
+
+exports[`MessageSerializer : sendMessage : should return created message 1`] = `
+{
+  "data": {
+    "attributes": {
+      "dialogId": undefined,
+      "message": "Hello",
+      "senderId": 1,
+    },
+    "id": "1",
+    "links": {
+      "self": "http://localhost:5000/api/dialog/message/1",
+    },
+    "type": "Message",
+  },
+}
+`;
