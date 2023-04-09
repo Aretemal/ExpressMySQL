@@ -7,7 +7,7 @@ class AuthController {
   async registration(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ message: 'Ошибка регистрациии' });
+      return res.status(400).json({ errors: errors.array() });
     }
     const user = await AuthService.registration(req.body);
     req.serializer = new UserSerializer(user, req);
@@ -15,6 +15,10 @@ class AuthController {
   }
 
   async login(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const token = await AuthService.login(req.body);
     req.serializer = new AuthSerializer(token, req);
     next();

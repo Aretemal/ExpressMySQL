@@ -1,3 +1,4 @@
+import { validationResult } from 'express-validator';
 import CollectionSerializer from '../serializers/CollectionSerializer.js';
 import DialogSerializer from '../serializers/DialogSerializer.js';
 import MessageSerializer from '../serializers/MessageSerializer.js';
@@ -5,6 +6,10 @@ import DialogService from '../services/DialogService.js';
 
 class DialogController {
   async sendMessage(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const message = await DialogService.sendMessage(req.body, req.params.id, req.user.id);
     req.serializer = new MessageSerializer(message, req);
     next();
@@ -17,6 +22,10 @@ class DialogController {
   }
 
   async getAllMessage(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
     const messages = await DialogService.getAllMessage(req.params.id);
     req.serializer = new CollectionSerializer(messages, MessageSerializer, req);
     next();
