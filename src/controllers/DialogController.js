@@ -15,6 +15,16 @@ class DialogController {
     next();
   }
 
+  async deleteMessage(req, res, next) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const message = await DialogService.deleteMessage(req.params.id);
+    req.serializer = new MessageSerializer(message, req);
+    next();
+  }
+
   async getAllDialogs(req, res, next) {
     const users = await DialogService.getAllDialogs(req.user.id);
     req.serializer = new CollectionSerializer(users, DialogSerializer, req);

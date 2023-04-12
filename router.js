@@ -46,11 +46,17 @@ router.put('/approve', [
 router.put('/unfollow', [
   body('id', 'Id cannot be empty').notEmpty(),
 ], FollowController.unfollow);
+router.get('/friends', FollowController.getFriends);
+router.get('/subscribers', FollowController.getSubscribers);
+router.get('/subscriptions', FollowController.getSubscriptions);
 
 router.post('/dialog/message/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
 ], DialogController.sendMessage);
 router.get('/dialog/companion', DialogController.getAllDialogs);
+router.delete('/dialog/message/:id', [
+  param('id', 'Id cannot be empty').notEmpty(),
+], DialogController.deleteMessage);
 router.get('/dialog/messages/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
   body('message', 'Message cannot be empty').notEmpty(),

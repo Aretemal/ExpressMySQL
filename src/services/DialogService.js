@@ -20,6 +20,12 @@ class DialogService {
     return content;
   }
 
+  async deleteMessage(id) {
+    const dialog = await Message.findOne({ where: { id } });
+    const deleteMessage = await dialog.destroy();
+    return deleteMessage;
+  }
+
   async getAllDialogs(id) {
     const user = await User.findOne({ where: { id } });
     const data = await user.getDialogs();

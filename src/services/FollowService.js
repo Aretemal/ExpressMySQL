@@ -1,4 +1,6 @@
+import { Op } from 'sequelize';
 import Follow from '../models/follow.js';
+import User from '../models/user.js';
 
 class FollowService {
   async follow(firstUserId, secondUserId) {
@@ -49,6 +51,61 @@ class FollowService {
     }
     await deletedConnection.update({ approvedAt: null });
     return deletedConnection;
+  }
+
+  async getFriends(id) {
+    const connections = await Follow.findAll({
+      include: [{
+        model: User,
+        association: 'following',
+      }, {
+        model: User,
+        association: 'follower',
+      }],
+      where: {
+        [Op.or]: [
+          { followerId: id, approvedAt: { [Op.ne]: null } },
+          { followingId: id, approvedAt: { [Op.ne]: null } },
+        ],
+      },
+    });
+    const friends = connections.map((item) => {
+      if (item.dataValues.follower.dataValues.id === id) {
+        return item.dataValues.following.dataValues;
+      }
+      return item.dataValues.follower.dataValues;
+    });
+    return friends;
+  }
+
+  async getSubscriptions(id) {
+    const connections = await Follow.findAll({
+      include: {
+        model: User,
+        association: 'following',
+      },
+      where: {
+        followerId: id,
+        approvedAt: null,
+      },
+    });
+    const subscriptions = connections.map((item) => item.dataValues.following.dataValues);
+    return subscriptions;
+  }
+
+  async getSubscribers(id) {
+    const connections = await Follow.findAll({
+      include: {
+        model: User,
+        association: 'follower',
+      },
+      where: {
+        followingId: id,
+        approvedAt: null,
+      },
+    });
+    const subscribers = connections.map((item) => item.dataValues.follower.dataValues);
+    return subscribers;
   }
 }
 export default new FollowService();
