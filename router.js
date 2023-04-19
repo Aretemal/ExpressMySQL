@@ -6,6 +6,7 @@ import PostController from './src/controllers/PostController.js';
 import ProfileController from './src/controllers/ProfileController.js';
 import UserController from './src/controllers/UserController.js';
 import AuthController from './src/controllers/AuthController.js';
+import { tryCatch } from './src/utils/tryCatch.js';
 
 const router = new Router();
 router.post('/registration', [
@@ -14,51 +15,51 @@ router.post('/registration', [
   check('lastName', 'Last Name cannot be empty').notEmpty(),
   check('email', 'Email cannot be empty').notEmpty(),
   check('password', 'Password cannot be shorter than 4 characters').isLength({ min: 4 }),
-], AuthController.registration);
+], tryCatch(AuthController.registration));
 router.post('/login', [
   check('login', 'Login cannot be empty').notEmpty(),
   check('password', 'Password cannot be shorter than 4 characters').isLength({ min: 4 }),
-], AuthController.login);
+], tryCatch(AuthController.login));
 
-router.get('/user/:id', UserController.getOne);
-router.get('/users', UserController.getAllUsers);
+router.get('/user/:id', tryCatch(UserController.getOne));
+router.get('/users', tryCatch(UserController.getAllUsers));
 
 router.post('/profile/posts', [
   check('newMessageText', 'Message for new post cannot be empty').notEmpty().isLength({ max: 400 }),
-], PostController.create);
-router.get('/profile/posts', PostController.getAll);
+], tryCatch(PostController.create));
+router.get('/profile/posts', tryCatch(PostController.getAll));
 router.get('/profile/posts/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
-], PostController.getOne);
-router.put('/profile/posts/:id', PostController.update);
-router.delete('/profile/posts/:id', PostController.delete);
+], tryCatch(PostController.getOne));
+router.put('/profile/posts/:id', tryCatch(PostController.update));
+router.delete('/profile/posts/:id', tryCatch(PostController.delete));
 
-router.get('/profile/user', ProfileController.getInfoAuthorizedUser);
-router.put('/profile/status', ProfileController.updateStatus);
-router.get('profile/status/:id', ProfileController.getStatus);
+router.get('/profile/user', tryCatch(ProfileController.getInfoAuthorizedUser));
+router.put('/profile/status', tryCatch(ProfileController.updateStatus));
+router.get('profile/status/:id', tryCatch(ProfileController.getStatus));
 
 router.post('/follow', [
   body('id', 'Id cannot be empty').notEmpty(),
-], FollowController.follow);
+], tryCatch(FollowController.follow));
 router.put('/approve', [
   body('id', 'Id cannot be empty').notEmpty(),
-], FollowController.approve);
+], tryCatch(FollowController.approve));
 router.put('/unfollow', [
   body('id', 'Id cannot be empty').notEmpty(),
-], FollowController.unfollow);
-router.get('/friends', FollowController.getFriends);
-router.get('/subscribers', FollowController.getSubscribers);
-router.get('/subscriptions', FollowController.getSubscriptions);
+], tryCatch(FollowController.unfollow));
+router.get('/friends', tryCatch(FollowController.getFriends));
+router.get('/subscribers', tryCatch(FollowController.getSubscribers));
+router.get('/subscriptions', tryCatch(FollowController.getSubscriptions));
 
 router.post('/dialog/message/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
-], DialogController.sendMessage);
-router.get('/dialog/companion', DialogController.getAllDialogs);
+], tryCatch(DialogController.sendMessage));
+router.get('/dialog/companion', tryCatch(DialogController.getAllDialogs));
 router.delete('/dialog/message/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
-], DialogController.deleteMessage);
+], tryCatch(DialogController.deleteMessage));
 router.get('/dialog/messages/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
-], DialogController.getAllMessage);
+], tryCatch(DialogController.getAllMessage));
 
 export default router;

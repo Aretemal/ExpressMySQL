@@ -3,13 +3,15 @@ import CollectionSerializer from '../serializers/CollectionSerializer.js';
 import DialogSerializer from '../serializers/DialogSerializer.js';
 import MessageSerializer from '../serializers/MessageSerializer.js';
 import DialogService from '../services/DialogService.js';
+import AppError from '../utils/AppError.js';
 import { getClass } from '../utils/getClass.js';
 
 class DialogController {
   async sendMessage(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      const errorString = errors.array().map((item) => item.msg).join(', ');
+      throw new AppError(errorString, 400);
     }
     const message = await DialogService.sendMessage(req.body, req.params.id, req.user.id);
     req.serializer = new MessageSerializer(message);
@@ -19,7 +21,8 @@ class DialogController {
   async deleteMessage(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      const errorString = errors.array().map((item) => item.msg).join(', ');
+      throw new AppError(errorString, 400);
     }
     const message = await DialogService.deleteMessage(req.params.id);
     req.serializer = new MessageSerializer(message, req);
@@ -35,7 +38,8 @@ class DialogController {
   async getAllMessage(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      const errorString = errors.array().map((item) => item.msg).join(', ');
+      throw new AppError(errorString, 400);
     }
     const messages = await DialogService.getAllMessage(req.params.id);
     req.serializer = new CollectionSerializer(

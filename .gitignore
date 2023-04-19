@@ -8,7 +8,7 @@
 .env
 .env.devel
 .env.test
-
+/src/logger/logger-history
 # testing
 /coverage
 

@@ -1,9 +1,10 @@
 import User from '../models/user.js';
+import AppError from '../utils/AppError.js';
 
 class ProfileService {
   async getInfoAuthorizedUser(userId) {
     if (!userId) {
-      throw new Error('Id не указан');
+      throw new AppError('id not specified', 400);
     }
     const user = await User.findByPk(userId);
     const {
@@ -16,7 +17,7 @@ class ProfileService {
 
   async updateStatus(status, userId) {
     if (!userId) {
-      throw new Error('Id не указан');
+      throw new AppError('id not specified', 400);
     }
     const oldUser = await User.findByPk(userId);
     await oldUser.update({ status });
@@ -30,11 +31,11 @@ class ProfileService {
 
   async getStatus(userId) {
     if (!userId) {
-      throw new Error('Id не указан');
+      throw new AppError('id not specified', 400);
     }
     const user = await User.findByPk(userId);
     if (!user) {
-      throw new Error('Пользователь не найден');
+      throw new AppError('User is not found', 400);
     }
     const {
       id, login, firstName, lastName, email, ava, status,
