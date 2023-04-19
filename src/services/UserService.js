@@ -1,10 +1,11 @@
 import Follow from '../models/follow.js';
 import User from '../models/user.js';
+import AppError from '../utils/AppError.js';
 
 class UserService {
   async getOne(userId) {
     if (!userId) {
-      throw new Error('Id не указан');
+      throw new AppError('id not specified', 400);
     }
     const user = await User.findByPk(userId);
     return user;
@@ -12,7 +13,7 @@ class UserService {
 
   async getAllUsers(userId, { page, count }) {
     if (!userId) {
-      throw new Error('Пользователь не авторизован');
+      throw new AppError('User is not found', 400);
     }
     count = +count;
     page = +page;

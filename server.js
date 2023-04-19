@@ -8,7 +8,7 @@ import app from './app.js';
 import UserDialog from './src/models/User_Dialog.js';
 import { getClass } from './src/utils/getClass.js';
 
-const PORT = process.env.DB_PORT;
+const PORT = process.env.APP_PORT;
 async function startApp() {
   try {
     User.associate({ Post, Follow });

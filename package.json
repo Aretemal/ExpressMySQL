@@ -36,6 +36,7 @@
     "sequelize-cli": "^6.6.0",
     "supertest": "^6.3.3",
     "uuid": "^9.0.0",
+    "winston": "^3.8.2",
     "yayson": "^3.0.0"
   },
   "devDependencies": {
