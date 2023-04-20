@@ -1,12 +1,23 @@
 import dotenv from 'dotenv';
-import errorCodes from '../utils/ErrorCode.js';
+import User from '../models/user.js';
+import { errorCodes, titleCodes } from '../utils/ErrorCode.js';
 
 dotenv.config();
 
 class ErrorSerializer {
-  constructor(error) {
+  constructor(error, { id }) {
     this.errorsArray = error.errorsArray;
-    this.title = error.title;
+    if (id) {
+      const user = User.findOne({
+        attributes: ['lang'],
+        where: {
+          id,
+        },
+      });
+      this.lang = user.dataValues.lang;
+    } else {
+      this.lang = 'ru';
+    }
   }
 
   serialize() {
@@ -15,8 +26,8 @@ class ErrorSerializer {
         this.errorsArray.map((item) => {
           const data = {
             status: item.msg,
-            title: this.title,
-            detail: errorCodes(item.msg),
+            title: titleCodes(item.msg, this.lang),
+            detail: errorCodes(item.msg, this.lang),
           };
           if (item.location && item.param) {
             data.source = {

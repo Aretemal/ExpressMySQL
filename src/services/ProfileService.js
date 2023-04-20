@@ -8,10 +8,10 @@ class ProfileService {
     }
     const user = await User.findByPk(userId);
     const {
-      id, login, firstName, lastName, email, status, ava,
+      id, login, firstName, lastName, email, status, ava, lang,
     } = user;
     return {
-      id, login, firstName, lastName, email, status, ava,
+      id, login, firstName, lastName, email, status, ava, lang,
     };
   }
 

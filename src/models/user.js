@@ -39,6 +39,10 @@ User.init({
     type: DataTypes.STRING,
     defaultValue: 0,
   },
+  lang: {
+    type: DataTypes.STRING,
+    defaultValue: 'en',
+  },
   ava: {
     type: DataTypes.BLOB,
     defaultValue: 0,

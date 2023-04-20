@@ -5,7 +5,6 @@ class ValidationError extends Error {
       delete item.value;
       return item;
     });
-    this.title = 'Validation Error';
   }
 }
 export default ValidationError;

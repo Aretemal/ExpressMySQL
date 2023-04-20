@@ -5,7 +5,6 @@ class ServiceError extends Error {
       msg: errorCode,
     },
     ];
-    this.title = 'Service Error';
   }
 }
 export default ServiceError;
