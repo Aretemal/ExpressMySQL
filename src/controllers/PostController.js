@@ -2,14 +2,13 @@ import { validationResult } from 'express-validator';
 import CollectionSerializer from '../serializers/CollectionSerializer.js';
 import PostService from '../services/PostService.js';
 import PostSerializer from '../serializers/PostSerializer.js';
-import AppError from '../utils/AppError.js';
+import ValidationError from '../utils/errors/ValidationError.js';
 
 class PostController {
   async create(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorString = errors.array().map((item) => item.msg).join(', ');
-      throw new AppError(errorString, 400);
+      throw new ValidationError(errors.array());
     }
     const post = await PostService.create(req.body, req.user.id);
     req.serializer = new PostSerializer(post);
@@ -25,8 +24,7 @@ class PostController {
   async getOne(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorString = errors.array().map((item) => item.msg).join(', ');
-      throw new AppError(errorString, 400);
+      throw new ValidationError(errors.array());
     }
     const post = await PostService.getOne(req.params.id);
     req.serializer = new PostSerializer(post);

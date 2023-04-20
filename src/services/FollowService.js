@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import Follow from '../models/follow.js';
 import User from '../models/user.js';
-import AppError from '../utils/AppError.js';
+import ServiceError from '../utils/errors/ServiceError.js';
 
 class FollowService {
   async follow(firstUserId, secondUserId) {
@@ -19,7 +19,7 @@ class FollowService {
       },
     });
     if (!approvedFollow) {
-      throw new AppError('No such connection exists.', 400);
+      throw new ServiceError('440');
     }
     await approvedFollow.update({ approvedAt: (new Date()) });
     return approvedFollow;

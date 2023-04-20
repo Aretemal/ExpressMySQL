@@ -3,14 +3,13 @@ import CollectionSerializer from '../serializers/CollectionSerializer.js';
 import UserSerializer from '../serializers/UserSerializer.js';
 import FollowService from '../services/FollowService.js';
 import FollowSerializer from '../serializers/FollowSerializer.js';
-import AppError from '../utils/AppError.js';
+import ValidationError from '../utils/errors/ValidationError.js';
 
 class FollowController {
   async follow(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorString = errors.array().map((item) => item.msg).join(', ');
-      throw new AppError(errorString, 400);
+      throw new ValidationError(errors.array());
     }
     const { id } = req.body;
     const follow = await FollowService.follow(req.user.id, id);
@@ -21,8 +20,7 @@ class FollowController {
   async approve(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorString = errors.array().map((item) => item.msg).join(', ');
-      throw new AppError(errorString, 400);
+      throw new ValidationError(errors.array());
     }
     const { id } = req.body;
     const follow = await FollowService.approve(req.user.id, id);
@@ -33,8 +31,7 @@ class FollowController {
   async unfollow(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      const errorString = errors.array().map((item) => item.msg).join(', ');
-      throw new AppError(errorString, 400);
+      throw new ValidationError(errors.array());
     }
     const { id } = req.body;
     const follow = await FollowService.unfollow(req.user.id, id);

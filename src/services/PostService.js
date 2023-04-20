@@ -1,5 +1,5 @@
 import Post from '../models/post.js';
-import AppError from '../utils/AppError.js';
+import ServiceError from '../utils/errors/ServiceError.js';
 
 class PostService {
   async create({ newMessageText }, id) {
@@ -14,7 +14,7 @@ class PostService {
 
   async getOne(id) {
     if (!id) {
-      throw new AppError('id not specified', 400);
+      throw new ServiceError('441');
     }
     const post = await Post.findByPk(id);
     return post;
@@ -22,7 +22,7 @@ class PostService {
 
   async update({ author, title, content }, id) {
     if (!id) {
-      throw new AppError('id not specified', 400);
+      throw new ServiceError('441');
     }
     const oldPost = await Post.findByPk(id);
     const updatedPost = await oldPost.update({ author, title, content });
@@ -31,7 +31,7 @@ class PostService {
 
   async delete(id) {
     if (!id) {
-      throw new AppError('id not specified', 400);
+      throw new ServiceError('441');
     }
     const oldPost = await Post.findByPk(id);
     const deletedPost = await oldPost.destroy();
