@@ -1,4 +1,8 @@
 /* eslint-disable no-unused-vars */
-import logger from '../logger/logger.js';
+import ErrorSerializer from '../serializers/ErrorSerializer.js';
 
-export const errorHandler = (error, req, res, next) => res.status(error.statusCode).send(error.message);
+export const errorHandler = (error, req, res, next) => {
+  const serializer = new ErrorSerializer(error);
+  res.status(400).send(serializer.serialize());
+  next(error);
+};
