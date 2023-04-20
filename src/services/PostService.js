@@ -13,7 +13,7 @@ class PostService {
 
   async getOne(id, next) {
     if (!id) {
-      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'Id not specified' }] });
       return;
     }
     const post = await Post.findByPk(id);
@@ -22,7 +22,7 @@ class PostService {
 
   async update({ author, title, content }, id, next) {
     if (!id) {
-      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'Id not specified' }] });
       return;
     }
     const oldPost = await Post.findByPk(id);
@@ -32,7 +32,7 @@ class PostService {
 
   async delete(id, next) {
     if (!id) {
-      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'Id not specified' }] });
       return;
     }
     const oldPost = await Post.findByPk(id);

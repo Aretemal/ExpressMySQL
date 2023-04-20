@@ -7,7 +7,7 @@ class PostController {
   async create(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      next({ errorsArray: errors.array() });
       return;
     }
     const post = await PostService.create(req.body, req.user.id, next);
@@ -24,7 +24,7 @@ class PostController {
   async getOne(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      next({ errorsArray: errors.array() });
       return;
     }
     const post = await PostService.getOne(req.params.id, next);

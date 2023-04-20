@@ -4,7 +4,7 @@ import User from '../models/user.js';
 class UserService {
   async getOne(userId, next) {
     if (!userId) {
-      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'Id not specified' }] });
       return;
     }
     const user = await User.findByPk(userId);
@@ -13,7 +13,7 @@ class UserService {
 
   async getAllUsers(userId, { page, count }, next) {
     if (!userId) {
-      next({ errorsArray: [{ msg: '438' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'User not found' }] });
       return;
     }
     count = +count;

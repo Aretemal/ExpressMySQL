@@ -18,7 +18,7 @@ class FollowService {
       },
     });
     if (!approvedFollow) {
-      next({ errorsArray: [{ msg: '440' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'No such connection exists' }] });
       return;
     }
     await approvedFollow.update({ approvedAt: (new Date()) });

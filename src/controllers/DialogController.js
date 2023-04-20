@@ -9,7 +9,7 @@ class DialogController {
   async sendMessage(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      next({ errorsArray: errors.array() });
       return;
     }
     const message = await DialogService.sendMessage(req.body, req.params.id, req.user.id, next);
@@ -20,7 +20,7 @@ class DialogController {
   async deleteMessage(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      next({ errorsArray: errors.array() });
       return;
     }
     const message = await DialogService.deleteMessage(req.params.id, next);
@@ -37,7 +37,7 @@ class DialogController {
   async getAllMessage(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      next({ errorsArray: errors.array() });
       return;
     }
     const messages = await DialogService.getAllMessage(req.params.id, next);

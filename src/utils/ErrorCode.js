@@ -1,19 +1,86 @@
-const errorCodes = (status) => {
-  switch (status) {
-    case '430': return 'Login cannot be empty';
-    case '431': return 'First Name cannot be empty';
-    case '432': return 'Last Name cannot be empty';
-    case '433': return 'Email cannot be empty';
-    case '434': return 'Password cannot be shorter than 4 characters';
-    case '435': return 'Message for new post cannot be empty';
-    case '436': return 'Id cannot be empty';
-    case '437': return 'User already exists';
-    case '438': return 'User not found';
-    case '439': return 'Wrong password entered';
-    case '440': return 'No such connection exists';
-    case '441': return 'Id not specified';
-    default: return null;
+class ErrorCode {
+  constructor() {
+    this.codeMap = new Map();
+    this.codeMap.set('Login cannot be empty', '430');
+    this.codeMap.set('First Name cannot be empty', '431');
+    this.codeMap.set('Last Name cannot be empty', '432');
+    this.codeMap.set('Email cannot be empty', '433');
+    this.codeMap.set('Password cannot be shorter than 4 characters', '434');
+    this.codeMap.set('Message for new post cannot be empty', '435');
+    this.codeMap.set('Id cannot be empty', '436');
+    this.codeMap.set('User already exists', '437');
+    this.codeMap.set('User not found', '438');
+    this.codeMap.set('Wrong password entered', '439');
+    this.codeMap.set('No such connection exists', '440');
+    this.codeMap.set('Id not specified', '441');
+    this.ruMap = new Map();
+    this.ruMap.set('Login cannot be empty', 'Логин не может быть пустым');
+    this.ruMap.set('First Name cannot be empty', 'Имя не может быть пустым');
+    this.ruMap.set('Last Name cannot be empty', 'Фамилия не может быть пустой');
+    this.ruMap.set('Email cannot be empty', 'Электронная почта не может быть пустой');
+    this.ruMap.set('Password cannot be shorter than 4 characters', 'Пароль не может быть короче 4 символов');
+    this.ruMap.set('Message for new post cannot be empty', 'Сообщение для нового поста не может быть пустым');
+    this.ruMap.set('Id cannot be empty', 'Идентификатор не может быть пустым');
+    this.ruMap.set('User already exists', 'Пользователь уже существует');
+    this.ruMap.set('User not found', 'Пользователь не найден');
+    this.ruMap.set('Wrong password entered', 'Введен неправильный пароль');
+    this.ruMap.set('No such connection exists', 'Нет такой связи');
+    this.ruMap.set('Id not specified', 'Идентификатор не указан');
   }
-};
 
-export default errorCodes;
+  getStatus(code) {
+    return this.codeMap.get(code);
+  }
+
+  getLanguage(code, lang) {
+    if (lang === 'ru') {
+      return this.ruMap.get(code);
+    } if (lang === 'en') {
+      return code;
+    }
+  }
+
+  getTitle(code, lang = null) {
+    if (lang === 'en') {
+      switch (this.getStatus(code)) {
+        case '430':
+        case '431':
+        case '432':
+        case '433':
+        case '434':
+        case '435':
+        case '436':
+          return 'Validation Error';
+        case '437':
+        case '438':
+        case '439':
+        case '440':
+        case '441':
+          return 'Service Error';
+        default:
+          return null;
+      }
+    } else if (lang === 'ru') {
+      switch (this.getStatus(code)) {
+        case '430':
+        case '431':
+        case '432':
+        case '433':
+        case '434':
+        case '435':
+        case '436':
+          return 'Ошибка проверки';
+        case '437':
+        case '438':
+        case '439':
+        case '440':
+        case '441':
+          return 'Cервисная ошибка';
+        default:
+          return null;
+      }
+    }
+  }
+}
+
+export default new ErrorCode();

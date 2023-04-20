@@ -3,21 +3,21 @@ import User from '../models/user.js';
 class ProfileService {
   async getInfoAuthorizedUser(userId, next) {
     if (!userId) {
-      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'Id not specified' }] });
       return;
     }
     const user = await User.findByPk(userId);
     const {
-      id, login, firstName, lastName, email, status, ava,
+      id, login, firstName, lastName, email, status, ava, lang,
     } = user;
     return {
-      id, login, firstName, lastName, email, status, ava,
+      id, login, firstName, lastName, email, status, ava, lang,
     };
   }
 
   async updateStatus(status, userId, next) {
     if (!userId) {
-      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'Id not specified' }] });
       return;
     }
     const oldUser = await User.findByPk(userId);
@@ -32,12 +32,12 @@ class ProfileService {
 
   async getStatus(userId, next) {
     if (!userId) {
-      next({ errorsArray: [{ msg: '440' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'No such connection exists' }] });
       return;
     }
     const user = await User.findByPk(userId);
     if (!user) {
-      next({ errorsArray: [{ msg: '440' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'No such connection exists' }] });
       return;
     }
     const {
