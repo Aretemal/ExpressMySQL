@@ -8,7 +8,7 @@ class FollowController {
   async follow(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      next({ errorsArray: errors.array() });
       return;
     }
     const { id } = req.body;
@@ -20,7 +20,7 @@ class FollowController {
   async approve(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      next({ errorsArray: errors.array() });
       return;
     }
     const { id } = req.body;
@@ -32,7 +32,7 @@ class FollowController {
   async unfollow(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      next({ errorsArray: errors.array() });
       return;
     }
     const { id } = req.body;

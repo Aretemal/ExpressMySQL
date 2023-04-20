@@ -22,7 +22,7 @@ class AuthService {
       },
     });
     if (candidate) {
-      next({ errorsArray: [{ msg: '437' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'User already exists' }] });
       return;
     }
     const hashPassword = bcrypt.hashSync(password, 7);
@@ -43,12 +43,12 @@ class AuthService {
   async login({ login, password }, next) {
     const user = await User.findOne({ where: { login } });
     if (!user) {
-      next({ errorsArray: [{ msg: '438' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'User not found' }] });
       return;
     }
     const validPassword = bcrypt.compareSync(password, user.password);
     if (!validPassword) {
-      next({ errorsArray: [{ msg: '439' }], title: 'Service Error' });
+      next({ errorsArray: [{ msg: 'Wrong password entered' }] });
       return;
     }
     const token = generationAccessToken(user.id);

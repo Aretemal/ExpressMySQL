@@ -9,7 +9,6 @@ class AuthController {
     if (!errors.isEmpty()) {
       next({
         errorsArray: errors.array(),
-        title: 'Validation Error',
       });
       return;
     }
@@ -21,7 +20,7 @@ class AuthController {
   async login(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      next({ errorsArray: errors.array() });
       return;
     }
     const token = await AuthService.login(req.body, next);
