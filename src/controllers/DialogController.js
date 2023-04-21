@@ -3,16 +3,16 @@ import CollectionSerializer from '../serializers/CollectionSerializer.js';
 import DialogSerializer from '../serializers/DialogSerializer.js';
 import MessageSerializer from '../serializers/MessageSerializer.js';
 import DialogService from '../services/DialogService.js';
-import ValidationError from '../utils/errors/ValidationError.js';
 import { getClass } from '../utils/getClass.js';
 
 class DialogController {
   async sendMessage(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new ValidationError(errors.array());
+      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      return;
     }
-    const message = await DialogService.sendMessage(req.body, req.params.id, req.user.id);
+    const message = await DialogService.sendMessage(req.body, req.params.id, req.user.id, next);
     req.serializer = new MessageSerializer(message);
     next();
   }
@@ -20,15 +20,16 @@ class DialogController {
   async deleteMessage(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new ValidationError(errors.array());
+      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      return;
     }
-    const message = await DialogService.deleteMessage(req.params.id);
+    const message = await DialogService.deleteMessage(req.params.id, next);
     req.serializer = new MessageSerializer(message, req);
     next();
   }
 
   async getAllDialogs(req, res, next) {
-    const users = await DialogService.getAllDialogs(req.user.id);
+    const users = await DialogService.getAllDialogs(req.user.id, next);
     req.serializer = new CollectionSerializer(users, { serializerType: DialogSerializer });
     next();
   }
@@ -36,9 +37,10 @@ class DialogController {
   async getAllMessage(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new ValidationError(errors.array());
+      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      return;
     }
-    const messages = await DialogService.getAllMessage(req.params.id);
+    const messages = await DialogService.getAllMessage(req.params.id, next);
     req.serializer = new CollectionSerializer(
       messages,
       {
