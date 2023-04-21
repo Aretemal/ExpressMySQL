@@ -1,5 +1,4 @@
 import Post from '../models/post.js';
-import ServiceError from '../utils/errors/ServiceError.js';
 
 class PostService {
   async create({ newMessageText }, id) {
@@ -12,26 +11,29 @@ class PostService {
     return posts;
   }
 
-  async getOne(id) {
+  async getOne(id, next) {
     if (!id) {
-      throw new ServiceError('441');
+      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      return;
     }
     const post = await Post.findByPk(id);
     return post;
   }
 
-  async update({ author, title, content }, id) {
+  async update({ author, title, content }, id, next) {
     if (!id) {
-      throw new ServiceError('441');
+      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      return;
     }
     const oldPost = await Post.findByPk(id);
     const updatedPost = await oldPost.update({ author, title, content });
     return updatedPost;
   }
 
-  async delete(id) {
+  async delete(id, next) {
     if (!id) {
-      throw new ServiceError('441');
+      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      return;
     }
     const oldPost = await Post.findByPk(id);
     const deletedPost = await oldPost.destroy();

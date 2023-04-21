@@ -4,9 +4,9 @@ import errorCodes from '../utils/ErrorCode.js';
 dotenv.config();
 
 class ErrorSerializer {
-  constructor(error) {
-    this.errorsArray = error.errorsArray;
-    this.title = error.title;
+  constructor(errorsArray, title) {
+    this.errorsArray = errorsArray;
+    this.title = title;
   }
 
   serialize() {

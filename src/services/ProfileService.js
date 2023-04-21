@@ -1,10 +1,10 @@
 import User from '../models/user.js';
-import ServiceError from '../utils/errors/ServiceError.js';
 
 class ProfileService {
-  async getInfoAuthorizedUser(userId) {
+  async getInfoAuthorizedUser(userId, next) {
     if (!userId) {
-      throw new ServiceError('441');
+      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      return;
     }
     const user = await User.findByPk(userId);
     const {
@@ -15,9 +15,10 @@ class ProfileService {
     };
   }
 
-  async updateStatus(status, userId) {
+  async updateStatus(status, userId, next) {
     if (!userId) {
-      throw new ServiceError('441');
+      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      return;
     }
     const oldUser = await User.findByPk(userId);
     await oldUser.update({ status });
@@ -29,13 +30,15 @@ class ProfileService {
     };
   }
 
-  async getStatus(userId) {
+  async getStatus(userId, next) {
     if (!userId) {
-      throw new ServiceError('id not specified', 400);
+      next({ errorsArray: [{ msg: '440' }], title: 'Service Error' });
+      return;
     }
     const user = await User.findByPk(userId);
     if (!user) {
-      throw new ServiceError('User is not found', 400);
+      next({ errorsArray: [{ msg: '440' }], title: 'Service Error' });
+      return;
     }
     const {
       id, login, firstName, lastName, email, ava, status,

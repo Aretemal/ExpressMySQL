@@ -3,19 +3,19 @@ import UserSerializer from '../serializers/UserSerializer.js';
 
 class ProfileController {
   async getInfoAuthorizedUser(req, res, next) {
-    const user = await ProfileService.getInfoAuthorizedUser(req.user.id);
+    const user = await ProfileService.getInfoAuthorizedUser(req.user.id, next);
     req.serializer = new UserSerializer(user);
     next();
   }
 
   async updateStatus(req, res, next) {
-    const user = await ProfileService.updateStatus(req.body.status, req.user.id);
+    const user = await ProfileService.updateStatus(req.body.status, req.user.id, next);
     req.serializer = new UserSerializer(user);
     next();
   }
 
   async getStatus(req, res, next) {
-    const user = await ProfileService.getStatus(req.params.id);
+    const user = await ProfileService.getStatus(req.params.id, next);
     req.serializer = new UserSerializer(user);
     next();
   }

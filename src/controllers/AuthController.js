@@ -2,15 +2,18 @@ import { validationResult } from 'express-validator';
 import UserSerializer from '../serializers/UserSerializer.js';
 import AuthService from '../services/AuthService.js';
 import AuthSerializer from '../serializers/AuthSerializer.js';
-import ValidationError from '../utils/errors/ValidationError.js';
 
 class AuthController {
   async registration(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new ValidationError(errors.array());
+      next({
+        errorsArray: errors.array(),
+        title: 'Validation Error',
+      });
+      return;
     }
-    const user = await AuthService.registration(req.body);
+    const user = await AuthService.registration(req.body, next);
     req.serializer = new UserSerializer(user);
     next();
   }
@@ -18,9 +21,10 @@ class AuthController {
   async login(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      throw new ValidationError(errors.array());
+      next({ errorsArray: errors.array(), title: 'Validation Error' });
+      return;
     }
-    const token = await AuthService.login(req.body);
+    const token = await AuthService.login(req.body, next);
     req.serializer = new AuthSerializer(token);
     next();
   }

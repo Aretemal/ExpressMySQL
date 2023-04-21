@@ -1,4 +1,3 @@
-import { Op } from 'sequelize';
 import Dialog from '../models/dialog.js';
 import Message from '../models/message.js';
 import User from '../models/user.js';

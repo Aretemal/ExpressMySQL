@@ -1,19 +1,20 @@
 import Follow from '../models/follow.js';
 import User from '../models/user.js';
-import ServiceError from '../utils/errors/ServiceError.js';
 
 class UserService {
-  async getOne(userId) {
+  async getOne(userId, next) {
     if (!userId) {
-      throw new ServiceError('441');
+      next({ errorsArray: [{ msg: '441' }], title: 'Service Error' });
+      return;
     }
     const user = await User.findByPk(userId);
     return user;
   }
 
-  async getAllUsers(userId, { page, count }) {
+  async getAllUsers(userId, { page, count }, next) {
     if (!userId) {
-      throw new ServiceError('438');
+      next({ errorsArray: [{ msg: '438' }], title: 'Service Error' });
+      return;
     }
     count = +count;
     page = +page;
