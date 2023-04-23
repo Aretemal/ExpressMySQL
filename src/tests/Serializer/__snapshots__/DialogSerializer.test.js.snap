@@ -5,27 +5,33 @@ exports[`DialogSerializer : getAllInterlocutors : should return array of users 1
   "data": [
     {
       "attributes": {
-        "dialogId": undefined,
-        "message": undefined,
-        "senderId": undefined,
+        "ava": null,
+        "email": "111s@11.1",
+        "firstName": "assaaa",
+        "lastName": "bbsbb",
+        "login": "dsdsd",
+        "status": "1s",
       },
       "id": "3",
       "links": {
-        "self": "http://localhost:5000/api/dialog/message/3",
+        "self": "http://localhost:5000/api/user/3",
       },
-      "type": "Message",
+      "type": "User",
     },
     {
       "attributes": {
-        "dialogId": undefined,
-        "message": undefined,
-        "senderId": undefined,
+        "ava": null,
+        "email": "111@11.1",
+        "firstName": "aaaa",
+        "lastName": "bbbb",
+        "login": "Artem",
+        "status": "1",
       },
       "id": "1",
       "links": {
-        "self": "http://localhost:5000/api/dialog/message/1",
+        "self": "http://localhost:5000/api/user/1",
       },
-      "type": "Message",
+      "type": "User",
     },
   ],
   "links": {

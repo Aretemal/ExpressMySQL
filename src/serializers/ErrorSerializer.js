@@ -5,7 +5,7 @@ import ErrorCode from '../utils/ErrorCode.js';
 dotenv.config();
 
 class ErrorSerializer {
-  constructor(error, title, { id }) {
+  constructor(error, id) {
     this.errorsArray = error.errorsArray;
     if (id) {
       const user = User.findOne({

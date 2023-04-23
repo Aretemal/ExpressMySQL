@@ -17,15 +17,37 @@ const res = {
 };
 
 describe('User Controller :', () => {
-  test('Get info one user', async () => {
-    UserService.getOne = (id) => ({
-      userId: id, login: 'Artem', firstName: 'Artem', lastName: 'Novik',
+  describe('getOne :', () => {
+    test('should return info one user', async () => {
+      function next() {}
+      UserService.getOne = (id) => ({
+        userId: id, login: 'Artem', firstName: 'Artem', lastName: 'Novik',
+      });
+
+      await UserController.getOne(req, res, next);
+
+      expect(req.serializer)
+        .toMatchSnapshot();
     });
+  });
 
-    await UserController.getOne(req, res);
+  describe('getAllUsers :', () => {
+    test('should return array of users and count of users', async () => {
+      function next() {}
+      UserService.getOne = (id) => ({
+        users: [{
+          userId: id,
+          login: 'Artem',
+          firstName: 'Artem',
+          lastName: 'Novik',
+        }],
+        countOfUsers: 5,
+      });
 
-    expect(res.dataJS.data.attributes.attributes.userId).toBe(1);
-    expect(res.dataJS.data.attributes.attributes.firstName).toBe('Artem');
-    expect(res.dataJS.data.attributes.attributes.lastName).toBe('Novik');
+      await UserController.getOne(req, res, next);
+
+      expect(req.serializer)
+        .toMatchSnapshot();
+    });
   });
 });

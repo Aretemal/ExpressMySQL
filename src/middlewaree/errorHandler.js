@@ -2,7 +2,8 @@
 import ErrorSerializer from '../serializers/ErrorSerializer.js';
 
 export const errorHandler = (error, req, res, next) => {
-  const serializer = new ErrorSerializer(error.errorsArray, error.title);
+  const errorId = error.id || null;
+  const serializer = new ErrorSerializer(error.errorsArray, errorId);
   res.status(400).send(serializer.serialize());
   next(error);
 };

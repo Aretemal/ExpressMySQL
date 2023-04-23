@@ -24,3 +24,6 @@ Run tests for Controllers
 
 ### `NODE_OPTIONS=--experimental-vm-modules npx jest src/tests/Services`
 Run tests for Services
+
+### `NODE_OPTIONS=--experimental-vm-modules npx jest src/tests/Serializer`
+Run tests for Serializer

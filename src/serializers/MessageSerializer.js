@@ -1,4 +1,3 @@
-import { getClass } from '../utils/getClass.js';
 import Serializer from './Serializer.js';
 
 class MessageSerializer extends Serializer {

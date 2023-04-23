@@ -2,27 +2,39 @@
 import FollowService from '../../services/FollowService.js';
 
 describe('Follow Service :', () => {
-  test('Follow', async () => {
-    const data = await FollowService.follow(1, 4);
+  describe('follow :', () => {
+    test('should return connection between users', async () => {
+      function next() {}
 
-    expect(data).toBeDefined();
-    expect(data.followerId).toBe(1);
-    expect(data.followingId).toBe(4);
+      const data = await FollowService.follow(1, 8, next);
+
+      expect(data).toBeDefined();
+      expect(data.followerId).toBe(1);
+      expect(data.followingId).toBe(8);
+    });
   });
 
-  test('Approve', async () => {
-    const data = await FollowService.approve(4, 1);
+  describe('approve :', () => {
+    test('should return updated connection between users', async () => {
+      function next() {}
 
-    expect(data.followerId).toBe(1);
-    expect(data.followingId).toBe(4);
+      const data = await FollowService.approve(8, 1, next);
+
+      expect(data.followerId).toBe(1);
+      expect(data.followingId).toBe(8);
+    });
   });
 
-  test('Unfollow', async () => {
-    const data = await FollowService.unfollow(4, 1);
+  describe('unfollow :', () => {
+    test('should return deleted connection between users', async () => {
+      function next() {}
 
-    expect(data).toBeDefined();
-    expect(data.approvedAt).toBe(0);
+      const data = await FollowService.unfollow(8, 1, next);
 
-    await data.destroy();
+      expect(data).toBeDefined();
+      expect(data.approvedAt).toBe(0);
+
+      await data.destroy();
+    });
   });
 });

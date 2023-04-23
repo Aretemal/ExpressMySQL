@@ -19,18 +19,13 @@ exports[`AuthSerializer : Registration should return object with data about user
 {
   "data": {
     "attributes": {
-      "ava": null,
-      "email": "111@11.1",
-      "firstName": "aaaa",
-      "lastName": "bbbb",
-      "login": "Artem",
-      "status": "1",
+      "token": undefined,
     },
-    "id": "1",
+    "id": "undefined",
     "links": {
-      "self": "http://localhost:5000/api/user/1",
+      "self": "http://localhost:5000/api/login",
     },
-    "type": "User",
+    "type": "Token",
   },
 }
 `;
