@@ -23,36 +23,43 @@ const res = {
 };
 
 describe('Post Controller :', () => {
-  test('Creates a new post', async () => {
-    PostService.create = ({ newMessageText }, id) => ({
-      authorId: id, content: newMessageText,
+  describe('Create', () => {
+    test('should creates a new post', async () => {
+      function next() {}
+      PostService.create = ({ newMessageText }, id) => ({
+        authorId: id,
+        content: newMessageText,
+      });
+
+      await PostController.create(req, res, next);
+
+      expect(req.serializer).toMatchSnapshot();
     });
-
-    await PostController.create(req, res);
-
-    expect(res.dataJS.data.attributes.attributes.content).toBe('Hello');
-    expect(res.dataJS.data.attributes.attributes.authorId).toBe(1);
   });
 
-  test('Returns all posts', async () => {
-    PostService.getAll = () => ([
-      { id: 1 }, { id: 2 },
-    ]);
+  describe('getAll', () => {
+    test('should returns all posts', async () => {
+      function next() {}
+      PostService.getAll = () => ([
+        { id: 1 }, { id: 2 },
+      ]);
 
-    await PostController.getAll(req, res);
+      await PostController.getAll(req, res, next);
 
-    expect(res.dataJS.data.attributes.attributes[0].id).toBe(1);
-    expect(res.dataJS.data.attributes.attributes[1].id).toBe(2);
+      expect(req.serializer).toMatchSnapshot();
+    });
   });
 
-  test('Returns one posts', async () => {
-    PostService.getOne = (id) => ({
-      id, content: 'Hello',
+  describe('getOne', () => {
+    test('should returns one posts', async () => {
+      function next() {}
+      PostService.getOne = (id) => ({
+        id, content: 'Hello',
+      });
+
+      await PostController.getOne(req, res, next);
+
+      expect(req.serializer).toMatchSnapshot();
     });
-
-    await PostController.getOne(req, res);
-
-    expect(res.dataJS.data.attributes.attributes.id).toBe(1);
-    expect(res.dataJS.data.attributes.attributes.content).toBe('Hello');
   });
 });

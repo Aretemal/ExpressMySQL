@@ -15,12 +15,10 @@ exports[`MessageSerializer : getAllMessage : should return array with messages 1
       },
       "relationships": {
         "user": {
-          "data": [
-            {
-              "id": "2",
-              "type": "User",
-            },
-          ],
+          "data": {
+            "id": "2",
+            "type": "User",
+          },
           "links": {
             "self": "http://localhost:5000/api/user/2",
           },
@@ -40,12 +38,10 @@ exports[`MessageSerializer : getAllMessage : should return array with messages 1
       },
       "relationships": {
         "user": {
-          "data": [
-            {
-              "id": "1",
-              "type": "User",
-            },
-          ],
+          "data": {
+            "id": "1",
+            "type": "User",
+          },
           "links": {
             "self": "http://localhost:5000/api/user/1",
           },

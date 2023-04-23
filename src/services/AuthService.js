@@ -12,7 +12,7 @@ const generationAccessToken = (id) => {
 class AuthService {
   async registration(
     {
-      userName: login, password, firstName, lastName, email,
+      login, password, firstName, lastName, email,
     },
     next,
   ) {
@@ -29,15 +29,8 @@ class AuthService {
     const user = await User.create({
       login, password: hashPassword, firstName, lastName, email,
     });
-    return {
-      id: user.id,
-      login,
-      firstName,
-      lastName,
-      email,
-      ava: user.dataValues.ava,
-      status: user.dataValues.status,
-    };
+    const token = generationAccessToken(user.id);
+    return { token, id: user.id };
   }
 
   async login({ login, password }, next) {

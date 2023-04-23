@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`User Controller : getAllUsers : should return array of users and count of users 1`] = `
+UserSerializer {
+  "resource": {
+    "countOfUsers": 5,
+    "users": [
+      {
+        "firstName": "Artem",
+        "lastName": "Novik",
+        "login": "Artem",
+        "userId": 1,
+      },
+    ],
+  },
+}
+`;
+
+exports[`User Controller : getOne : should return info one user 1`] = `
+UserSerializer {
+  "resource": {
+    "firstName": "Artem",
+    "lastName": "Novik",
+    "login": "Artem",
+    "userId": 1,
+  },
+}
+`;

@@ -9,6 +9,7 @@ class PostSerializer extends Serializer {
     return {
       authorId: this.resource.authorId,
       content: this.resource.content,
+      createdAt: this.resource.createdAt,
     };
   }
 

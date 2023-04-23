@@ -6,6 +6,9 @@ import UserService from '../../services/UserService.js';
 
 jest.fn('ProfileService');
 const req = {
+  params: {
+    id: 1,
+  },
   user: {
     id: 1,
   },
@@ -21,33 +24,42 @@ const res = {
 };
 
 describe('Profile Controller :', () => {
-  test('Get info authorized user', async () => {
-    ProfileService.getInfoAuthorizedUser = (id) => ({
-      userId: id, login: 'Artem', firstName: 'Artem', lastName: 'Novik',
+  describe('getInfoAuthorizedUser :', () => {
+    test('should return info authorized user', async () => {
+      function next() {}
+      ProfileService.getInfoAuthorizedUser = (id) => ({
+        userId: id, login: 'Artem', firstName: 'Artem', lastName: 'Novik',
+      });
+
+      await ProfileController.getInfoAuthorizedUser(req, res, next);
+
+      expect(req.serializer).toMatchSnapshot();
     });
-
-    await ProfileController.getInfoAuthorizedUser(req, res);
-
-    expect(res.dataJS.data.attributes.attributes.userId).toBe(1);
-    expect(res.dataJS.data.attributes.attributes.firstName).toBe('Artem');
-    expect(res.dataJS.data.attributes.attributes.lastName).toBe('Novik');
   });
 
-  test('Update status', async () => {
-    ProfileService.updateStatus = (status, id) => ({
-      status: `${status + id}`,
+  describe('updateStatus :', () => {
+    test('should return user', async () => {
+      function next() {}
+      ProfileService.updateStatus = (id) => ({
+        userId: id, login: 'Artem', firstName: 'Artem', lastName: 'Novik',
+      });
+
+      await ProfileController.updateStatus(req, res, next);
+
+      expect(req.serializer).toMatchSnapshot();
     });
-
-    await ProfileController.updateStatus(req, res);
-
-    expect(res.dataJS.data.attributes.attributes.status).toBe('Status1');
   });
 
-  test('Get status', async () => {
-    UserService.getStatus = (id) => `Status${id}`;
+  describe('getStatus :', () => {
+    test('should return user', async () => {
+      function next() {}
+      UserService.getStatus = (id) => ({
+        userId: id, login: 'Artem', firstName: 'Artem', lastName: 'Novik',
+      });
 
-    await ProfileController.getStatus(req, res);
+      await ProfileController.getStatus(req, res, next);
 
-    expect(res.dataJS.data.attributes.attributes).toBe('Status1');
+      expect(req.serializer).toMatchSnapshot();
+    });
   });
 });

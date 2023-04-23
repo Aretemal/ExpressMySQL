@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth Controller : Login should return token and id 1`] = `
+AuthSerializer {
+  "resource": {
+    "id": 1,
+    "token": "token",
+  },
+}
+`;
+
+exports[`Auth Controller : Registration should create a new user and return token and id 1`] = `
+AuthSerializer {
+  "resource": {
+    "id": 1,
+    "token": "token",
+  },
+}
+`;

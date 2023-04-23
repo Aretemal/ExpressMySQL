@@ -1,5 +1,4 @@
 import { validationResult } from 'express-validator';
-import UserSerializer from '../serializers/UserSerializer.js';
 import AuthService from '../services/AuthService.js';
 import AuthSerializer from '../serializers/AuthSerializer.js';
 
@@ -12,8 +11,8 @@ class AuthController {
       });
       return;
     }
-    const user = await AuthService.registration(req.body, next);
-    req.serializer = new UserSerializer(user);
+    const token = await AuthService.registration(req.body, next);
+    req.serializer = new AuthSerializer(token);
     next();
   }
 

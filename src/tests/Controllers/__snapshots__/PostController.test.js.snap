@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Post Controller : Create should creates a new post 1`] = `
+PostSerializer {
+  "resource": {
+    "authorId": 1,
+    "content": "Hello",
+  },
+}
+`;
+
+exports[`Post Controller : getAll should returns all posts 1`] = `
+CollectionSerializer {
+  "resource": [
+    {
+      "id": 1,
+    },
+    {
+      "id": 2,
+    },
+  ],
+  "serializerType": [Function],
+}
+`;
+
+exports[`Post Controller : getOne should returns one posts 1`] = `
+PostSerializer {
+  "resource": {
+    "content": "Hello",
+    "id": 1,
+  },
+}
+`;

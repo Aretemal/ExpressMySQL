@@ -14,6 +14,7 @@ describe('PostSerializer :', () => {
         id: 3,
         authorId: 2,
         content: 'Hello',
+        createdAt: '1',
       };
 
       const serializer = new PostSerializer(post);
@@ -30,11 +31,13 @@ describe('PostSerializer :', () => {
         id: 2,
         authorId: 2,
         content: 'Hello',
+        createdAt: '1',
       },
       {
         id: 1,
         authorId: 1,
         content: 'World',
+        createdAt: '1',
       }];
       const serializer = new CollectionSerializer(posts, { serializerType: PostSerializer });
       const data = serializer.serialize({ originalUrl: 'example' });
@@ -50,6 +53,7 @@ describe('PostSerializer :', () => {
         id: 1,
         authorId: 2,
         content: 'Hello',
+        createdAt: '1',
       };
       const serializer = new PostSerializer(post);
       const data = serializer.serialize();

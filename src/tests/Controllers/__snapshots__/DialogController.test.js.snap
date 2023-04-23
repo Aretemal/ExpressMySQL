@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dialog Controller : deleteMessage should return deleted message 1`] = `
+MessageSerializer {
+  "body": {
+    "message": "Hello",
+    "recipientId": 5,
+  },
+  "params": {
+    "id": 1,
+  },
+  "resource": {
+    "dialogId": "1",
+    "message": "message",
+    "senderId": "2",
+  },
+  "serializer": MessageSerializer {
+    "resource": {
+      "dialogId": "1",
+      "message": "message",
+      "senderId": "2",
+    },
+  },
+  "user": {
+    "id": 1,
+  },
+}
+`;
+
+exports[`Dialog Controller : getAllDialogs should return dialog array 1`] = `
+CollectionSerializer {
+  "resource": [
+    {
+      "dialogId": "1",
+      "id": "2",
+      "name": "name",
+    },
+  ],
+  "serializerType": [Function],
+}
+`;
+
+exports[`Dialog Controller : getAllMessage should return message array 1`] = `
+CollectionSerializer {
+  "getter": [Function],
+  "include": [
+    "user",
+  ],
+  "resource": [
+    {
+      "dialogId": "1",
+      "message": "message",
+      "senderId": "2",
+    },
+  ],
+  "serializerType": [Function],
+}
+`;
+
+exports[`Dialog Controller : sendMessage should create and return new message 1`] = `
+MessageSerializer {
+  "resource": {
+    "dialogId": "1",
+    "message": "message",
+    "senderId": "2",
+  },
+}
+`;

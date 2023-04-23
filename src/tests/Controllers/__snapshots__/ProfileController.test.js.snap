@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile Controller : getInfoAuthorizedUser : should return info authorized user 1`] = `
+UserSerializer {
+  "resource": {
+    "firstName": "Artem",
+    "lastName": "Novik",
+    "login": "Artem",
+    "userId": 1,
+  },
+}
+`;
+
+exports[`Profile Controller : getStatus : should return user 1`] = `
+UserSerializer {
+  "resource": {
+    "ava": null,
+    "email": "user1",
+    "firstName": "user1",
+    "id": 1,
+    "lastName": "user1",
+    "login": "user1",
+    "status": "User",
+  },
+}
+`;
+
+exports[`Profile Controller : updateStatus : should return user 1`] = `
+UserSerializer {
+  "resource": {
+    "firstName": "Artem",
+    "lastName": "Novik",
+    "login": "Artem",
+    "userId": "Status",
+  },
+}
+`;

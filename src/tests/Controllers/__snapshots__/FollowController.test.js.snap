@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Follow Controller : Approve should changed connection 1`] = `
+FollowSerializer {
+  "resource": {
+    "approvedAt": 0,
+    "followerId": 1,
+    "followingId": 2,
+  },
+}
+`;
+
+exports[`Follow Controller : Follow should create and return a new connection 1`] = `
+FollowSerializer {
+  "resource": {
+    "approvedAt": 0,
+    "followerId": 1,
+    "followingId": 2,
+  },
+}
+`;
+
+exports[`Follow Controller : Unfollow should return deleted connection 1`] = `
+FollowSerializer {
+  "resource": {
+    "approvedAt": 0,
+    "followerId": 1,
+    "followingId": 2,
+  },
+}
+`;
+
+exports[`Follow Controller : getFriends should return array of users 1`] = `
+CollectionSerializer {
+  "resource": [
+    {
+      "ava": "example",
+      "email": "example",
+      "firstName": "example",
+      "id": 1,
+      "lastName": "example",
+      "login": "example",
+      "status": "example",
+    },
+  ],
+}
+`;
+
+exports[`Follow Controller : getSubscribers should return array of users 1`] = `
+CollectionSerializer {
+  "resource": [
+    {
+      "ava": "example",
+      "email": "example",
+      "firstName": "example",
+      "id": 1,
+      "lastName": "example",
+      "login": "example",
+      "status": "example",
+    },
+  ],
+}
+`;
+
+exports[`Follow Controller : getSubscriptions should return array of users 1`] = `
+CollectionSerializer {
+  "resource": [
+    {
+      "ava": "example",
+      "email": "example",
+      "firstName": "example",
+      "id": 1,
+      "lastName": "example",
+      "login": "example",
+      "status": "example",
+    },
+  ],
+}
+`;

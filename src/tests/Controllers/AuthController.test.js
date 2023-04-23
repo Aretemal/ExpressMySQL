@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+/* eslint-disable no-undef, no-unused-vars */
 import { jest } from '@jest/globals';
 import AuthController from '../../controllers/AuthController';
 import AuthService from '../../services/AuthService.js';
@@ -21,30 +21,39 @@ const res = {
 };
 
 describe('Auth Controller :', () => {
-  test('Creates a new user', async () => {
-    AuthService.registration = ({
-      id, userName: login, password, firstName, lastName, email,
-    }) => ({
-      userId: id, login, firstName, lastName, email, password,
+  describe('Registration', () => {
+    test('should create a new user and return token and id', async () => {
+      function next() {}
+
+      AuthService.registration = ({
+        userName: login,
+        password,
+        firstName,
+        lastName,
+        email,
+      }) => ({
+        id: 1,
+        token: 'token',
+      });
+
+      await AuthController.registration(req, res, next);
+
+      expect(req.serializer)
+        .toMatchSnapshot();
     });
-
-    await AuthController.registration(req, res);
-
-    expect(res.dataJS.data.attributes.attributes.userId).toBe(1);
-    expect(res.dataJS.data.attributes.attributes.firstName).toBe('Artem');
-    expect(res.dataJS.data.attributes.attributes.lastName).toBe('Novik');
   });
 
-  test('Authorization', async () => {
-    AuthService.login = ({ login, password }) => ({
-      user: { id: 1 }, token: 'token', login, password,
+  describe('Login', () => {
+    test('should return token and id', async () => {
+      function next() {}
+
+      AuthService.login = ({ login, password }) => ({
+        id: 1, token: 'token',
+      });
+
+      await AuthController.login(req, res, next);
+
+      expect(req.serializer).toMatchSnapshot();
     });
-
-    await AuthController.login(req, res);
-
-    expect(res.dataJS.data.attributes.attributes.token).toBe('token');
-    expect(res.dataJS.data.attributes.attributes.user).toBeDefined();
-    expect(res.dataJS.data.attributes.attributes.password).toBeDefined();
-    expect(res.dataJS.data.attributes.attributes.login).toBeDefined();
   });
 });
