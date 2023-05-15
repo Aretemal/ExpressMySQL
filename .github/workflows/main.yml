@@ -1,7 +1,7 @@
 name: Create docker image
 on:
   push:
-    branches: [ master ]
+    branches: [ SN-API-51 ]
   pull_request:
     branches: [ master ]
 jobs:
@@ -15,3 +15,7 @@ jobs:
           echo "${{ secrets.DOCKERPW }}" | docker login -u "aretemal" --password-stdin
           docker image build -t aretemal/sn-api:latest .
           docker push aretemal/sn-api:latest
+      - name: Build MySQL container
+        run: |
+          echo "${{ secrets.DOCKERPW }}" | docker login -u "aretemal" --password-stdin
+          docker run --name sn-db -p 3000:3306 -e MYSQL_ROOT_PASSWORD=root MYSQL_DATABASE=database_development_socialnetwork -d mysql:tag

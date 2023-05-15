@@ -1,4 +1,5 @@
 import { validationResult } from 'express-validator';
+import { messageAPI } from '../api/api.js';
 import CollectionSerializer from '../serializers/CollectionSerializer.js';
 import DialogSerializer from '../serializers/DialogSerializer.js';
 import MessageSerializer from '../serializers/MessageSerializer.js';
@@ -14,6 +15,11 @@ class DialogController {
     }
     const message = await DialogService.sendMessage(req.body, req.params.id, req.user.id, next);
     req.serializer = new MessageSerializer(message);
+    const data = await messageAPI
+      .sendMessageToRoom({
+        message: req.serializer.serialize(req),
+        id: req.params.id,
+      });
     next();
   }
 

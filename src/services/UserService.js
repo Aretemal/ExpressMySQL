@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import Follow from '../models/follow.js';
 import User from '../models/user.js';
 
@@ -28,6 +29,11 @@ class UserService {
         model: Follow,
         association: 'follower',
       }],
+      where: {
+        id: {
+          [Op.not]: userId,
+        },
+      },
       offset: beginUsers,
       limit: count,
     });

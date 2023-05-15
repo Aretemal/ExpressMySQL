@@ -54,7 +54,7 @@ class FollowService {
     return deletedConnection;
   }
 
-  async getFriends(id) {
+  async getFriends(id, count) {
     const connections = await Follow.findAll({
       include: [{
         model: User,
@@ -69,6 +69,7 @@ class FollowService {
           { followingId: id, approvedAt: { [Op.ne]: null } },
         ],
       },
+      limit: +count,
     });
     const friends = connections.map((item) => {
       if (item.dataValues.follower.dataValues.id === id) {
@@ -79,7 +80,7 @@ class FollowService {
     return friends;
   }
 
-  async getSubscriptions(id) {
+  async getSubscriptions(id, count) {
     const connections = await Follow.findAll({
       include: {
         model: User,
@@ -89,12 +90,13 @@ class FollowService {
         followerId: id,
         approvedAt: null,
       },
+      limit: +count,
     });
     const subscriptions = connections.map((item) => item.dataValues.following.dataValues);
     return subscriptions;
   }
 
-  async getSubscribers(id) {
+  async getSubscribers(id, count) {
     const connections = await Follow.findAll({
       include: {
         model: User,
@@ -104,6 +106,7 @@ class FollowService {
         followingId: id,
         approvedAt: null,
       },
+      limit: +count,
     });
     const subscribers = connections.map((item) => item.dataValues.follower.dataValues);
     return subscribers;
