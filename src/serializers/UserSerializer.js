@@ -6,7 +6,7 @@ class UserSerializer extends Serializer {
   }
 
   attributes() {
-    return {
+    const data = {
       firstName: this.resource.firstName,
       lastName: this.resource.lastName,
       ava: this.resource.ava,
@@ -14,6 +14,8 @@ class UserSerializer extends Serializer {
       status: this.resource.status,
       email: this.resource.email,
     };
+    if (this.resource.followed) data.followed = this.resource.followed;
+    return data;
   }
 
   links() {
