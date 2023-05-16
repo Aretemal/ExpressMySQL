@@ -5,7 +5,7 @@ const baseInstance = axios.create({
   headers: {},
 });
 export const messageAPI = {
-  sendMessageToRoom({ id, message }) {
-    return baseInstance.post('/message/create', { message, id });
+  sendMessageToRoom({ dialogId, message }) {
+    return baseInstance.post('/message/create', { message, dialogId });
   },
 };
