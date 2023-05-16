@@ -18,7 +18,7 @@ class DialogController {
     const data = await messageAPI
       .sendMessageToRoom({
         message: req.serializer.serialize(req),
-        id: req.params.id,
+        dialogId: req.params.id,
       });
     next();
   }

@@ -47,9 +47,9 @@ router.put('/approve', [
 router.put('/unfollow', [
   body('id', 'Id cannot be empty').notEmpty(),
 ], tryCatch(FollowController.unfollow));
-router.get('/friends/:count', tryCatch(FollowController.getFriends));
-router.get('/subscribers/:count', tryCatch(FollowController.getSubscribers));
-router.get('/subscriptions/:count', tryCatch(FollowController.getSubscriptions));
+router.get('/friends/:perPage', tryCatch(FollowController.getFriends));
+router.get('/subscribers/:perPage', tryCatch(FollowController.getSubscribers));
+router.get('/subscriptions/:perPage', tryCatch(FollowController.getSubscriptions));
 
 router.post('/dialog/message/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
