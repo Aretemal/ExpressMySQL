@@ -7,8 +7,10 @@ import ProfileController from './src/controllers/ProfileController.js';
 import UserController from './src/controllers/UserController.js';
 import AuthController from './src/controllers/AuthController.js';
 import { tryCatch } from './src/utils/tryCatch.js';
+import SettingController from './src/controllers/SettingController.js';
 
 const router = new Router();
+
 router.post('/registration', [
   check('login', 'Login cannot be empty').notEmpty(),
   check('firstName', 'First Name cannot be empty').notEmpty(),
@@ -66,5 +68,9 @@ router.delete('/dialog/message/:id', [
 router.get('/dialog/messages/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
 ], tryCatch(DialogController.getAllMessage));
+
+router.get('/settings/language', tryCatch(SettingController.getLanguage));
+router.put('/settings/language', tryCatch(SettingController.changeLanguage));
+router.put('/settings/password', tryCatch(SettingController.changePassword));
 
 export default router;
