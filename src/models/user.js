@@ -21,6 +21,18 @@ class User extends Model {
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
+    this.hasMany(models.Comment, {
+      foreignKey: 'senderCommentId',
+      as: 'senderComment',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
+    this.hasMany(models.LikePost, {
+      foreignKey: 'senderLikeId',
+      as: 'senderLike',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   }
 }
 User.init({
