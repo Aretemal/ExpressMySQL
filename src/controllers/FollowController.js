@@ -41,6 +41,12 @@ class FollowController {
     next();
   }
 
+  async findUsers(req, res, next) {
+    const users = await FollowService.findUsers(req.user.id, req.params.name, next);
+    req.serializer = new CollectionSerializer(users, { serializerType: UserSerializer });
+    next();
+  }
+
   async getFriends(req, res, next) {
     const friends = await FollowService.getFriends(req.user.id, req.params.perPage, next);
     req.serializer = new CollectionSerializer(friends, { serializerType: UserSerializer });
@@ -48,7 +54,11 @@ class FollowController {
   }
 
   async getSubscriptions(req, res, next) {
-    const subscriptions = await FollowService.getSubscriptions(req.user.id, req.params.perPage, next);
+    const subscriptions = await FollowService.getSubscriptions(
+      req.user.id,
+      req.params.perPage,
+      next,
+    );
     req.serializer = new CollectionSerializer(subscriptions, { serializerType: UserSerializer });
     next();
   }

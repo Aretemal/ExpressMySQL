@@ -54,6 +54,7 @@ router.put('/approve', [
 router.put('/unfollow', [
   body('id', 'Id cannot be empty').notEmpty(),
 ], tryCatch(FollowController.unfollow));
+router.get('/find/:name', tryCatch(FollowController.findUsers));
 router.get('/friends/:perPage', tryCatch(FollowController.getFriends));
 router.get('/subscribers/:perPage', tryCatch(FollowController.getSubscribers));
 router.get('/subscriptions/:perPage', tryCatch(FollowController.getSubscriptions));
