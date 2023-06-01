@@ -21,7 +21,7 @@ class UserService {
     page = +page;
     const beginUsers = (page - 1) * count;
     const data = await User.findAll({
-      attributes: ['id', 'firstName', 'lastName', 'login', 'email', 'status', 'ava'],
+      attributes: ['id', 'firstName', 'lastName', 'login', 'email', 'status'],
       include: [{
         model: Follow,
         association: 'following',
