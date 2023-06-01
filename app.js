@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
-import { errorHandler } from './src/middlewaree/errorHandler.js';
+import { errorHandler } from './src/middleware/errorHandler.js';
 import router from './router.js';
-import { errorLogger } from './src/middlewaree/errorLogger.js';
-import { responseJSON } from './src/middlewaree/responseJSON.js';
-import { successLogger } from './src/middlewaree/successLogger.js';
-import { tokenMiddleware } from './src/middlewaree/tokenMiddleware.js';
+import { errorLogger } from './src/middleware/errorLogger.js';
+import { responseJSON } from './src/middleware/responseJSON.js';
+import { successLogger } from './src/middleware/successLogger.js';
+import { tokenMiddleware } from './src/middleware/tokenMiddleware.js';
 
 const app = express();
 

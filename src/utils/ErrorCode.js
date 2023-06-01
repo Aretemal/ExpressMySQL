@@ -13,6 +13,10 @@ class ErrorCode {
     this.codeMap.set('Wrong password entered', '439');
     this.codeMap.set('No such connection exists', '440');
     this.codeMap.set('Id not specified', '441');
+    this.codeMap.set('Like already exists', '442');
+    this.codeMap.set('Like not found', '443');
+    this.codeMap.set('Language not specified', '444');
+    this.codeMap.set('Password not specified', '445');
     this.ruMap = new Map();
     this.ruMap.set('Login cannot be empty', 'Логин не может быть пустым');
     this.ruMap.set('First Name cannot be empty', 'Имя не может быть пустым');
@@ -26,6 +30,10 @@ class ErrorCode {
     this.ruMap.set('Wrong password entered', 'Введен неправильный пароль');
     this.ruMap.set('No such connection exists', 'Нет такой связи');
     this.ruMap.set('Id not specified', 'Идентификатор не указан');
+    this.ruMap.set('Like already exists', 'Лайк уже существует');
+    this.ruMap.set('Like not found', 'Лайк не найден');
+    this.ruMap.set('Language not specified', 'Язык не указан');
+    this.ruMap.set('Password not specified', 'Пароль не указан');
   }
 
   getStatus(code) {

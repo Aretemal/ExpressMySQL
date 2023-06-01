@@ -7,12 +7,18 @@ import User from './src/models/user.js';
 import app from './app.js';
 import UserDialog from './src/models/User_Dialog.js';
 import { getClass } from './src/utils/getClass.js';
+import Comment from './src/models/comment.js';
+import LikePost from './src/models/likePost.js';
 
 const PORT = process.env.APP_PORT;
 
-User.associate({ Post, Follow });
-Post.associate({ User });
+User.associate({
+  Post, Follow, Comment, LikePost,
+});
+Post.associate({ User, Comment, LikePost });
 Dialog.associate({ User, Message });
+Comment.associate({ User, Post });
+LikePost.associate({ User, Post });
 Message.associate({ Dialog });
 Follow.associate({ User });
 User.belongsToMany(Dialog, { through: UserDialog });

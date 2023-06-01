@@ -31,8 +31,13 @@ router.get('/profile/posts', tryCatch(PostController.getAll));
 router.get('/profile/posts/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
 ], tryCatch(PostController.getOne));
-router.put('/profile/posts/:id', tryCatch(PostController.update));
-router.delete('/profile/posts/:id', tryCatch(PostController.delete));
+router.put('/profile/posts/update/:id', tryCatch(PostController.update));
+router.delete('/profile/posts/delete/:id', tryCatch(PostController.delete));
+router.post('/profile/posts/comment/create', tryCatch(PostController.createComment));
+router.delete('/profile/posts/comment/delete/:id', tryCatch(PostController.deleteComment));
+router.get('/profile/posts/comments/:id', tryCatch(PostController.getAllComments));
+router.post('/profile/posts/like/:id', tryCatch(PostController.setLike));
+router.delete('/profile/posts/unlike/:id', tryCatch(PostController.deleteLike));
 
 router.get('/profile/user', tryCatch(ProfileController.getInfoAuthorizedUser));
 router.put('/profile/status', tryCatch(ProfileController.updateStatus));

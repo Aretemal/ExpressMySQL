@@ -10,6 +10,9 @@ class PostSerializer extends Serializer {
       authorId: this.resource.authorId,
       content: this.resource.content,
       createdAt: this.resource.createdAt,
+      isMeLike: this.resource.isMeLike,
+      likesCount: this.resource.likesCount,
+      commentCount: this.resource.commentCount,
     };
   }
 
