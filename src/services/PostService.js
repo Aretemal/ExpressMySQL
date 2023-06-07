@@ -93,6 +93,7 @@ class PostService {
   }
 
   async setLike(postId, authId, next) {
+    console.log(postId, authId);
     if (!postId) {
       next({ errorsArray: [{ msg: 'Id not specified' }] });
       return;

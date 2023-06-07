@@ -3,12 +3,35 @@ import Follow from '../models/follow.js';
 import User from '../models/user.js';
 
 class UserService {
-  async getOne(userId, next) {
+  async getOne(userId, authId, next) {
     if (!userId) {
       next({ errorsArray: [{ msg: 'Id not specified' }] });
       return;
     }
     const user = await User.findByPk(userId);
+    let a;
+    if (userId !== authId) {
+      const connection = await Follow.findOne({
+        where: {
+          followerId: {
+            [Op.or]: [userId, authId],
+          },
+          followingId: {
+            [Op.or]: [userId, authId],
+          },
+        }
+      });
+      if (!connection) {
+        a = 'Subscribe';
+      } else if (connection.approvedAt) {
+        a = 'You are friends';
+      } else if (connection.followerId === authId) {
+        a = 'You subscribed';
+      } else {
+        a = 'Add as friend';
+      }
+    }
+    user.hasConnection = a;
     return user;
   }
 

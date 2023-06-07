@@ -4,7 +4,7 @@ import UserSerializer from '../serializers/UserSerializer.js';
 
 class UserController {
   async getOne(req, res, next) {
-    const user = await UserService.getOne(req.params.id, next);
+    const user = await UserService.getOne(req.params.id, req.user.id, next);
     req.serializer = new UserSerializer(user);
     next();
   }

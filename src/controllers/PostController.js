@@ -18,7 +18,7 @@ class PostController {
   }
 
   async getAll(req, res, next) {
-    const posts = await PostService.getAll(req.user.id);
+    const posts = await PostService.getAll(req.params.id);
     req.serializer = new CollectionSerializer(posts, { serializerType: PostSerializer });
     next();
   }
