@@ -54,7 +54,7 @@ class FollowService {
     return deletedConnection;
   }
 
-  async getFriends(id, perPage) {
+  async getFriends(authId, { perPage, id }, next) {
     const connections = await Follow.findAll({
       include: [{
         model: User,
@@ -80,7 +80,7 @@ class FollowService {
     return friends;
   }
 
-  async getSubscriptions(id, perPage) {
+  async getSubscriptions(authId, { perPage, id }, next) {
     const connections = await Follow.findAll({
       include: {
         model: User,
@@ -96,7 +96,7 @@ class FollowService {
     return subscriptions;
   }
 
-  async getSubscribers(id, perPage) {
+  async getSubscribers(authId, { perPage, id }, next) {
     const connections = await Follow.findAll({
       include: {
         model: User,

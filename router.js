@@ -29,8 +29,8 @@ router.get('/users', tryCatch(UserController.getAllUsers));
 router.post('/profile/posts', [
   check('newMessageText', 'Message for new post cannot be empty').notEmpty().isLength({ max: 400 }),
 ], tryCatch(PostController.create));
-router.get('/profile/posts', tryCatch(PostController.getAll));
-router.get('/profile/posts/:id', [
+router.get('/profile/posts/:id', tryCatch(PostController.getAll));
+router.get('/profile/post/:id', [
   param('id', 'Id cannot be empty').notEmpty(),
 ], tryCatch(PostController.getOne));
 router.put('/profile/posts/update/:id', tryCatch(PostController.update));
@@ -55,9 +55,9 @@ router.put('/unfollow', [
   body('id', 'Id cannot be empty').notEmpty(),
 ], tryCatch(FollowController.unfollow));
 router.get('/find/:name', tryCatch(FollowController.findUsers));
-router.get('/friends/:perPage', tryCatch(FollowController.getFriends));
-router.get('/subscribers/:perPage', tryCatch(FollowController.getSubscribers));
-router.get('/subscriptions/:perPage', tryCatch(FollowController.getSubscriptions));
+router.get('/friends', tryCatch(FollowController.getFriends));
+router.get('/subscribers', tryCatch(FollowController.getSubscribers));
+router.get('/subscriptions', tryCatch(FollowController.getSubscriptions));
 
 router.post('/dialog/message/:id', [
   param('id', 'Id cannot be empty').notEmpty(),

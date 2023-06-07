@@ -27,7 +27,7 @@ class AuthService {
       login, password: hashPassword, firstName, lastName, email,
     });
     const token = generationAccessToken(user.id);
-    return { token, id: user.id };
+    return { token, id: user.id, login: user.login };
   }
 
   async login({ login, password }, next) {
@@ -42,7 +42,7 @@ class AuthService {
       return;
     }
     const token = generationAccessToken(user.id);
-    return { token, id: user.id };
+    return { token, id: user.id, login: user.login };
   }
 }
 

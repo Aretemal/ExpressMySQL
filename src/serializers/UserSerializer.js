@@ -15,6 +15,7 @@ class UserSerializer extends Serializer {
       email: this.resource.email,
     };
     if (this.resource.followed) data.followed = this.resource.followed;
+    if (this.resource.hasConnection) data.hasConnection = this.resource.hasConnection;
     return data;
   }
 
