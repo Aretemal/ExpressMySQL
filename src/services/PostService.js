@@ -1,6 +1,8 @@
+import { Op } from 'sequelize';
 import Post from '../models/post.js';
 import Comment from '../models/comment.js';
 import LikePost from '../models/likePost.js';
+import User from '../models/user.js';
 
 class PostService {
   async create({ newMessageText }, id) {
@@ -84,16 +86,23 @@ class PostService {
       next({ errorsArray: [{ msg: 'Id not specified' }] });
       return;
     }
-    const comments = await Comment.findAll({
+    const data = await Comment.findAll({
       where: {
         postCommentId: id,
       },
+    });
+    const dataId = data.map((item) => item.dataValues.senderCommentId);
+    const usersId = [...new Set(dataId)];
+    const users = await User.findAll({ where: { id: { [Op.or]: [...usersId] } } });
+    const comments = data.map((item) => {
+      const person = users.find((user) => user.dataValues.id === item.dataValues.senderCommentId);
+      item.dataValues.user = person.dataValues;
+      return item.dataValues;
     });
     return comments;
   }
 
   async setLike(postId, authId, next) {
-    console.log(postId, authId);
     if (!postId) {
       next({ errorsArray: [{ msg: 'Id not specified' }] });
       return;
