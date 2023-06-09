@@ -4,6 +4,7 @@ import PostService from '../services/PostService.js';
 import PostSerializer from '../serializers/PostSerializer.js';
 import CommentSerializer from '../serializers/CommentSerializer.js';
 import LikeSerializer from '../serializers/LikeSerializer.js';
+import { getClass } from '../utils/getClass.js';
 
 class PostController {
   async create(req, res, next) {
@@ -61,7 +62,14 @@ class PostController {
 
   async getAllComments(req, res, next) {
     const comments = await PostService.getAllComments(req.params.id, next);
-    req.serializer = new CollectionSerializer(comments, { serializerType: CommentSerializer });
+    req.serializer = new CollectionSerializer(
+      comments,
+      {
+        serializerType: CommentSerializer,
+        include: ['user'],
+        getter: getClass,
+      }
+    );
     next();
   }
 
