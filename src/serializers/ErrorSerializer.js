@@ -5,8 +5,8 @@ import ErrorCode from '../utils/ErrorCode.js';
 dotenv.config();
 
 class ErrorSerializer {
-  constructor(error, id) {
-    this.errorsArray = error.errorsArray;
+  constructor(errorsArray, id) {
+    this.errorsArray = errorsArray;
     if (id) {
       const user = User.findOne({
         attributes: ['lang'],
@@ -16,7 +16,7 @@ class ErrorSerializer {
       });
       this.lang = user.dataValues.lang;
     } else {
-      this.lang = 'ru';
+      this.lang = 'en';
     }
   }
 

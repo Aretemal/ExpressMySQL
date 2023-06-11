@@ -5,8 +5,7 @@ export const errorHandler = (error, req, res, next) => {
   if (!(error instanceof Error)) {
     const errorId = error.id || null;
     const serializer = new ErrorSerializer(error.errorsArray, errorId);
-    res.status(400)
-      .send(serializer.serialize());
+    res.send(serializer.serialize());
     next(error);
   }
   next(error);
