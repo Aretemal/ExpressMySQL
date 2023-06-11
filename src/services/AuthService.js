@@ -33,12 +33,12 @@ class AuthService {
   async login({ login, password }, next) {
     const user = await User.findOne({ where: { login } });
     if (!user) {
-      next({ errorsArray: [{ msg: 'User not found' }] });
+      next({ errorsArray: [{ msg: 'Login or password is incorrect' }] });
       return;
     }
     const validPassword = bcrypt.compareSync(password, user.password);
     if (!validPassword) {
-      next({ errorsArray: [{ msg: 'Wrong password entered' }] });
+      next({ errorsArray: [{ msg: 'Login or password is incorrect' }] });
       return;
     }
     const token = generationAccessToken(user.id);
