@@ -24,5 +24,5 @@ Follow.associate({ User });
 User.belongsToMany(Dialog, { through: UserDialog });
 Dialog.belongsToMany(User, { through: UserDialog });
 global[getClass] = getClass;
-// await db.sync({ alter: true });
+await db.sync({ alter: true });
 app.listen(PORT, () => console.log(`Server created on port: ${PORT}`));
